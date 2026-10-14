@@ -12,11 +12,11 @@
   "TRS457_pdf_sha256": "829b6c34f6aec400a36eac57e14da6ad97eeed9f3f389153b308c1751fa4cc6b",
   "Mo_reference_archive_sha256": "2d61ec2784128b4a8de0870a43c2428f43e8f7834754270ffcf1db3520ee30bf",
   "embedded_data_sha256": {
-    "iec61267-2005.json": "2445bf2798a802f0721738e19382e84b929003412eb97a1637252bfc46440a1a",
-    "trs457_requirements.json": "d28ae2e0e6653f303e3d6f221be1d0302f641db227335f698b5c04ec759bdc11",
-    "diagnostic_w_params.json": "ac8e475ed467999fd45f75bf14525c0b9ffb8cb04832cf9a71eb20b0fa1efd79",
-    "mo_reference_spectra.json": "1ed703ba3d69d3c89ff2547b2635604564266a6432386ce1c1ea0a573901f990",
-    "mo_calibration.json": "a3451a4621b58d27647969432181461049eca56d85e8dd9a35d5953976d6873a"
+    "iec61267-2005.json": "fb6f3ebaa92ef23449a7ecc1df104ab3a61e9eaa64fba7be0805b47f8d33ee38",
+    "trs457_requirements.json": "13ccfb4fc92a542214579f59e6a1b30f687661fcdeb4013178450affca4796fe",
+    "diagnostic_w_params.json": "1bfd8ddf387bd6974d805cbed82ef00e1274137e772ef575672d304aeab2f1eb",
+    "mo_reference_spectra.json": "eb6c9b8f6832dc323dae2656fa91f1220cf4c8c7043c8a79d50d76d8ea35ce9d",
+    "mo_calibration.json": "09f116ed8c048f13fdc098ab64de4dde7dd0e2b3bdc8de797025601faff0b5d4"
   },
   "physics_policy": "原ISO物理参数未改；W仅独立校准RQR基准过滤；乳腺采用真实Mo基础谱+标准Mo/Al过滤。",
   "software_version": "1.0.0-beta.1",
@@ -26,7 +26,7 @@
   },
   "baseline_public_fixture": {
     "path": "tests/fixtures/iso-baseline.html.txt",
-    "sha256": "9f45dd7d898fd9ed6a3a52f1f07a758a7e23d7b96c9bb3073b54ca19eb69a75b",
+    "sha256": "1cf943659e4d40df6f4bda8b8fdec5fcee1153fb9b750488c4e12ec705e83200",
     "source_sha256": "21a43217c8a95f7a10eccd81f1fe3cb0bffe9182432a601927a3e1111cfeaaa7",
     "sanitization": "Static signature removed; calculation scripts unchanged."
   }
