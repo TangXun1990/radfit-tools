@@ -14,12 +14,12 @@
     },
     "diagnostic_W": {
       "id": "w-rqr-equivalent-al-calibration",
-      "parameters_sha256": "ac8e475ed467999fd45f75bf14525c0b9ffb8cb04832cf9a71eb20b0fa1efd79"
+      "parameters_sha256": "1bfd8ddf387bd6974d805cbed82ef00e1274137e772ef575672d304aeab2f1eb"
     },
     "diagnostic_Mo": {
       "id": "ptb-mo-2020-nominal-filtration",
-      "data_sha256": "1ed703ba3d69d3c89ff2547b2635604564266a6432386ce1c1ea0a573901f990",
-      "parameters_sha256": "a3451a4621b58d27647969432181461049eca56d85e8dd9a35d5953976d6873a"
+      "data_sha256": "eb6c9b8f6832dc323dae2656fa91f1220cf4c8c7043c8a79d50d76d8ea35ce9d",
+      "parameters_sha256": "09f116ed8c048f13fdc098ab64de4dde7dd0e2b3bdc8de797025601faff0b5d4"
     }
   },
   "physical_constants_modified": false

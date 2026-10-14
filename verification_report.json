@@ -22,8 +22,8 @@
     "xray_model.py": "1243f6d65be8fa837d0ec321cd8ff5da698b8e9ec323da402274df0cc6808fdb"
   },
   "delivered_html_sha256": {
-    "ISO": "5a834be07440a494da98fd85c2400f9ca53ea3dd76033e50e8c86080c4437cd5",
-    "diagnostic": "4b3d81fefdbccedb5c23757a6b6b1cfe65dea412b050a733693c074e5c2f1bfd"
+    "ISO": "d2ab56d25f579cf59eec47d9045312cc62f3ebe00ddd7cc3492957037887a946",
+    "diagnostic": "692e828b3c6f40de5e208c166a4a036f9f21af4d3bde318888221a4aacb1698e"
   },
   "limitation": "Node VM executes delivered JS with simulated DOM/ECharts. This verifies numerical data and UI state logic; it does not replace visual browser verification or physical standard conformity.",
   "html_structural_audit": {
