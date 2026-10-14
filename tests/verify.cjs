@@ -5,6 +5,7 @@ const assert=require('node:assert/strict'),crypto=require('node:crypto');
 const outDir=path.resolve(__dirname,'..');
 const baseDir=path.join(__dirname,'fixtures');
 const reportPath=path.join(outDir,'reports','test_report.json');
+fs.mkdirSync(path.dirname(reportPath),{recursive:true});
 const plain=v=>JSON.parse(JSON.stringify(v));
 const sha=f=>crypto.createHash('sha256').update(fs.readFileSync(f)).digest('hex');
 const expectedCounts={RQR:9,RQA:9,RQT:3,'RQR-M':4,'RQA-M':4};
