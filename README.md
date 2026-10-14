@@ -1,5 +1,7 @@
 # RadFit Tools
 
+**简体中文** | [English](README.en.md)
+
 电离辐射计量用 X 射线能谱计算器，powered by 唐逊。
 
 当前版本：**v1.0.0-beta.1**。网页无需后台，每页独立内嵌计算数据，唯一外部依赖为 ECharts，含两个 CDN 兜底。
