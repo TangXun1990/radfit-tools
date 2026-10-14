@@ -19,10 +19,10 @@
     "mo_calibration.json": "09f116ed8c048f13fdc098ab64de4dde7dd0e2b3bdc8de797025601faff0b5d4"
   },
   "physics_policy": "原ISO物理参数未改；W仅独立校准RQR基准过滤；乳腺采用真实Mo基础谱+标准Mo/Al过滤。",
-  "software_version": "1.0.0-beta.2",
+  "software_version": "1.0.0-beta.3",
   "published_html_sha256": {
-    "index.html": "fe19c6036e274b0bb6dbc5bdd6a4c073daa99a4ff63232d35fd0dc6ad1590a79",
-    "diagnostic.html": "b23f17143aa7c5bc1ed2ae11e95ee9cf3e5332775a783c19ef1a19653e2c8b93"
+    "index.html": "7452948ee35bff1cac625afa0f595d044a88bfa9628cfeb22f3f325b44e69e4f",
+    "diagnostic.html": "9fa1f2a9310748597bf443b7cbf73f711ee605d35772ebbef5c518aa481e7438"
   },
   "baseline_public_fixture": {
     "path": "tests/fixtures/iso-baseline.html.txt",

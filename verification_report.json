@@ -22,18 +22,18 @@
     "xray_model.py": "1243f6d65be8fa837d0ec321cd8ff5da698b8e9ec323da402274df0cc6808fdb"
   },
   "delivered_html_sha256": {
-    "ISO": "fe19c6036e274b0bb6dbc5bdd6a4c073daa99a4ff63232d35fd0dc6ad1590a79",
-    "diagnostic": "b23f17143aa7c5bc1ed2ae11e95ee9cf3e5332775a783c19ef1a19653e2c8b93"
+    "ISO": "7452948ee35bff1cac625afa0f595d044a88bfa9628cfeb22f3f325b44e69e4f",
+    "diagnostic": "9fa1f2a9310748597bf443b7cbf73f711ee605d35772ebbef5c518aa481e7438"
   },
   "limitation": "Node VM executes delivered JS with simulated DOM/ECharts. This verifies numerical data and UI state logic; it does not replace visual browser verification or physical standard conformity.",
   "html_structural_audit": {
-    "ISO4037.html": {
+    "index.html": {
       "balanced_tags": true,
-      "unique_ids": 30
+      "unique_ids": 32
     },
-    "诊断X射线.html": {
+    "diagnostic.html": {
       "balanced_tags": true,
-      "unique_ids": 35
+      "unique_ids": 37
     }
   },
   "original_model_and_parameter_copies_byte_identical": true,
@@ -64,6 +64,34 @@
     "reapplied_Be_or_air": false
   },
   "interpretation": "数值实现一致性、模型表值残差、实际设备符合性分别评价；名义HVL残差不以JS/Python 2%要求代替验收。",
-  "cosmetic_revision": "beta.2: unified page headings; calculation scripts unchanged",
-  "publication_preparation": "版本标识、页面文件名和来源文字调整；计算函数保持不变，另运行tests/verify.cjs核验发布副本。"
+  "cosmetic_revision": "beta.3: bilingual interface with persistent ENG/CHS controls; physical functions, parameters and CSV export unchanged",
+  "publication_preparation": "两页内嵌语言切换；tests/verify.cjs 与 tests/language.cjs 通过，保留原模型参数和标准参考数据。",
+  "software_version": "1.0.0-beta.3",
+  "ui_language_regression": {
+    "passed": true,
+    "pages": 2,
+    "translated_static_nodes": 82,
+    "cases": [
+      "both standalone pages embed the exact maintained common helper",
+      "iso custom values, family/table/source, results and CSV roundtrip",
+      "iso invalid value and localized errors",
+      "iso selected preset and CSV",
+      "iso every family table and diagnostic preset requirement translated",
+      "iso zero-spectrum translated empty charts",
+      "iso preference restore/query override/storage denial/chart CDN failure",
+      "diagnostic custom values, family/table/source, results and CSV roundtrip",
+      "diagnostic invalid value and localized errors",
+      "diagnostic selected preset and CSV",
+      "diagnostic every family table and diagnostic preset requirement translated",
+      "diagnostic zero-spectrum translated empty charts",
+      "diagnostic preference restore/query override/storage denial/chart CDN failure"
+    ],
+    "common_helper_inline_copies_match": true,
+    "storage_denied_reload_and_navigation": true,
+    "storage_and_history_denial_safe": true,
+    "full_csv_language_invariance": true,
+    "physical_results_language_invariance": true,
+    "limitation": "Executes delivered inline JS in Node VM with simulated DOM/ECharts; numerical regression remains separately verified by tests/verify.cjs."
+  },
+  "physics_and_csv_unchanged_from_beta_2": true
 }
