@@ -22,8 +22,8 @@
     "xray_model.py": "1243f6d65be8fa837d0ec321cd8ff5da698b8e9ec323da402274df0cc6808fdb"
   },
   "delivered_html_sha256": {
-    "ISO": "424e1052d58a34ed8147cda70463e48a8bbb578b0c6ec6906c9becda8cc88d41",
-    "diagnostic": "2f9f2dd515906bd616a185099aba7302f1fbabe7228d55849d4f299c83d03c91"
+    "ISO": "fe19c6036e274b0bb6dbc5bdd6a4c073daa99a4ff63232d35fd0dc6ad1590a79",
+    "diagnostic": "b23f17143aa7c5bc1ed2ae11e95ee9cf3e5332775a783c19ef1a19653e2c8b93"
   },
   "limitation": "Node VM executes delivered JS with simulated DOM/ECharts. This verifies numerical data and UI state logic; it does not replace visual browser verification or physical standard conformity.",
   "html_structural_audit": {
@@ -64,6 +64,6 @@
     "reapplied_Be_or_air": false
   },
   "interpretation": "数值实现一致性、模型表值残差、实际设备符合性分别评价；名义HVL残差不以JS/Python 2%要求代替验收。",
-  "cosmetic_revision": "Diagnostic subtitle attribution added; numerical scripts unchanged",
+  "cosmetic_revision": "beta.2: unified page headings; calculation scripts unchanged",
   "publication_preparation": "版本标识、页面文件名和来源文字调整；计算函数保持不变，另运行tests/verify.cjs核验发布副本。"
 }
