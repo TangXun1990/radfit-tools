@@ -4,7 +4,7 @@
 
 An X-ray spectrum calculator for ionizing radiation metrology, powered by 唐逊.
 
-Current version: **v1.0.0-beta.2**. No backend is required. Each page embeds its own calculation data. ECharts is the only external dependency, with two CDN fallbacks.
+Current version: **v1.0.0-beta.3**. No backend is required. Each page embeds its own calculation data. ECharts is the only external dependency, with two CDN fallbacks.
 
 ## Usage
 
@@ -12,6 +12,8 @@ Current version: **v1.0.0-beta.2**. No backend is required. Each page embeds its
 - [Diagnostic X-rays](diagnostic.html): IEC 61267:2005 / IAEA TRS-457, with 29 presets across RQR, RQA, RQT, RQR-M and RQA-M.
 
 Download or clone the repository and open `index.html` directly. Use the buttons at the top of the page to switch between the two pages. Both HTML files must be in the same directory. An internet connection allows the charts to load; numerical results, presets and CSV export remain available if the chart component fails to load.
+
+Use **ENG / CHS** in the upper-right corner of either page to switch between English and Simplified Chinese, including input labels, results, charts, comparison tables and validation messages. Chinese is the initial default. The browser remembers the selected language, and page links carry the preference. Switching preserves parameters, presets and the reference source; calculation results and CSV fields remain unchanged.
 
 The mammography series on the diagnostic page uses an independent measured Mo (molybdenum) anode basis spectrum. RQR-M uses 0.032 mm Mo filtration; RQA-M adds 2 mm Al to the corresponding basis. The original ISO parameters are not refitted.
 
@@ -36,9 +38,12 @@ After installing Node.js, run:
 
 ```sh
 node tests/verify.cjs
+node tests/language.cjs
 ```
 
 The tests include fixed baselines and Python reference results, without depending on other directories on the author's computer. They check the original 50 ISO presets, 29 diagnostic presets, 21 W spectrum calculations and 17 Mo results at tabulated and intermediate tube voltages, as well as CSV export, input boundaries, zero spectra and switching to the TRS source. Results are written to `reports/test_report.json`.
+
+Language tests check both interfaces, unchanged parameters and CSV content, saved preferences, page links and fallback behavior when browser storage is unavailable. Results are written to `reports/language_test_report.json`. These tests execute the page scripts with simulated DOM / ECharts; they do not replace visual verification in a real browser.
 
 Current maximum JS/Python deviations: ISO `7.42e-8%`, diagnostic W `1.49e-10%` and Mo `2.51e-8%`, all below 2%. These values measure consistency between algorithm implementations, not the measurement accuracy of an actual installation.
 

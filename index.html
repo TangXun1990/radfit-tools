@@ -107,68 +107,140 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 
 .sources{line-height:1.7;margin-top:16px}
 @media(max-width:700px){.results{grid-template-columns:repeat(2,1fr)}.page-nav a{flex:1;text-align:center;padding:9px}}
-.app-version{margin:8px 0 16px;color:#64748b;font-size:12px}</style>
+.app-version{margin:8px 0 16px;color:#64748b;font-size:12px}
+.header{gap:20px;align-items:flex-start}
+.header>div:first-child{flex:1;min-width:0}
+.header-actions{display:flex;align-items:center;justify-content:flex-end;gap:10px;flex-shrink:0;flex-wrap:wrap}
+.lang-switch{display:inline-flex;border:1px solid rgba(255,255,255,.6);border-radius:5px;overflow:hidden}
+.lang-switch button{border:0;border-radius:0;background:transparent;color:#fff;padding:6px 10px;font-size:12px;font-weight:600;cursor:pointer}
+.lang-switch button:hover{background:rgba(255,255,255,.2)}
+.lang-switch button.active{background:#fff;color:#0284c7}
+.lang-switch button:focus-visible,.header-actions .btn-export:focus-visible{outline:2px solid #fff;outline-offset:-3px}
+@media(max-width:700px){.header{flex-wrap:wrap;gap:12px}.header>div:first-child{flex-basis:100%;order:2}.header-actions{margin-left:auto;order:1}}
+</style>
 </head>
 <body>
 <div class="app">
-<nav class="page-nav" aria-label="计算页面"><a href="index.html" aria-current="page" class="active">ISO 4037 · 防护辐射质</a><a href="diagnostic.html">诊断 X 射线 · IEC / TRS‑457</a></nav>
+<nav class="page-nav" aria-label="计算页面" data-en-aria-label="Calculator pages"><a href="index.html" data-page-link data-en="ISO 4037 · Radiation protection" aria-current="page" class="active">ISO 4037 · 防护辐射质</a><a href="diagnostic.html" data-page-link data-en="Diagnostic X-rays · IEC / TRS-457">诊断 X 射线 · IEC / TRS‑457</a></nav>
 <div class="header">
-<div><h1>湖北省计量院-电离辐射实验室拟合工具</h1><div class="sub">Birch-Marshall模型 · NIST XCOM衰减系数 · 钨靶W(Z=74) ·powered by 唐逊</div></div>
-<button id="exportBtn" class="btn-export" onclick="doExport()">导出 CSV</button>
+<div><h1 data-en="Hubei Institute of Metrology · Ionizing Radiation Laboratory Fitting Tool">湖北省计量院-电离辐射实验室拟合工具</h1><div class="sub" data-en="Birch-Marshall model · NIST XCOM attenuation coefficients · W target (Z=74) ·powered by 唐逊">Birch-Marshall模型 · NIST XCOM衰减系数 · 钨靶W(Z=74) ·powered by 唐逊</div></div>
+<div class="header-actions"><div class="lang-switch" role="group" aria-label="界面语言" data-en-aria-label="Interface language"><button type="button" id="langENG" onclick="setLanguage('eng')" aria-pressed="false">ENG</button><button type="button" id="langCHS" class="active" onclick="setLanguage('chs')" aria-pressed="true">CHS</button></div><button id="exportBtn" class="btn-export" onclick="doExport()" data-en="Export CSV">导出 CSV</button></div>
 </div>
-<div class="app-version">软件 v1.0.0-beta.2</div>
+<div class="app-version" data-en="Software v1.0.0-beta.3">软件 v1.0.0-beta.3</div>
 <div class="main">
 <div class="panel">
-<div class="panel-title">射线源参数</div><div id="inputStatus" class="status error" role="alert"></div>
-<div class="field"><label>管电压 (kVp)</label><div class="row"><input type="range" id="kvp" min="10" max="400" value="100" step="1" oninput="onSlider()"><input type="number" id="kvpN" min="10" max="400" value="100" step="1" oninput="onNum()"><span class="unit">kV</span></div></div>
-<div class="field"><label>靶角</label><div class="row"><input type="number" id="angle" min="5" max="30" value="20" step="1" oninput="recalc()"><span class="unit">度</span></div></div>
-<div class="field"><label for="inhMat">固有过滤</label><div class="row"><select id="inhMat" onchange="onInhMat()"><option value="none">无</option><option value="Be">Be 铍</option><option value="Al" selected>Al 铝</option></select><input type="number" id="inh" aria-label="固有过滤厚度" min="0" max="10" value="1.0" step="0.1" oninput="recalc()"><span class="unit" id="inhUnit">mm Al</span></div><div class="hint">Be 厚度按既有拟合系数折算为 Al 等效厚度。</div></div>
-<div class="panel-title" style="margin-top:16px">附加滤片厚度</div>
-<div class="field"><label>Al 铝</label><div class="row"><input type="number" id="fAl" min="0" max="50" value="0" step="0.1" oninput="recalc()"><span class="unit">mm</span></div></div>
-<div class="field"><label>Cu 铜</label><div class="row"><input type="number" id="fCu" min="0" max="20" value="0" step="0.01" oninput="recalc()"><span class="unit">mm</span></div></div>
-<div class="field"><label>Sn 锡</label><div class="row"><input type="number" id="fSn" min="0" max="20" value="0" step="0.01" oninput="recalc()"><span class="unit">mm</span></div></div>
-<div class="field"><label>Pb 铅</label><div class="row"><input type="number" id="fPb" min="0" max="10" value="0" step="0.01" oninput="recalc()"><span class="unit">mm</span></div></div>
-<div class="field"><label>HVL计算材料</label><select id="hvlMat" onchange="recalc()"><option value="auto">自动选择</option><option value="Al">Al 铝</option><option value="Cu">Cu 铜</option><option value="Pb">Pb 铅</option></select></div>
-<div class="panel-title" style="margin-top:16px">ISO 4037 预设</div>
+<div class="panel-title" data-en="X-ray source parameters">射线源参数</div><div id="inputStatus" class="status error" role="alert"></div>
+<div class="field"><label data-en="Tube voltage (kVp)">管电压 (kVp)</label><div class="row"><input type="range" id="kvp" min="10" max="400" value="100" step="1" oninput="onSlider()"><input type="number" id="kvpN" min="10" max="400" value="100" step="1" oninput="onNum()"><span class="unit">kV</span></div></div>
+<div class="field"><label data-en="Anode angle">靶角</label><div class="row"><input type="number" id="angle" min="5" max="30" value="20" step="1" oninput="recalc()"><span class="unit" data-en="degrees">度</span></div></div>
+<div class="field"><label for="inhMat" data-en="Inherent filtration">固有过滤</label><div class="row"><select id="inhMat" onchange="onInhMat()"><option value="none" data-en="None">无</option><option value="Be" data-en="Be · Beryllium">Be 铍</option><option value="Al" selected data-en="Al · Aluminium">Al 铝</option></select><input type="number" id="inh" aria-label="固有过滤厚度" min="0" max="10" value="1.0" step="0.1" oninput="recalc()"><span class="unit" id="inhUnit">mm Al</span></div><div class="hint" data-en="Be thickness is converted to an equivalent Al thickness using the existing fitted coefficient.">Be 厚度按既有拟合系数折算为 Al 等效厚度。</div></div>
+<div class="panel-title" style="margin-top:16px" data-en="Additional filtration thickness">附加滤片厚度</div>
+<div class="field"><label data-en="Al · Aluminium">Al 铝</label><div class="row"><input type="number" id="fAl" min="0" max="50" value="0" step="0.1" oninput="recalc()"><span class="unit">mm</span></div></div>
+<div class="field"><label data-en="Cu · Copper">Cu 铜</label><div class="row"><input type="number" id="fCu" min="0" max="20" value="0" step="0.01" oninput="recalc()"><span class="unit">mm</span></div></div>
+<div class="field"><label data-en="Sn · Tin">Sn 锡</label><div class="row"><input type="number" id="fSn" min="0" max="20" value="0" step="0.01" oninput="recalc()"><span class="unit">mm</span></div></div>
+<div class="field"><label data-en="Pb · Lead">Pb 铅</label><div class="row"><input type="number" id="fPb" min="0" max="10" value="0" step="0.01" oninput="recalc()"><span class="unit">mm</span></div></div>
+<div class="field"><label data-en="HVL material">HVL计算材料</label><select id="hvlMat" onchange="recalc()"><option value="auto" data-en="Automatic">自动选择</option><option value="Al" data-en="Al · Aluminium">Al 铝</option><option value="Cu" data-en="Cu · Copper">Cu 铜</option><option value="Pb" data-en="Pb · Lead">Pb 铅</option></select></div>
+<div class="panel-title" style="margin-top:16px" data-en="ISO 4037 presets">ISO 4037 预设</div>
 <div class="tabs">
-<div class="tab active" data-s="N" onclick="switchTab(this)">N 窄谱</div>
-<div class="tab" data-s="W" onclick="switchTab(this)">W 宽谱</div>
-<div class="tab" data-s="H" onclick="switchTab(this)">H 高剂量率</div>
-<div class="tab" data-s="L" onclick="switchTab(this)">L 低剂量率</div>
+<div class="tab active" data-s="N" onclick="switchTab(this)" data-en="N · Narrow spectrum">N 窄谱</div>
+<div class="tab" data-s="W" onclick="switchTab(this)" data-en="W · Wide spectrum">W 宽谱</div>
+<div class="tab" data-s="H" onclick="switchTab(this)" data-en="H · High dose rate">H 高剂量率</div>
+<div class="tab" data-s="L" onclick="switchTab(this)" data-en="L · Low dose rate">L 低剂量率</div>
 </div>
 <div class="preset-grid" id="pgrid"></div>
 </div>
 <div>
 <div id="calcStatus" class="status" role="status" aria-live="polite"></div><div id="chartStatus" class="status" role="status">图表组件加载中…</div><div class="results">
-<div class="rcard"><div class="lb">第一半值层 HVL₁</div><div class="vl" id="o_hvl1">--</div><div class="un" id="o_u1">mm Cu</div></div>
-<div class="rcard"><div class="lb">第二半值层 HVL₂</div><div class="vl" id="o_hvl2">--</div><div class="un" id="o_u2">mm Cu</div></div>
-<div class="rcard"><div class="lb">均匀系数 h</div><div class="vl" id="o_h">--</div><div class="un">HVL₁/HVL₂</div></div>
-<div class="rcard"><div class="lb">谱分辨力</div><div class="vl" id="o_res">--</div><div class="un">%</div></div>
-<div class="rcard"><div class="lb">注量平均能量</div><div class="vl" id="o_ef">--</div><div class="un">keV</div></div>
-<div class="rcard"><div class="lb">能量注量平均能量</div><div class="vl" id="o_ep">--</div><div class="un">keV</div></div>
-<div class="rcard"><div class="lb">有效能量</div><div class="vl" id="o_ee">--</div><div class="un">keV</div></div>
-<div class="rcard"><div class="lb">相对比释动能率</div><div class="vl" id="o_k">--</div><div class="un">%</div></div>
+<div class="rcard"><div class="lb" data-en="First half-value layer HVL₁">第一半值层 HVL₁</div><div class="vl" id="o_hvl1">--</div><div class="un" id="o_u1">mm Cu</div></div>
+<div class="rcard"><div class="lb" data-en="Second half-value layer HVL₂">第二半值层 HVL₂</div><div class="vl" id="o_hvl2">--</div><div class="un" id="o_u2">mm Cu</div></div>
+<div class="rcard"><div class="lb" data-en="Homogeneity coefficient h">均匀系数 h</div><div class="vl" id="o_h">--</div><div class="un">HVL₁/HVL₂</div></div>
+<div class="rcard"><div class="lb" data-en="Spectral resolution">谱分辨力</div><div class="vl" id="o_res">--</div><div class="un">%</div></div>
+<div class="rcard"><div class="lb" data-en="Fluence-weighted mean energy">注量平均能量</div><div class="vl" id="o_ef">--</div><div class="un">keV</div></div>
+<div class="rcard"><div class="lb" data-en="Energy-fluence-weighted mean energy">能量注量平均能量</div><div class="vl" id="o_ep">--</div><div class="un">keV</div></div>
+<div class="rcard"><div class="lb" data-en="Effective energy">有效能量</div><div class="vl" id="o_ee">--</div><div class="un">keV</div></div>
+<div class="rcard"><div class="lb" data-en="Relative air kerma rate">相对比释动能率</div><div class="vl" id="o_k">--</div><div class="un">%</div></div>
 </div>
 <div class="charts">
-<div class="cbox"><div class="ctitle">初始韧致辐射谱（相对光子注量 dΦ/dE）</div><div class="chart" id="cSpec0"></div></div>
-<div class="cbox"><div class="ctitle">过滤后能谱（相对光子注量 dΦ/dE）</div><div class="chart" id="cSpec"></div></div>
-<div class="cbox"><div class="ctitle">衰减曲线（空气比释动能透射率）</div><div class="chart" id="cAtt"></div></div>
+<div class="cbox"><div class="ctitle" data-en="Initial bremsstrahlung spectrum (relative photon fluence dΦ/dE)">初始韧致辐射谱（相对光子注量 dΦ/dE）</div><div class="chart" id="cSpec0"></div></div>
+<div class="cbox"><div class="ctitle" data-en="Filtered spectrum (relative photon fluence dΦ/dE)">过滤后能谱（相对光子注量 dΦ/dE）</div><div class="chart" id="cSpec"></div></div>
+<div class="cbox"><div class="ctitle" data-en="Attenuation curve (air kerma transmission)">衰减曲线（空气比释动能透射率）</div><div class="chart" id="cAtt"></div></div>
 </div>
 </div>
 </div>
 <div class="panel table-section">
-<div class="panel-title">ISO 4037-1:2019 辐射质参数对照表</div>
+<div class="panel-title" data-en="ISO 4037-1:2019 radiation quality comparison">ISO 4037-1:2019 辐射质参数对照表</div>
 <div class="table-tabs">
-<div class="table-tab active" data-t="N" onclick="switchTableTab(this)">N 窄谱</div>
-<div class="table-tab" data-t="W" onclick="switchTableTab(this)">W 宽谱</div>
-<div class="table-tab" data-t="H" onclick="switchTableTab(this)">H 高空气比释动能率</div>
-<div class="table-tab" data-t="L" onclick="switchTableTab(this)">L 低空气比释动能率</div>
+<div class="table-tab active" data-t="N" onclick="switchTableTab(this)" data-en="N · Narrow spectrum">N 窄谱</div>
+<div class="table-tab" data-t="W" onclick="switchTableTab(this)" data-en="W · Wide spectrum">W 宽谱</div>
+<div class="table-tab" data-t="H" onclick="switchTableTab(this)" data-en="H · High air kerma rate">H 高空气比释动能率</div>
+<div class="table-tab" data-t="L" onclick="switchTableTab(this)" data-en="L · Low air kerma rate">L 低空气比释动能率</div>
 </div>
 <div class="table-wrap" id="tableWrap"></div>
 </div>
 </div>
 <script>
 // fitted_params.json 原值完整内嵌，仅用于单文件运行；未重新拟合。
+// RadFit UI language：界面语言独立于物理计算，存储不可用时仍可通过页面链接传递。
+var UI_LANG='chs', UI_CHART_STATE='loading';
+var UI_LANGUAGE_KEY='radfit.ui.language';
+function uiT(chs,eng){return UI_LANG==='eng'?eng:chs;}
+function uiInputName(id,chs){
+  var names={kvpN:'Tube voltage',angle:'Anode angle',inh:'Inherent filtration thickness',fAl:'Al thickness',fCu:'Cu thickness',fSn:'Sn thickness',fPb:'Pb thickness',baseAl:'RQR baseline Al-equivalent filtration',fMo:'Mo thickness'};
+  return UI_LANG==='eng'?(names[id]||chs):chs;
+}
+function uiChineseInputName(id){
+  var names={kvpN:'管电压',angle:'靶角',inh:'固有过滤厚度',fAl:'Al 厚度',fCu:'Cu 厚度',fSn:'Sn 厚度',fPb:'Pb 厚度',baseAl:'RQR 基准 Al 等效过滤',fMo:'Mo 厚度'};
+  return names[id]||id;
+}
+function readUiLanguage(){
+  try{var match=(window.location&&window.location.search||'').match(/(?:^\?|&)lang=(eng|chs)(?:&|$)/i);if(match)return match[1].toLowerCase();}catch(error){}
+  try{var saved=window.localStorage.getItem(UI_LANGUAGE_KEY);if(saved==='eng'||saved==='chs')return saved;}catch(error){}
+  return 'chs';
+}
+function applyUiLanguage(){
+  if(document.documentElement)document.documentElement.setAttribute('lang',UI_LANG==='eng'?'en':'zh-CN');
+  document.title=typeof calculateDiag==='function'?uiT('诊断X射线 · IEC 61267 / TRS-457','Diagnostic X-rays · IEC 61267 / TRS-457'):uiT('ISO 4037 防护辐射质能谱','ISO 4037 radiation protection spectra');
+  document.querySelectorAll('[data-en]').forEach(function(el){
+    if(el.__chsText===undefined)el.__chsText=el.textContent;
+    el.textContent=UI_LANG==='eng'?el.getAttribute('data-en'):el.__chsText;
+  });
+  document.querySelectorAll('[data-en-aria-label]').forEach(function(el){
+    if(el.__chsAria===undefined)el.__chsAria=el.getAttribute('aria-label')||'';
+    el.setAttribute('aria-label',UI_LANG==='eng'?el.getAttribute('data-en-aria-label'):el.__chsAria);
+  });
+  document.querySelectorAll('input[type="number"]').forEach(function(el){
+    if(el.__chsInputAria===undefined)el.__chsInputAria=el.getAttribute('aria-label')||uiChineseInputName(el.id);
+    el.setAttribute('aria-label',uiInputName(el.id,el.__chsInputAria));
+  });
+  ['eng','chs'].forEach(function(lang){var b=document.getElementById(lang==='eng'?'langENG':'langCHS');if(b){b.classList.toggle('active',UI_LANG===lang);b.setAttribute('aria-pressed',String(UI_LANG===lang));}});
+  document.querySelectorAll('[data-page-link]').forEach(function(a){
+    if(!a.__basePageHref)a.__basePageHref=(a.getAttribute('href')||'').split('?')[0];
+    a.setAttribute('href',a.__basePageHref+'?lang='+UI_LANG);
+  });
+  var status=document.getElementById('chartStatus');
+  if(status&&UI_CHART_STATE==='loading')status.textContent=uiT('图表组件加载中…','Loading charts…');
+}
+function updateUiLanguageURL(){
+  try{
+    if(!window.history||!window.location||!window.location.href)return;
+    var href=window.location.href,hashIndex=href.indexOf('#'),hash=hashIndex>=0?href.slice(hashIndex):'';
+    if(hashIndex>=0)href=href.slice(0,hashIndex);
+    var parts=href.split('?'),query=(parts[1]||'').split('&').filter(function(p){return p&&!/^lang=/i.test(p);});
+    query.push('lang='+UI_LANG);window.history.replaceState(null,'',parts[0]+'?'+query.join('&')+hash);
+  }catch(error){}
+}
+function initLanguage(){UI_LANG=readUiLanguage();applyUiLanguage();}
+function setLanguage(lang){
+  if(lang!=='eng'&&lang!=='chs')return;
+  UI_LANG=lang;try{window.localStorage.setItem(UI_LANGUAGE_KEY,lang);}catch(error){}
+  updateUiLanguageURL();applyUiLanguage();
+  if(typeof calculateDiag==='function'){renderTable();recalcDiag();}
+  else{renderTable(typeof ISO_TABLE_ACTIVE==='string'?ISO_TABLE_ACTIVE:'N');recalc();}
+  if(UI_CHART_STATE==='failed'){
+    if(typeof showDiagChartFailure==='function')showDiagChartFailure();
+    else if(typeof showChartFailure==='function')showChartFailure();
+  }
+}
+
 var FITTED_PARAMS = Object.freeze({
   "d0": 8.350894563850522e-05,
   "a": 2.689168367595846,
@@ -273,14 +345,15 @@ function readInputs(){
     var el=document.getElementById(id), rule=LIMITS[id], v=Number(el.value);
     var ok=el.value.trim()!=='' && Number.isFinite(v) && v>=rule[0] && v<=rule[1];
     el.classList.toggle('invalid', !ok); el.setAttribute('aria-invalid', String(!ok));
-    var message=ok?'':rule[2]+'请输入 '+rule[0]+'～'+rule[1]+' 范围内的有限数值。';
+    var name=uiInputName(id,rule[2]);
+    var message=ok?'':uiT(name+'请输入 '+rule[0]+'～'+rule[1]+' 范围内的有限数值。','Enter a finite value for '+name+' between '+rule[0]+' and '+rule[1]+'.');
     el.setCustomValidity(message); el.title=message;
     if(!ok) errors.push(message);
     values[id]=v;
   });
   var inhMat=document.getElementById('inhMat').value;
   var mat=document.getElementById('hvlMat').value;
-  if(['none','Be','Al'].indexOf(inhMat)<0 || ['auto','Al','Cu','Pb'].indexOf(mat)<0) errors.push('请选择有效材料。');
+  if(['none','Be','Al'].indexOf(inhMat)<0 || ['auto','Al','Cu','Pb'].indexOf(mat)<0) errors.push(uiT('请选择有效材料。','Select a valid material.'));
   document.getElementById('inputStatus').textContent=errors.join(' ');
   if(errors.length) return null;
   return {kvp:values.kvpN,ang:values.angle,
@@ -431,7 +504,7 @@ function recalc(){
     document.getElementById('o_'+item[0]).textContent=fmt(out[item[1]],item[2]);
   });
   ['o_u1','o_u2'].forEach(function(id){document.getElementById(id).textContent=RES?'mm '+RES.mat:'mm';});
-  document.getElementById('calcStatus').textContent=!RES?'请修正输入后重新计算。':RES.empty?'过滤后能谱为零或低于数值精度，无法计算 HVL 与平均能量。':RES.hv1===null||RES.hv2===null?'HVL 未在安全范围内收敛，请调整过滤条件。':'';
+  document.getElementById('calcStatus').textContent=!RES?uiT('请修正输入后重新计算。','Correct the inputs to recalculate.'):RES.empty?uiT('过滤后能谱为零或低于数值精度，无法计算 HVL 与平均能量。','The filtered spectrum is zero or below numerical precision; HVL and mean energy cannot be calculated.'):RES.hv1===null||RES.hv2===null?uiT('HVL 未在安全范围内收敛，请调整过滤条件。','HVL did not converge within the safe range. Adjust the filtration.'):'';
   document.getElementById('exportBtn').disabled=!RES || RES.empty || RES.hv1===null || RES.hv2===null;
   draw();
 }
@@ -442,7 +515,7 @@ function emptyChart(chart,text){
 
 function draw() {
   if(!ch1 || !ch2 || !ch3) return;
-  if(!RES){[ch1,ch2,ch3].forEach(function(c){emptyChart(c,'请修正输入');}); return;}
+  if(!RES){[ch1,ch2,ch3].forEach(function(c){emptyChart(c,uiT('请修正输入','Correct the inputs'));}); return;}
   var E=RES.E, p0=RES.p0, pF=RES.pF, n=E.length;
   var mx = 0;
   for (var i=0;i<n;i++) if (pF[i]>mx) mx=pF[i];
@@ -462,16 +535,16 @@ function draw() {
     ml = [{xAxis:59,name:'Kα'},{xAxis:67,name:'Kβ'}];
   }
 
-  if(RES.empty) emptyChart(ch1,'无有效能谱，请减小过滤厚度');
+  if(RES.empty) emptyChart(ch1,uiT('无有效能谱，请减小过滤厚度','No valid spectrum. Reduce the filtration thickness.'));
   else ch1.setOption({
     tooltip:{trigger:'axis'},
     grid:{left:50,right:20,top:30,bottom:40},
-    legend:{data:['过滤后谱'],top:0,textStyle:{fontSize:11}},
-    xAxis:{type:'category',data:E,name:'能量(keV)',nameLocation:'middle',nameGap:25,
+    legend:{data:[uiT('过滤后谱','Filtered spectrum')],top:0,textStyle:{fontSize:11}},
+    xAxis:{type:'category',data:E,name:uiT('能量(keV)','Energy (keV)'),nameLocation:'middle',nameGap:25,
            interval:Math.max(1,Math.floor(n/10))},
-    yAxis:{type:'value',name:'相对注量(%)',min:0},
+    yAxis:{type:'value',name:uiT('相对注量(%)','Relative fluence (%)'),min:0},
     series:[
-      {name:'过滤后谱',type:'line',data:sF,
+      {name:uiT('过滤后谱','Filtered spectrum'),type:'line',data:sF,
        areaStyle:{color:'rgba(14,165,233,0.22)'},lineStyle:{color:'#0ea5e9',width:2},
        symbol:'none'}
     ]
@@ -480,12 +553,12 @@ function draw() {
   ch3.setOption({
     tooltip:{trigger:'axis'},
     grid:{left:50,right:20,top:30,bottom:40},
-    legend:{data:['初始韧致辐射'],top:0,textStyle:{fontSize:11}},
-    xAxis:{type:'category',data:E,name:'能量(keV)',nameLocation:'middle',nameGap:25,
+    legend:{data:[uiT('初始韧致辐射','Initial bremsstrahlung')],top:0,textStyle:{fontSize:11}},
+    xAxis:{type:'category',data:E,name:uiT('能量(keV)','Energy (keV)'),nameLocation:'middle',nameGap:25,
            interval:Math.max(1,Math.floor(n/10))},
-    yAxis:{type:'value',name:'相对注量(%)',min:0},
+    yAxis:{type:'value',name:uiT('相对注量(%)','Relative fluence (%)'),min:0},
     series:[
-      {name:'初始韧致辐射',type:'line',data:s0,
+      {name:uiT('初始韧致辐射','Initial bremsstrahlung'),type:'line',data:s0,
        lineStyle:{color:'#bbb',type:'dashed',width:1.5},symbol:'none',
        areaStyle:{color:'rgba(187,187,187,0.15)'},
        markLine:{silent:true,data:ml,lineStyle:{color:'#ccc',type:'dashed'},
@@ -494,7 +567,7 @@ function draw() {
   }, true);
 
   // 零谱或无效 HVL 不进入对数坐标，避免 0/0 与 NaN。
-  if(RES.empty || RES.hv1===null || RES.t25===null){emptyChart(ch2,'无有效衰减曲线');return;}
+  if(RES.empty || RES.hv1===null || RES.t25===null){emptyChart(ch2,uiT('无有效衰减曲线','No valid attenuation curve'));return;}
   // 衰减图
   var mat=RES.mat;
   var tMax = Math.max(RES.hv1*5, 0.5);
@@ -514,10 +587,10 @@ function draw() {
   ch2.setOption({
     tooltip:{trigger:'axis',valueFormatter:function(v){return typeof v==='number'?v.toFixed(3):v}},
     grid:{left:55,right:20,top:30,bottom:40},
-    xAxis:{type:'value',name:'衰减层厚度('+un[mat]+')',nameLocation:'middle',nameGap:25},
-    yAxis:{type:'log',name:'透射率(%)',min:0.1,max:100},
+    xAxis:{type:'value',name:uiT('衰减层厚度('+un[mat]+')','Attenuator thickness ('+un[mat]+')'),nameLocation:'middle',nameGap:25},
+    yAxis:{type:'log',name:uiT('透射率(%)','Transmission (%)'),min:0.1,max:100},
     series:[{
-      name:'透射率',type:'line',data:ad,
+      name:uiT('透射率','Transmission'),type:'line',data:ad,
       lineStyle:{color:'#0e8a4a',width:2},symbol:'none',
       markLine:{silent:true,data:[
         {yAxis:50,lineStyle:{color:'#e74c3c',type:'dashed'},label:{formatter:'50%',fontSize:10}},
@@ -583,17 +656,20 @@ var ISO_REF = {"N-10":[8.5,"28",0.055,0.06],"N-15":[12.4,"33",0.157,0.177],"N-20
 function filterText(it){
   var parts=[];
   ['Al','Cu','Sn','Pb'].forEach(function(m,i){if(it[i+3]>0) parts.push(it[i+3]+' mm '+m);});
-  return '固有 '+it[2]+' mm '+it[7]+(parts.length?'；附加 '+parts.join(' + '):'');
+  return uiT('固有 ','Inherent ')+it[2]+' mm '+it[7]+(parts.length?uiT('；附加 ','; additional ')+parts.join(' + '):'');
 }
 function diffText(value,ref){return Number.isFinite(value)&&ref>0?' <span class="diff">('+((value/ref-1)*100>=0?'+':'')+((value/ref-1)*100).toFixed(1)+'%)</span>':'';}
+var ISO_TABLE_ACTIVE='N';
 function renderTable(t){
+  ISO_TABLE_ACTIVE=t;
   var wrap=document.getElementById('tableWrap');
-  var html='<table class="data-table"><thead><tr><th>辐射质</th><th>kV</th><th class="col-filter">固有+附加过滤</th><th>E(keV)<br>ISO</th><th>E(keV)<br>预测</th><th>RE(%)<br>ISO</th><th>RE(%)<br>预测</th><th>HVL1(mm)<br>ISO</th><th>HVL1(mm)<br>预测</th><th>HVL2(mm)<br>ISO</th><th>HVL2(mm)<br>预测</th><th>h<br>ISO推算</th><th>h<br>预测</th></tr></thead><tbody>';
+  var predicted=uiT('预测','Model');
+  var html='<table class="data-table"><thead><tr><th>'+uiT('辐射质','Radiation quality')+'</th><th>kV</th><th class="col-filter">'+uiT('固有+附加过滤','Inherent + additional filtration')+'</th><th>E(keV)<br>ISO</th><th>E(keV)<br>'+predicted+'</th><th>RE(%)<br>ISO</th><th>RE(%)<br>'+predicted+'</th><th>HVL1(mm)<br>ISO</th><th>HVL1(mm)<br>'+predicted+'</th><th>HVL2(mm)<br>ISO</th><th>HVL2(mm)<br>'+predicted+'</th><th>h<br>'+uiT('ISO推算','Derived from ISO')+'</th><th>h<br>'+predicted+'</th></tr></thead><tbody>';
   PRE[t].forEach(function(it){
     var r=ISO_REF[it[0]], result=calculate(presetCase(it)), o=result.o, mat=result.mat;
     html+='<tr><td>'+it[0]+'</td><td>'+it[1]+'</td><td class="col-filter">'+filterText(it)+'</td><td>'+r[0]+'</td><td class="pred">'+fmt(o.eF,1)+diffText(o.eF,r[0])+'</td><td>'+(r[1]||'—')+'</td><td class="pred">'+fmt(o.res,0)+'</td><td>'+r[2]+' '+mat+'</td><td class="pred">'+fmt(o.hv1,3)+' '+mat+diffText(o.hv1,r[2])+'</td><td>'+r[3]+' '+mat+'</td><td class="pred">'+fmt(o.hv2,3)+' '+mat+'</td><td>'+fmt(r[2]/r[3],2)+'</td><td class="pred">'+fmt(o.hc,2)+'</td></tr>';
   });
-  html+='</tbody></table><div class="note">ISO 参考列沿用所提供的标准数据，补齐已核对的分辨力；缺失项以“—”显示。h 参考列由同一距离的 ISO HVL1/HVL2 推算。预测列使用本页同一计算函数实时生成（靶角 20°、预设过滤、自动 HVL 材料）。Be 按原拟合参数换算为 Al 等效厚度，CSV 固有过滤字段仍输出 mm Al 等效值。<br>HVL 参考值采用 1 m 列；N-350/N-400、H-350/H-400 采用 2.5 m 列。原模型未显式加入空气路径衰减，保持其原有计算口径。<br>H系列薄过滤软射线，半经验模型存在固有约±10%残差，更高精度建议使用蒙特卡洛或SpekPy</div>';
+  html+='</tbody></table><div class="note">'+uiT('ISO 参考列沿用所提供的标准数据，补齐已核对的分辨力；缺失项以“—”显示。h 参考列由同一距离的 ISO HVL1/HVL2 推算。预测列使用本页同一计算函数实时生成（靶角 20°、预设过滤、自动 HVL 材料）。Be 按原拟合参数换算为 Al 等效厚度，CSV 固有过滤字段仍输出 mm Al 等效值。','ISO reference columns retain the supplied standard data with verified spectral resolution values added; missing values are shown as “—”. Reference h is derived from ISO HVL1/HVL2 at the same distance. Model columns are calculated live using the same function as this page (20° anode angle, preset filtration and automatic HVL material). Be is converted to an equivalent Al thickness using the original fitted parameter; the CSV inherent filtration field remains in mm Al equivalent.')+'<br>'+uiT('HVL 参考值采用 1 m 列；N-350/N-400、H-350/H-400 采用 2.5 m 列。原模型未显式加入空气路径衰减，保持其原有计算口径。','HVL reference values use the 1 m column, except N-350/N-400 and H-350/H-400, which use the 2.5 m column. Air-path attenuation is not explicitly included in the original model; its existing calculation convention is retained.')+'<br>'+uiT('H系列薄过滤软射线，半经验模型存在固有约±10%残差，更高精度建议使用蒙特卡洛或SpekPy','The H series uses lightly filtered soft X-rays; the semi-empirical model has an inherent residual of approximately ±10%. For higher accuracy, use Monte Carlo methods or SpekPy.')+(UI_LANG==='eng'?'<br>CSV field names and units remain unchanged when switching the interface language.':'')+'</div>';
   wrap.innerHTML=html;
 }
 
@@ -604,11 +680,14 @@ renderTable(el.dataset.t);
 }
 
 function showChartFailure(){
-  document.getElementById('chartStatus').textContent='图表组件加载失败，请联网后刷新；数值计算、预设和 CSV 导出仍可使用。';
-  ['cSpec','cAtt','cSpec0'].forEach(function(id){document.getElementById(id).textContent='图表暂不可用';});
+  UI_CHART_STATE='failed';
+  document.getElementById('chartStatus').textContent=uiT('图表组件加载失败，请联网后刷新；数值计算、预设和 CSV 导出仍可使用。','Charts failed to load. Connect to the internet and refresh; calculations, presets and CSV export remain available.');
+  ['cSpec','cAtt','cSpec0'].forEach(function(id){document.getElementById(id).textContent=uiT('图表暂不可用','Chart unavailable');});
 }
 document.addEventListener('DOMContentLoaded',function(){
-  document.querySelectorAll('input[type="number"]').forEach(function(el){el.setAttribute('aria-describedby','inputStatus');if(!el.getAttribute('aria-label'))el.setAttribute('aria-label',LIMITS[el.id][2]);});
+  initLanguage();
+  document.getElementById('chartStatus').textContent=uiT('图表组件加载中…','Loading charts…');
+  document.querySelectorAll('input[type="number"]').forEach(function(el){el.setAttribute('aria-describedby','inputStatus');el.setAttribute('aria-label',uiInputName(el.id,LIMITS[el.id][2]));});
   renderPre('N'); onInhMat(true); recalc(); renderTable('N');
   window.__echartsReady.then(function(ok){
     if(!ok || !window.echarts){showChartFailure();return;}
@@ -616,6 +695,7 @@ document.addEventListener('DOMContentLoaded',function(){
       ch1=echarts.init(document.getElementById('cSpec'));
       ch2=echarts.init(document.getElementById('cAtt'));
       ch3=echarts.init(document.getElementById('cSpec0'));
+      UI_CHART_STATE='ready';
       document.getElementById('chartStatus').textContent='';
       window.addEventListener('resize',function(){[ch1,ch2,ch3].forEach(function(c){c.resize();});});
       draw();

@@ -3,3 +3,4 @@ __pycache__/
 .validation/
 *.zip
 reports/test_report.json
+reports/language_test_report.json
