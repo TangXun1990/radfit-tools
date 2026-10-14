@@ -4,7 +4,7 @@
 
 An X-ray spectrum calculator for ionizing radiation metrology, powered by 唐逊.
 
-Current version: **v1.0.0-beta.1**. No backend is required. Each page embeds its own calculation data. ECharts is the only external dependency, with two CDN fallbacks.
+Current version: **v1.0.0-beta.2**. No backend is required. Each page embeds its own calculation data. ECharts is the only external dependency, with two CDN fallbacks.
 
 ## Usage
 

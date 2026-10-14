@@ -19,9 +19,9 @@
     "mo_calibration.json": "09f116ed8c048f13fdc098ab64de4dde7dd0e2b3bdc8de797025601faff0b5d4"
   },
   "physics_policy": "原ISO物理参数未改；W仅独立校准RQR基准过滤；乳腺采用真实Mo基础谱+标准Mo/Al过滤。",
-  "software_version": "1.0.0-beta.1",
+  "software_version": "1.0.0-beta.2",
   "published_html_sha256": {
-    "index.html": "d2ab56d25f579cf59eec47d9045312cc62f3ebe00ddd7cc3492957037887a946",
-    "diagnostic.html": "692e828b3c6f40de5e208c166a4a036f9f21af4d3bde318888221a4aacb1698e"
+    "index.html": "2163910abccf5b9eeb952d67b2883cf304f872c005b41ad3b63f925dfc0aed71",
+    "diagnostic.html": "db3bd0a2ed6445a131a60f313832e23a76ea11db00337d6ec246e95b43e41797"
   }
 }
