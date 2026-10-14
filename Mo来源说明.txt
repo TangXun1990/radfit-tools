@@ -1,0 +1,61 @@
+钼靶能谱来源和处理说明
+
+1. 来源和署名
+Ketelhut, S., & Büermann, L. (2020). Catalogue of unfiltered x-ray spectra from tungsten-, molybdenum-, and rhodium-anode-based x-ray tubes with generating voltages from 10kV to 50kV in steps of 1kV [Data set]. Physikalisch-Technische Bundesanstalt (PTB).
+https://doi.org/10.7795/720.20201118
+档案页：https://oar.ptb.de/resources/show/10.7795/720.20201118
+下载：https://oar.ptb.de/files/download/681c528353218de84f08e827
+许可：CC BY 4.0，https://creativecommons.org/licenses/by/4.0/
+下载 ZIP SHA256：2d61ec2784128b4a8de0870a43c2428f43e8f7834754270ffcf1db3520ee30bf，与档案公示值一致。
+网页必须保留来源、作者及许可署名。
+
+相关论文：Ketelhut, S., Büermann, L., & Hilgers, G. (2021), Catalog of x-ray spectra of Mo-, Rh-, and W-anode-based x-ray tubes from 10 to 50 kV. Physics in Medicine & Biology 66, 115013. DOI:10.1088/1361-6560/abfbb2。
+https://pubmed.ncbi.nlm.nih.gov/33902019/
+
+2. 此处实际使用的测量条件
+归档 Mo_25kV.dat 至 Mo_35kV.dat 文件头明确写明：钼阳极、靶角 26°、固有过滤 1 mm Be，在空气中距焦点 100 cm 处测量、分箱宽度 0.25 keV。
+基谱已经包含该 Be 窗和空气路径。不在网页中重复施加 1 mm Be 或 100 cm 空气，也不把此谱称为无窗的裸靶谱。
+文件头未给出纹波；不把未知值默认为零。标准对实际装置纹波的要求由标准说明单独列示。
+
+3. 数据处理（属于对原数据的改编）
+原文件第一列是分箱上界，第二列是按总注量和 keV 箱宽归一化的微分光子注量。
+计算取箱中心 E_i=上界-0.125 keV，光子箱权重 p_i=原微分注量×0.25 keV。
+保留箱上界不超过管电压端点的箱，去除端点以上测量噪声尾部，并把每个电压的箱权重重新归一化为总和1。逐档文件哈希和去除比例见 mo_reference_spectra.json。
+25~35 kV 共11个整数电压均使用对应实测谱；只有非整数电压才在相邻1 kV基谱间按同一能量箱线性插值，再按箱上界截断并重新归一化。
+谱值是每箱光子权重，不是每 keV 微分谱；如展示微分谱，须再除以0.25 keV。
+
+4. 数学过滤及 HVL 求解
+默认总 Mo 过滤厚度为标准名义值0.032 mm；RQA-M在对应RQR-M基谱上再加2 mm Al。
+pF_i = p0_i exp[-(mu/rho)_Mo(E_i) rho_Mo t_Mo/10 - (mu/rho)_Al(E_i) rho_Al t_Al/10 - (mu/rho)_Be(E_i) rho_Be t_extraBe/10]。
+厚度以mm输入，除以10转换为cm。
+以 w_i=pF_i E_i (mu_en/rho)_Air(E_i) 为空气比释动能权重，二分求取附加Al厚度，使加权透射比分别为0.5和0.25。HVL2=达到25%的总厚度-HVL1，均匀系数=HVL1/HVL2。
+平均能量=sum(pF_i E_i)/sum(pF_i)，其中pF为每箱光子权重。
+Mo密度10.22、Be密度1.848、Al密度2.699，单位g/cm^3。
+Mo和Be采用NIST官方完整质量衰减表，保留吸收边重复能量点；以log-log插值，边点取边后系数，边点下方不跨越边缘跳变。
+https://physics.nist.gov/PhysRefData/XrayMassCoef/ElemTab/z42.html
+https://physics.nist.gov/PhysRefData/XrayMassCoef/ElemTab/z04.html
+Al及Air使用原ISO Python参考模型的原数值表，以确保网页与参考代码一致；未改原ISO任何物理常数。
+
+5. 名义过滤的预测与标准参考（HVL单位mmAl，平均能量单位keV）
+辐射质       参考HVL1   模型HVL1      模型HVL2      模型平均能量
+RQR-M1       0.28       0.291878     0.374333      16.181946
+RQR-M2       0.31       0.323530     0.413730      16.766175
+RQR-M3       0.33       0.341402     0.434555      17.119459
+RQR-M4       0.36       0.375818     0.473645      17.985410
+RQA-M1       0.56       0.559339     0.592651      18.729312
+RQA-M2       0.60       0.601381     0.654088      19.742933
+RQA-M3       0.62       0.631224     0.703743      20.581078
+RQA-M4       0.68       0.712299     0.859701      23.048557
+以上是Python模型运行结果摘要，网页对照表应实时调用谱计算，不应将此表中的预测值写死。
+
+RQR-M四组HVL1与表值的最大绝对差为0.015819 mmAl。HVL1单项差值可以与适用标准的绝对mmAl要求比较；模型计算不证明整套实际装置已经满足电压、纹波、过滤等标准条件。
+RQA-M表值作为名义参考列示，模型残差如实显示，不把2%数值一致性要求当成标准的验收阈值。
+mo_calibration.json保留一个共享Mo厚度的诊断性约束搜索记录，但没有把该厚度调整应用为默认参数。实际计算一直采用标准名义0.032 mm Mo，不针对每个电压强行修改谱形。
+
+6. 使用和限制
+mo_model.py是仅用Python标准库的独立参考实现，读取同目录的mo_reference_spectra.json。
+直接运行输出八组RQR-M/RQA-M结果；--kvp 28 --mo-mm 0.032 --al-mm 2计算指定参数。
+支持25~35 kV；超界、负厚度及非有限数有明确拦截；HVL扩张和二分均设上限。
+这是特定PTB源的实测基谱经数学过滤得到的模型估计，不是IEC/IAEA唯一规定的完整能谱。HVL不唯一确定能谱；平均能量尚无每组标准谱的独立实测核验。
+每个电压的基谱独立归一化，不能据此比较跨电压绝对输出或计算绝对空气比释动能率。相对空气比释动能仅表示同一基谱过滤前后的透射比例。
+JS/Python小于2%的数值偏差是实现一致性要求，不等于对实际实验装置的2%测量准确度。

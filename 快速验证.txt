@@ -1,0 +1,36 @@
+1. 页面分离
+   打开index.html，只有N/W/H/L防护辐射质及ISO对照表。
+   点击页首“诊断X射线”，进入另一HTML；此页只有RQR/RQA/RQT/RQR-M/RQA-M。
+   两页都可直接从本地打开，各自只依赖ECharts。互跳需两个HTML放在同一目录。
+
+2. 原ISO数值回归（靶角20°，点击预设即可恢复原过滤）
+   N-120：HVL1=1.674739 mmCu，HVL2=1.730787 mmCu，平均E=100.441719 keV。
+   H-60 ：HVL1=2.399510 mmAl，HVL2=3.138648 mmAl，平均E=37.001738 keV。
+   L-30 ：HVL1=1.522648 mmAl，HVL2=1.578724 mmAl，平均E=26.395328 keV。
+   保持原fitted_params.json所有常数；CSV原字段未更改。
+
+3. 诊断W预设
+   选择RQR5：70kV，W靶，HVL1接近2.58mmAl；Al基准过滤约3.504mm。
+   RQA5：相同RQR基准上额外加21mmAl；RQT9：120kV上额外加0.25mmCu。
+   查看谱、HVL2、均匀系数、平均能量和CSV，均应有实际计算输出。
+   对照表预测列由同一谱函数实时计算；RQA/RQT名义HVL差值不会被隐藏。
+
+4. 乳腺Mo预设
+   RQR-M2：28kV，Mo靶，0.032mmMo；模型HVL1约0.323530mmAl，
+   HVL2约0.413730mmAl，平均E约16.766175keV。
+   RQA-M2：对应基础上再加2mmAl；模型HVL1约0.601381mmAl，
+   HVL2约0.654088mmAl，平均E约19.742933keV。
+   谱上应保留Mo特征线结构；不能出现用W靶谱代替的错误。
+   基谱已含1mmBe与1m空气，不再加一次。Mo谱CSV箱宽应为0.25keV。
+
+5. TRS来源和输入边界
+   切换IAEA TRS-457，表号应变6.2–6.6，显示TRS仪表/测量建议；同一预设
+   物理数值保持一致。选择TRS时W角度>27°被提示拦截。
+   测试空电压、0、负值、W>150kV、Mo>35kV、负厚度与超厚度，均须提示。
+   修改过滤标记“自定义估计”；点预设可恢复。零谱应显示空白提示并禁用CSV。
+
+6. Python参考
+   W：diagnostic_model.py（numpy，读取本目录原模型副本与独立诊断过滤参数）。
+   Mo：python mo_model.py --kvp 28 --mo-mm 0.032 --al-mm 2（纯标准库）。
+   JS/Python在相同参数下HVL和平均能量偏差应小于2%；实际检查结果见
+   verification_report.json。该一致性指标不能当作对真实设备的测量准确度。

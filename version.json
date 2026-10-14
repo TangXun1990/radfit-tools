@@ -1,0 +1,26 @@
+{
+  "software_version": "1.0.0-beta.1",
+  "release_date": "2026-10-14",
+  "status": "prerelease",
+  "standards": {
+    "ISO4037": "ISO 4037-1:2019",
+    "IEC61267": "IEC 61267:2005",
+    "TRS457": "IAEA TRS-457 (2007)"
+  },
+  "models": {
+    "ISO_W": {
+      "id": "iso-w-birch-marshall-original",
+      "parameters_sha256": "77cbcead63ce23ce6393fa349aa6732c8c077ca86ae9de554a2cf224aed64a47"
+    },
+    "diagnostic_W": {
+      "id": "w-rqr-equivalent-al-calibration",
+      "parameters_sha256": "ac8e475ed467999fd45f75bf14525c0b9ffb8cb04832cf9a71eb20b0fa1efd79"
+    },
+    "diagnostic_Mo": {
+      "id": "ptb-mo-2020-nominal-filtration",
+      "data_sha256": "1ed703ba3d69d3c89ff2547b2635604564266a6432386ce1c1ea0a573901f990",
+      "parameters_sha256": "a3451a4621b58d27647969432181461049eca56d85e8dd9a35d5953976d6873a"
+    }
+  },
+  "physical_constants_modified": false
+}
