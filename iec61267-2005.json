@@ -1,0 +1,1655 @@
+{
+  "edition": "IEC 61267:2005",
+  "status": "verified_standard_reference",
+  "sources": {
+    "user_pdf": "IEC 61267:2005 — author-supplied source, not distributed",
+    "supplementary_primary_source": {
+      "authority": "Pakistan Standards & Quality Control Authority",
+      "document": "PS IEC 61267/2009, retaining original IEC 61267:2005 body and printed page 35",
+      "url": "https://psqca.com.pk/cs/newitems2021/electronics/18-PS%20IEC%2061267-2009_FINAL.pdf",
+      "verified_clauses": [
+        "6.4",
+        "6.5"
+      ],
+      "verification_method": "search-indexed primary original-standard text, complete 6.4 and 6.5 blocks",
+      "retrieval_limitation": "Direct web open timed out and Python download received HTTP 403; no visual rendering of the supplementary page was available.",
+      "paraphrase": "Method 6.4 adds prescribed Table 2 filter to established RQR. Its Table 2 HVLs are nominal because voltage and source filtration have already been fixed. Method 6.5 permits direct RQA establishment using Clause 5 without first establishing RQR; then Table 2 HVLs are required target values rather than nominal values."
+    }
+  },
+  "verification_scope": "29组表值及相关过滤、生成与容差条款；独立经验参考曲线不构成物理谱或装置符合性声明。",
+  "notes": [
+    "RQR/RQA从2开始，RQT从8开始；两组乳腺系列各1–4。",
+    "所有第一HVL统一以mm Al报告；IEC参考不套用ISO的Cu材料自动判据。",
+    "RQA-M2005采用额外2 mm Al，不能误写成PMMA。",
+    "表格名义HVL、装置验收公差和拟合数值残差是不同指标。"
+  ],
+  "qualities": [
+    {
+      "name": "RQR 2",
+      "family": "RQR",
+      "number": 2,
+      "table": 1,
+      "standard_page": 26,
+      "pdf_page": 28,
+      "clause": "5",
+      "verified": true,
+      "kvp": 40,
+      "hvl1_mm_al": 1.42,
+      "homogeneity": 0.81,
+      "source": {
+        "url": "IEC 61267:2005 — author-supplied source, not distributed",
+        "locator": "IEC 61267:2005 表1；纸页26，PDF第28页（French）；第5章"
+      },
+      "reference_kind": "required_target_hvl1",
+      "physical_summary": "W靶；总过滤调节至指定HVL₁与均匀系数；电压脉动≤10%。",
+      "tolerance": {
+        "clause": "5.3–5.6",
+        "hvl_test_device_transmission_range": [
+          0.485,
+          0.515
+        ],
+        "homogeneity_absolute_tolerance": 0.03,
+        "practical_peak_voltage_expanded_uncertainty": {
+          "relative_percent": 1.5,
+          "absolute_floor_kv": 1.5,
+          "coverage_factor": 2,
+          "note": "取两者较大值；为实用峰值电压扩展不确定度，不是调节容差。"
+        },
+        "note": "HVL验证按测试器透射比判断；0.485–0.515不是HVL厚度±3%公差。",
+        "source": {
+          "url": "IEC 61267:2005 — author-supplied source, not distributed",
+          "locator": "5.3–5.5；PDF第27–28页、纸页25–26；测试器见5.6、PDF31/纸页29。"
+        }
+      },
+      "tolerance_summary": "均匀系数±0.03；HVL测试器透射比0.485–0.515。",
+      "physical_config": {
+        "target_material": "W",
+        "maximum_voltage_ripple_percent": 10,
+        "hvl_material": "Al",
+        "voltage_quantity": "practical_peak_voltage",
+        "source_assembly_filtration": {
+          "material": "Al",
+          "mode": "adjust_to_HVL1_and_homogeneity",
+          "note": "总过滤量随射线源组件调节，标准表1不规定统一固定Al厚度；不能把模型推定厚度称为标准厚度。"
+        }
+      }
+    },
+    {
+      "name": "RQR 3",
+      "family": "RQR",
+      "number": 3,
+      "table": 1,
+      "standard_page": 26,
+      "pdf_page": 28,
+      "clause": "5",
+      "verified": true,
+      "kvp": 50,
+      "hvl1_mm_al": 1.78,
+      "homogeneity": 0.76,
+      "source": {
+        "url": "IEC 61267:2005 — author-supplied source, not distributed",
+        "locator": "IEC 61267:2005 表1；纸页26，PDF第28页（French）；第5章"
+      },
+      "reference_kind": "required_target_hvl1",
+      "physical_summary": "W靶；总过滤调节至指定HVL₁与均匀系数；电压脉动≤10%。",
+      "tolerance": {
+        "clause": "5.3–5.6",
+        "hvl_test_device_transmission_range": [
+          0.485,
+          0.515
+        ],
+        "homogeneity_absolute_tolerance": 0.03,
+        "practical_peak_voltage_expanded_uncertainty": {
+          "relative_percent": 1.5,
+          "absolute_floor_kv": 1.5,
+          "coverage_factor": 2,
+          "note": "取两者较大值；为实用峰值电压扩展不确定度，不是调节容差。"
+        },
+        "note": "HVL验证按测试器透射比判断；0.485–0.515不是HVL厚度±3%公差。",
+        "source": {
+          "url": "IEC 61267:2005 — author-supplied source, not distributed",
+          "locator": "5.3–5.5；PDF第27–28页、纸页25–26；测试器见5.6、PDF31/纸页29。"
+        }
+      },
+      "tolerance_summary": "均匀系数±0.03；HVL测试器透射比0.485–0.515。",
+      "physical_config": {
+        "target_material": "W",
+        "maximum_voltage_ripple_percent": 10,
+        "hvl_material": "Al",
+        "voltage_quantity": "practical_peak_voltage",
+        "source_assembly_filtration": {
+          "material": "Al",
+          "mode": "adjust_to_HVL1_and_homogeneity",
+          "note": "总过滤量随射线源组件调节，标准表1不规定统一固定Al厚度；不能把模型推定厚度称为标准厚度。"
+        }
+      }
+    },
+    {
+      "name": "RQR 4",
+      "family": "RQR",
+      "number": 4,
+      "table": 1,
+      "standard_page": 26,
+      "pdf_page": 28,
+      "clause": "5",
+      "verified": true,
+      "kvp": 60,
+      "hvl1_mm_al": 2.19,
+      "homogeneity": 0.74,
+      "source": {
+        "url": "IEC 61267:2005 — author-supplied source, not distributed",
+        "locator": "IEC 61267:2005 表1；纸页26，PDF第28页（French）；第5章"
+      },
+      "reference_kind": "required_target_hvl1",
+      "physical_summary": "W靶；总过滤调节至指定HVL₁与均匀系数；电压脉动≤10%。",
+      "tolerance": {
+        "clause": "5.3–5.6",
+        "hvl_test_device_transmission_range": [
+          0.485,
+          0.515
+        ],
+        "homogeneity_absolute_tolerance": 0.03,
+        "practical_peak_voltage_expanded_uncertainty": {
+          "relative_percent": 1.5,
+          "absolute_floor_kv": 1.5,
+          "coverage_factor": 2,
+          "note": "取两者较大值；为实用峰值电压扩展不确定度，不是调节容差。"
+        },
+        "note": "HVL验证按测试器透射比判断；0.485–0.515不是HVL厚度±3%公差。",
+        "source": {
+          "url": "IEC 61267:2005 — author-supplied source, not distributed",
+          "locator": "5.3–5.5；PDF第27–28页、纸页25–26；测试器见5.6、PDF31/纸页29。"
+        }
+      },
+      "tolerance_summary": "均匀系数±0.03；HVL测试器透射比0.485–0.515。",
+      "physical_config": {
+        "target_material": "W",
+        "maximum_voltage_ripple_percent": 10,
+        "hvl_material": "Al",
+        "voltage_quantity": "practical_peak_voltage",
+        "source_assembly_filtration": {
+          "material": "Al",
+          "mode": "adjust_to_HVL1_and_homogeneity",
+          "note": "总过滤量随射线源组件调节，标准表1不规定统一固定Al厚度；不能把模型推定厚度称为标准厚度。"
+        }
+      }
+    },
+    {
+      "name": "RQR 5",
+      "family": "RQR",
+      "number": 5,
+      "table": 1,
+      "standard_page": 26,
+      "pdf_page": 28,
+      "clause": "5",
+      "verified": true,
+      "kvp": 70,
+      "hvl1_mm_al": 2.58,
+      "homogeneity": 0.71,
+      "source": {
+        "url": "IEC 61267:2005 — author-supplied source, not distributed",
+        "locator": "IEC 61267:2005 表1；纸页26，PDF第28页（French）；第5章"
+      },
+      "reference_kind": "required_target_hvl1",
+      "physical_summary": "W靶；总过滤调节至指定HVL₁与均匀系数；电压脉动≤10%。",
+      "tolerance": {
+        "clause": "5.3–5.6",
+        "hvl_test_device_transmission_range": [
+          0.485,
+          0.515
+        ],
+        "homogeneity_absolute_tolerance": 0.03,
+        "practical_peak_voltage_expanded_uncertainty": {
+          "relative_percent": 1.5,
+          "absolute_floor_kv": 1.5,
+          "coverage_factor": 2,
+          "note": "取两者较大值；为实用峰值电压扩展不确定度，不是调节容差。"
+        },
+        "note": "HVL验证按测试器透射比判断；0.485–0.515不是HVL厚度±3%公差。",
+        "source": {
+          "url": "IEC 61267:2005 — author-supplied source, not distributed",
+          "locator": "5.3–5.5；PDF第27–28页、纸页25–26；测试器见5.6、PDF31/纸页29。"
+        }
+      },
+      "tolerance_summary": "均匀系数±0.03；HVL测试器透射比0.485–0.515。",
+      "physical_config": {
+        "target_material": "W",
+        "maximum_voltage_ripple_percent": 10,
+        "hvl_material": "Al",
+        "voltage_quantity": "practical_peak_voltage",
+        "source_assembly_filtration": {
+          "material": "Al",
+          "mode": "adjust_to_HVL1_and_homogeneity",
+          "note": "总过滤量随射线源组件调节，标准表1不规定统一固定Al厚度；不能把模型推定厚度称为标准厚度。"
+        }
+      }
+    },
+    {
+      "name": "RQR 6",
+      "family": "RQR",
+      "number": 6,
+      "table": 1,
+      "standard_page": 26,
+      "pdf_page": 28,
+      "clause": "5",
+      "verified": true,
+      "kvp": 80,
+      "hvl1_mm_al": 3.01,
+      "homogeneity": 0.69,
+      "source": {
+        "url": "IEC 61267:2005 — author-supplied source, not distributed",
+        "locator": "IEC 61267:2005 表1；纸页26，PDF第28页（French）；第5章"
+      },
+      "reference_kind": "required_target_hvl1",
+      "physical_summary": "W靶；总过滤调节至指定HVL₁与均匀系数；电压脉动≤10%。",
+      "tolerance": {
+        "clause": "5.3–5.6",
+        "hvl_test_device_transmission_range": [
+          0.485,
+          0.515
+        ],
+        "homogeneity_absolute_tolerance": 0.03,
+        "practical_peak_voltage_expanded_uncertainty": {
+          "relative_percent": 1.5,
+          "absolute_floor_kv": 1.5,
+          "coverage_factor": 2,
+          "note": "取两者较大值；为实用峰值电压扩展不确定度，不是调节容差。"
+        },
+        "note": "HVL验证按测试器透射比判断；0.485–0.515不是HVL厚度±3%公差。",
+        "source": {
+          "url": "IEC 61267:2005 — author-supplied source, not distributed",
+          "locator": "5.3–5.5；PDF第27–28页、纸页25–26；测试器见5.6、PDF31/纸页29。"
+        }
+      },
+      "tolerance_summary": "均匀系数±0.03；HVL测试器透射比0.485–0.515。",
+      "physical_config": {
+        "target_material": "W",
+        "maximum_voltage_ripple_percent": 10,
+        "hvl_material": "Al",
+        "voltage_quantity": "practical_peak_voltage",
+        "source_assembly_filtration": {
+          "material": "Al",
+          "mode": "adjust_to_HVL1_and_homogeneity",
+          "note": "总过滤量随射线源组件调节，标准表1不规定统一固定Al厚度；不能把模型推定厚度称为标准厚度。"
+        }
+      }
+    },
+    {
+      "name": "RQR 7",
+      "family": "RQR",
+      "number": 7,
+      "table": 1,
+      "standard_page": 26,
+      "pdf_page": 28,
+      "clause": "5",
+      "verified": true,
+      "kvp": 90,
+      "hvl1_mm_al": 3.48,
+      "homogeneity": 0.68,
+      "source": {
+        "url": "IEC 61267:2005 — author-supplied source, not distributed",
+        "locator": "IEC 61267:2005 表1；纸页26，PDF第28页（French）；第5章"
+      },
+      "reference_kind": "required_target_hvl1",
+      "physical_summary": "W靶；总过滤调节至指定HVL₁与均匀系数；电压脉动≤10%。",
+      "tolerance": {
+        "clause": "5.3–5.6",
+        "hvl_test_device_transmission_range": [
+          0.485,
+          0.515
+        ],
+        "homogeneity_absolute_tolerance": 0.03,
+        "practical_peak_voltage_expanded_uncertainty": {
+          "relative_percent": 1.5,
+          "absolute_floor_kv": 1.5,
+          "coverage_factor": 2,
+          "note": "取两者较大值；为实用峰值电压扩展不确定度，不是调节容差。"
+        },
+        "note": "HVL验证按测试器透射比判断；0.485–0.515不是HVL厚度±3%公差。",
+        "source": {
+          "url": "IEC 61267:2005 — author-supplied source, not distributed",
+          "locator": "5.3–5.5；PDF第27–28页、纸页25–26；测试器见5.6、PDF31/纸页29。"
+        }
+      },
+      "tolerance_summary": "均匀系数±0.03；HVL测试器透射比0.485–0.515。",
+      "physical_config": {
+        "target_material": "W",
+        "maximum_voltage_ripple_percent": 10,
+        "hvl_material": "Al",
+        "voltage_quantity": "practical_peak_voltage",
+        "source_assembly_filtration": {
+          "material": "Al",
+          "mode": "adjust_to_HVL1_and_homogeneity",
+          "note": "总过滤量随射线源组件调节，标准表1不规定统一固定Al厚度；不能把模型推定厚度称为标准厚度。"
+        }
+      }
+    },
+    {
+      "name": "RQR 8",
+      "family": "RQR",
+      "number": 8,
+      "table": 1,
+      "standard_page": 26,
+      "pdf_page": 28,
+      "clause": "5",
+      "verified": true,
+      "kvp": 100,
+      "hvl1_mm_al": 3.97,
+      "homogeneity": 0.68,
+      "source": {
+        "url": "IEC 61267:2005 — author-supplied source, not distributed",
+        "locator": "IEC 61267:2005 表1；纸页26，PDF第28页（French）；第5章"
+      },
+      "reference_kind": "required_target_hvl1",
+      "physical_summary": "W靶；总过滤调节至指定HVL₁与均匀系数；电压脉动≤10%。",
+      "tolerance": {
+        "clause": "5.3–5.6",
+        "hvl_test_device_transmission_range": [
+          0.485,
+          0.515
+        ],
+        "homogeneity_absolute_tolerance": 0.03,
+        "practical_peak_voltage_expanded_uncertainty": {
+          "relative_percent": 1.5,
+          "absolute_floor_kv": 1.5,
+          "coverage_factor": 2,
+          "note": "取两者较大值；为实用峰值电压扩展不确定度，不是调节容差。"
+        },
+        "note": "HVL验证按测试器透射比判断；0.485–0.515不是HVL厚度±3%公差。",
+        "source": {
+          "url": "IEC 61267:2005 — author-supplied source, not distributed",
+          "locator": "5.3–5.5；PDF第27–28页、纸页25–26；测试器见5.6、PDF31/纸页29。"
+        }
+      },
+      "tolerance_summary": "均匀系数±0.03；HVL测试器透射比0.485–0.515。",
+      "physical_config": {
+        "target_material": "W",
+        "maximum_voltage_ripple_percent": 10,
+        "hvl_material": "Al",
+        "voltage_quantity": "practical_peak_voltage",
+        "source_assembly_filtration": {
+          "material": "Al",
+          "mode": "adjust_to_HVL1_and_homogeneity",
+          "note": "总过滤量随射线源组件调节，标准表1不规定统一固定Al厚度；不能把模型推定厚度称为标准厚度。"
+        }
+      }
+    },
+    {
+      "name": "RQR 9",
+      "family": "RQR",
+      "number": 9,
+      "table": 1,
+      "standard_page": 26,
+      "pdf_page": 28,
+      "clause": "5",
+      "verified": true,
+      "kvp": 120,
+      "hvl1_mm_al": 5.0,
+      "homogeneity": 0.68,
+      "source": {
+        "url": "IEC 61267:2005 — author-supplied source, not distributed",
+        "locator": "IEC 61267:2005 表1；纸页26，PDF第28页（French）；第5章"
+      },
+      "reference_kind": "required_target_hvl1",
+      "physical_summary": "W靶；总过滤调节至指定HVL₁与均匀系数；电压脉动≤10%。",
+      "tolerance": {
+        "clause": "5.3–5.6",
+        "hvl_test_device_transmission_range": [
+          0.485,
+          0.515
+        ],
+        "homogeneity_absolute_tolerance": 0.03,
+        "practical_peak_voltage_expanded_uncertainty": {
+          "relative_percent": 1.5,
+          "absolute_floor_kv": 1.5,
+          "coverage_factor": 2,
+          "note": "取两者较大值；为实用峰值电压扩展不确定度，不是调节容差。"
+        },
+        "note": "HVL验证按测试器透射比判断；0.485–0.515不是HVL厚度±3%公差。",
+        "source": {
+          "url": "IEC 61267:2005 — author-supplied source, not distributed",
+          "locator": "5.3–5.5；PDF第27–28页、纸页25–26；测试器见5.6、PDF31/纸页29。"
+        }
+      },
+      "tolerance_summary": "均匀系数±0.03；HVL测试器透射比0.485–0.515。",
+      "physical_config": {
+        "target_material": "W",
+        "maximum_voltage_ripple_percent": 10,
+        "hvl_material": "Al",
+        "voltage_quantity": "practical_peak_voltage",
+        "source_assembly_filtration": {
+          "material": "Al",
+          "mode": "adjust_to_HVL1_and_homogeneity",
+          "note": "总过滤量随射线源组件调节，标准表1不规定统一固定Al厚度；不能把模型推定厚度称为标准厚度。"
+        }
+      }
+    },
+    {
+      "name": "RQR 10",
+      "family": "RQR",
+      "number": 10,
+      "table": 1,
+      "standard_page": 26,
+      "pdf_page": 28,
+      "clause": "5",
+      "verified": true,
+      "kvp": 150,
+      "hvl1_mm_al": 6.57,
+      "homogeneity": 0.72,
+      "source": {
+        "url": "IEC 61267:2005 — author-supplied source, not distributed",
+        "locator": "IEC 61267:2005 表1；纸页26，PDF第28页（French）；第5章"
+      },
+      "reference_kind": "required_target_hvl1",
+      "physical_summary": "W靶；总过滤调节至指定HVL₁与均匀系数；电压脉动≤10%。",
+      "tolerance": {
+        "clause": "5.3–5.6",
+        "hvl_test_device_transmission_range": [
+          0.485,
+          0.515
+        ],
+        "homogeneity_absolute_tolerance": 0.03,
+        "practical_peak_voltage_expanded_uncertainty": {
+          "relative_percent": 1.5,
+          "absolute_floor_kv": 1.5,
+          "coverage_factor": 2,
+          "note": "取两者较大值；为实用峰值电压扩展不确定度，不是调节容差。"
+        },
+        "note": "HVL验证按测试器透射比判断；0.485–0.515不是HVL厚度±3%公差。",
+        "source": {
+          "url": "IEC 61267:2005 — author-supplied source, not distributed",
+          "locator": "5.3–5.5；PDF第27–28页、纸页25–26；测试器见5.6、PDF31/纸页29。"
+        }
+      },
+      "tolerance_summary": "均匀系数±0.03；HVL测试器透射比0.485–0.515。",
+      "physical_config": {
+        "target_material": "W",
+        "maximum_voltage_ripple_percent": 10,
+        "hvl_material": "Al",
+        "voltage_quantity": "practical_peak_voltage",
+        "source_assembly_filtration": {
+          "material": "Al",
+          "mode": "adjust_to_HVL1_and_homogeneity",
+          "note": "总过滤量随射线源组件调节，标准表1不规定统一固定Al厚度；不能把模型推定厚度称为标准厚度。"
+        }
+      }
+    },
+    {
+      "name": "RQA 2",
+      "family": "RQA",
+      "number": 2,
+      "table": 2,
+      "standard_page": 33,
+      "pdf_page": 35,
+      "clause": "6",
+      "verified": true,
+      "kvp": 40,
+      "hvl1_mm_al": 2.2,
+      "homogeneity": null,
+      "source": {
+        "url": "IEC 61267:2005 — author-supplied source, not distributed",
+        "locator": "IEC 61267:2005 表2；纸页33，PDF第35页（English）；第6章"
+      },
+      "reference_kind": "nominal_hvl1_method_6_4",
+      "homogeneity_note": "表2及第6章不规定RQA均匀系数；该值未列出，不能从RQR复制。",
+      "physical_summary": "对应RQR 2条件再加4 mm Al；厚度是额外过滤，非总过滤。",
+      "tolerance": {
+        "clause": "6.3.2, 6.4, 6.5",
+        "added_filter_layer_thickness_known_within_mm": 0.01,
+        "added_filter_al_minimum_purity_percent": 99.9,
+        "method_6_4": "先建立RQR再加入规定Al滤片；表2的RQA HVL是名义值，不用拟合偏差单独验收。",
+        "alternative_method_6_5": "允许按第5章直接建立RQA，此时表2 HVL为要求目标；按第5章HVL测试程序验证。",
+        "alternative_method_6_5_hvl_test_device_transmission_range": [
+          0.485,
+          0.515
+        ],
+        "source": {
+          "url": "https://psqca.com.pk/cs/newitems2021/electronics/18-PS%20IEC%2061267-2009_FINAL.pdf",
+          "locator": "原IEC 61267:2005第6.4、6.5条（官方PSQCA转载正文，纸页35）；6.3.2由用户PDF第35页/纸页33核对。"
+        }
+      },
+      "tolerance_summary": "表2 HVL为6.4法名义值；各层Al厚度已知至±0.01 mm。",
+      "physical_config": {
+        "target_material": "W",
+        "maximum_voltage_ripple_percent": 10,
+        "hvl_material": "Al",
+        "voltage_quantity": "practical_peak_voltage",
+        "base_quality": "RQR 2",
+        "additional_filter": {
+          "material": "Al",
+          "thickness_mm": 4,
+          "minimum_purity_percent": 99.9
+        },
+        "construction_method": "6.4_corresponding_RQR_plus_prescribed_Al"
+      }
+    },
+    {
+      "name": "RQA 3",
+      "family": "RQA",
+      "number": 3,
+      "table": 2,
+      "standard_page": 33,
+      "pdf_page": 35,
+      "clause": "6",
+      "verified": true,
+      "kvp": 50,
+      "hvl1_mm_al": 3.8,
+      "homogeneity": null,
+      "source": {
+        "url": "IEC 61267:2005 — author-supplied source, not distributed",
+        "locator": "IEC 61267:2005 表2；纸页33，PDF第35页（English）；第6章"
+      },
+      "reference_kind": "nominal_hvl1_method_6_4",
+      "homogeneity_note": "表2及第6章不规定RQA均匀系数；该值未列出，不能从RQR复制。",
+      "physical_summary": "对应RQR 3条件再加10 mm Al；厚度是额外过滤，非总过滤。",
+      "tolerance": {
+        "clause": "6.3.2, 6.4, 6.5",
+        "added_filter_layer_thickness_known_within_mm": 0.01,
+        "added_filter_al_minimum_purity_percent": 99.9,
+        "method_6_4": "先建立RQR再加入规定Al滤片；表2的RQA HVL是名义值，不用拟合偏差单独验收。",
+        "alternative_method_6_5": "允许按第5章直接建立RQA，此时表2 HVL为要求目标；按第5章HVL测试程序验证。",
+        "alternative_method_6_5_hvl_test_device_transmission_range": [
+          0.485,
+          0.515
+        ],
+        "source": {
+          "url": "https://psqca.com.pk/cs/newitems2021/electronics/18-PS%20IEC%2061267-2009_FINAL.pdf",
+          "locator": "原IEC 61267:2005第6.4、6.5条（官方PSQCA转载正文，纸页35）；6.3.2由用户PDF第35页/纸页33核对。"
+        }
+      },
+      "tolerance_summary": "表2 HVL为6.4法名义值；各层Al厚度已知至±0.01 mm。",
+      "physical_config": {
+        "target_material": "W",
+        "maximum_voltage_ripple_percent": 10,
+        "hvl_material": "Al",
+        "voltage_quantity": "practical_peak_voltage",
+        "base_quality": "RQR 3",
+        "additional_filter": {
+          "material": "Al",
+          "thickness_mm": 10,
+          "minimum_purity_percent": 99.9
+        },
+        "construction_method": "6.4_corresponding_RQR_plus_prescribed_Al"
+      }
+    },
+    {
+      "name": "RQA 4",
+      "family": "RQA",
+      "number": 4,
+      "table": 2,
+      "standard_page": 33,
+      "pdf_page": 35,
+      "clause": "6",
+      "verified": true,
+      "kvp": 60,
+      "hvl1_mm_al": 5.4,
+      "homogeneity": null,
+      "source": {
+        "url": "IEC 61267:2005 — author-supplied source, not distributed",
+        "locator": "IEC 61267:2005 表2；纸页33，PDF第35页（English）；第6章"
+      },
+      "reference_kind": "nominal_hvl1_method_6_4",
+      "homogeneity_note": "表2及第6章不规定RQA均匀系数；该值未列出，不能从RQR复制。",
+      "physical_summary": "对应RQR 4条件再加16 mm Al；厚度是额外过滤，非总过滤。",
+      "tolerance": {
+        "clause": "6.3.2, 6.4, 6.5",
+        "added_filter_layer_thickness_known_within_mm": 0.01,
+        "added_filter_al_minimum_purity_percent": 99.9,
+        "method_6_4": "先建立RQR再加入规定Al滤片；表2的RQA HVL是名义值，不用拟合偏差单独验收。",
+        "alternative_method_6_5": "允许按第5章直接建立RQA，此时表2 HVL为要求目标；按第5章HVL测试程序验证。",
+        "alternative_method_6_5_hvl_test_device_transmission_range": [
+          0.485,
+          0.515
+        ],
+        "source": {
+          "url": "https://psqca.com.pk/cs/newitems2021/electronics/18-PS%20IEC%2061267-2009_FINAL.pdf",
+          "locator": "原IEC 61267:2005第6.4、6.5条（官方PSQCA转载正文，纸页35）；6.3.2由用户PDF第35页/纸页33核对。"
+        }
+      },
+      "tolerance_summary": "表2 HVL为6.4法名义值；各层Al厚度已知至±0.01 mm。",
+      "physical_config": {
+        "target_material": "W",
+        "maximum_voltage_ripple_percent": 10,
+        "hvl_material": "Al",
+        "voltage_quantity": "practical_peak_voltage",
+        "base_quality": "RQR 4",
+        "additional_filter": {
+          "material": "Al",
+          "thickness_mm": 16,
+          "minimum_purity_percent": 99.9
+        },
+        "construction_method": "6.4_corresponding_RQR_plus_prescribed_Al"
+      }
+    },
+    {
+      "name": "RQA 5",
+      "family": "RQA",
+      "number": 5,
+      "table": 2,
+      "standard_page": 33,
+      "pdf_page": 35,
+      "clause": "6",
+      "verified": true,
+      "kvp": 70,
+      "hvl1_mm_al": 6.8,
+      "homogeneity": null,
+      "source": {
+        "url": "IEC 61267:2005 — author-supplied source, not distributed",
+        "locator": "IEC 61267:2005 表2；纸页33，PDF第35页（English）；第6章"
+      },
+      "reference_kind": "nominal_hvl1_method_6_4",
+      "homogeneity_note": "表2及第6章不规定RQA均匀系数；该值未列出，不能从RQR复制。",
+      "physical_summary": "对应RQR 5条件再加21 mm Al；厚度是额外过滤，非总过滤。",
+      "tolerance": {
+        "clause": "6.3.2, 6.4, 6.5",
+        "added_filter_layer_thickness_known_within_mm": 0.01,
+        "added_filter_al_minimum_purity_percent": 99.9,
+        "method_6_4": "先建立RQR再加入规定Al滤片；表2的RQA HVL是名义值，不用拟合偏差单独验收。",
+        "alternative_method_6_5": "允许按第5章直接建立RQA，此时表2 HVL为要求目标；按第5章HVL测试程序验证。",
+        "alternative_method_6_5_hvl_test_device_transmission_range": [
+          0.485,
+          0.515
+        ],
+        "source": {
+          "url": "https://psqca.com.pk/cs/newitems2021/electronics/18-PS%20IEC%2061267-2009_FINAL.pdf",
+          "locator": "原IEC 61267:2005第6.4、6.5条（官方PSQCA转载正文，纸页35）；6.3.2由用户PDF第35页/纸页33核对。"
+        }
+      },
+      "tolerance_summary": "表2 HVL为6.4法名义值；各层Al厚度已知至±0.01 mm。",
+      "physical_config": {
+        "target_material": "W",
+        "maximum_voltage_ripple_percent": 10,
+        "hvl_material": "Al",
+        "voltage_quantity": "practical_peak_voltage",
+        "base_quality": "RQR 5",
+        "additional_filter": {
+          "material": "Al",
+          "thickness_mm": 21,
+          "minimum_purity_percent": 99.9
+        },
+        "construction_method": "6.4_corresponding_RQR_plus_prescribed_Al"
+      }
+    },
+    {
+      "name": "RQA 6",
+      "family": "RQA",
+      "number": 6,
+      "table": 2,
+      "standard_page": 33,
+      "pdf_page": 35,
+      "clause": "6",
+      "verified": true,
+      "kvp": 80,
+      "hvl1_mm_al": 8.2,
+      "homogeneity": null,
+      "source": {
+        "url": "IEC 61267:2005 — author-supplied source, not distributed",
+        "locator": "IEC 61267:2005 表2；纸页33，PDF第35页（English）；第6章"
+      },
+      "reference_kind": "nominal_hvl1_method_6_4",
+      "homogeneity_note": "表2及第6章不规定RQA均匀系数；该值未列出，不能从RQR复制。",
+      "physical_summary": "对应RQR 6条件再加26 mm Al；厚度是额外过滤，非总过滤。",
+      "tolerance": {
+        "clause": "6.3.2, 6.4, 6.5",
+        "added_filter_layer_thickness_known_within_mm": 0.01,
+        "added_filter_al_minimum_purity_percent": 99.9,
+        "method_6_4": "先建立RQR再加入规定Al滤片；表2的RQA HVL是名义值，不用拟合偏差单独验收。",
+        "alternative_method_6_5": "允许按第5章直接建立RQA，此时表2 HVL为要求目标；按第5章HVL测试程序验证。",
+        "alternative_method_6_5_hvl_test_device_transmission_range": [
+          0.485,
+          0.515
+        ],
+        "source": {
+          "url": "https://psqca.com.pk/cs/newitems2021/electronics/18-PS%20IEC%2061267-2009_FINAL.pdf",
+          "locator": "原IEC 61267:2005第6.4、6.5条（官方PSQCA转载正文，纸页35）；6.3.2由用户PDF第35页/纸页33核对。"
+        }
+      },
+      "tolerance_summary": "表2 HVL为6.4法名义值；各层Al厚度已知至±0.01 mm。",
+      "physical_config": {
+        "target_material": "W",
+        "maximum_voltage_ripple_percent": 10,
+        "hvl_material": "Al",
+        "voltage_quantity": "practical_peak_voltage",
+        "base_quality": "RQR 6",
+        "additional_filter": {
+          "material": "Al",
+          "thickness_mm": 26,
+          "minimum_purity_percent": 99.9
+        },
+        "construction_method": "6.4_corresponding_RQR_plus_prescribed_Al"
+      }
+    },
+    {
+      "name": "RQA 7",
+      "family": "RQA",
+      "number": 7,
+      "table": 2,
+      "standard_page": 33,
+      "pdf_page": 35,
+      "clause": "6",
+      "verified": true,
+      "kvp": 90,
+      "hvl1_mm_al": 9.2,
+      "homogeneity": null,
+      "source": {
+        "url": "IEC 61267:2005 — author-supplied source, not distributed",
+        "locator": "IEC 61267:2005 表2；纸页33，PDF第35页（English）；第6章"
+      },
+      "reference_kind": "nominal_hvl1_method_6_4",
+      "homogeneity_note": "表2及第6章不规定RQA均匀系数；该值未列出，不能从RQR复制。",
+      "physical_summary": "对应RQR 7条件再加30 mm Al；厚度是额外过滤，非总过滤。",
+      "tolerance": {
+        "clause": "6.3.2, 6.4, 6.5",
+        "added_filter_layer_thickness_known_within_mm": 0.01,
+        "added_filter_al_minimum_purity_percent": 99.9,
+        "method_6_4": "先建立RQR再加入规定Al滤片；表2的RQA HVL是名义值，不用拟合偏差单独验收。",
+        "alternative_method_6_5": "允许按第5章直接建立RQA，此时表2 HVL为要求目标；按第5章HVL测试程序验证。",
+        "alternative_method_6_5_hvl_test_device_transmission_range": [
+          0.485,
+          0.515
+        ],
+        "source": {
+          "url": "https://psqca.com.pk/cs/newitems2021/electronics/18-PS%20IEC%2061267-2009_FINAL.pdf",
+          "locator": "原IEC 61267:2005第6.4、6.5条（官方PSQCA转载正文，纸页35）；6.3.2由用户PDF第35页/纸页33核对。"
+        }
+      },
+      "tolerance_summary": "表2 HVL为6.4法名义值；各层Al厚度已知至±0.01 mm。",
+      "physical_config": {
+        "target_material": "W",
+        "maximum_voltage_ripple_percent": 10,
+        "hvl_material": "Al",
+        "voltage_quantity": "practical_peak_voltage",
+        "base_quality": "RQR 7",
+        "additional_filter": {
+          "material": "Al",
+          "thickness_mm": 30,
+          "minimum_purity_percent": 99.9
+        },
+        "construction_method": "6.4_corresponding_RQR_plus_prescribed_Al"
+      }
+    },
+    {
+      "name": "RQA 8",
+      "family": "RQA",
+      "number": 8,
+      "table": 2,
+      "standard_page": 33,
+      "pdf_page": 35,
+      "clause": "6",
+      "verified": true,
+      "kvp": 100,
+      "hvl1_mm_al": 10.1,
+      "homogeneity": null,
+      "source": {
+        "url": "IEC 61267:2005 — author-supplied source, not distributed",
+        "locator": "IEC 61267:2005 表2；纸页33，PDF第35页（English）；第6章"
+      },
+      "reference_kind": "nominal_hvl1_method_6_4",
+      "homogeneity_note": "表2及第6章不规定RQA均匀系数；该值未列出，不能从RQR复制。",
+      "physical_summary": "对应RQR 8条件再加34 mm Al；厚度是额外过滤，非总过滤。",
+      "tolerance": {
+        "clause": "6.3.2, 6.4, 6.5",
+        "added_filter_layer_thickness_known_within_mm": 0.01,
+        "added_filter_al_minimum_purity_percent": 99.9,
+        "method_6_4": "先建立RQR再加入规定Al滤片；表2的RQA HVL是名义值，不用拟合偏差单独验收。",
+        "alternative_method_6_5": "允许按第5章直接建立RQA，此时表2 HVL为要求目标；按第5章HVL测试程序验证。",
+        "alternative_method_6_5_hvl_test_device_transmission_range": [
+          0.485,
+          0.515
+        ],
+        "source": {
+          "url": "https://psqca.com.pk/cs/newitems2021/electronics/18-PS%20IEC%2061267-2009_FINAL.pdf",
+          "locator": "原IEC 61267:2005第6.4、6.5条（官方PSQCA转载正文，纸页35）；6.3.2由用户PDF第35页/纸页33核对。"
+        }
+      },
+      "tolerance_summary": "表2 HVL为6.4法名义值；各层Al厚度已知至±0.01 mm。",
+      "physical_config": {
+        "target_material": "W",
+        "maximum_voltage_ripple_percent": 10,
+        "hvl_material": "Al",
+        "voltage_quantity": "practical_peak_voltage",
+        "base_quality": "RQR 8",
+        "additional_filter": {
+          "material": "Al",
+          "thickness_mm": 34,
+          "minimum_purity_percent": 99.9
+        },
+        "construction_method": "6.4_corresponding_RQR_plus_prescribed_Al"
+      }
+    },
+    {
+      "name": "RQA 9",
+      "family": "RQA",
+      "number": 9,
+      "table": 2,
+      "standard_page": 33,
+      "pdf_page": 35,
+      "clause": "6",
+      "verified": true,
+      "kvp": 120,
+      "hvl1_mm_al": 11.6,
+      "homogeneity": null,
+      "source": {
+        "url": "IEC 61267:2005 — author-supplied source, not distributed",
+        "locator": "IEC 61267:2005 表2；纸页33，PDF第35页（English）；第6章"
+      },
+      "reference_kind": "nominal_hvl1_method_6_4",
+      "homogeneity_note": "表2及第6章不规定RQA均匀系数；该值未列出，不能从RQR复制。",
+      "physical_summary": "对应RQR 9条件再加40 mm Al；厚度是额外过滤，非总过滤。",
+      "tolerance": {
+        "clause": "6.3.2, 6.4, 6.5",
+        "added_filter_layer_thickness_known_within_mm": 0.01,
+        "added_filter_al_minimum_purity_percent": 99.9,
+        "method_6_4": "先建立RQR再加入规定Al滤片；表2的RQA HVL是名义值，不用拟合偏差单独验收。",
+        "alternative_method_6_5": "允许按第5章直接建立RQA，此时表2 HVL为要求目标；按第5章HVL测试程序验证。",
+        "alternative_method_6_5_hvl_test_device_transmission_range": [
+          0.485,
+          0.515
+        ],
+        "source": {
+          "url": "https://psqca.com.pk/cs/newitems2021/electronics/18-PS%20IEC%2061267-2009_FINAL.pdf",
+          "locator": "原IEC 61267:2005第6.4、6.5条（官方PSQCA转载正文，纸页35）；6.3.2由用户PDF第35页/纸页33核对。"
+        }
+      },
+      "tolerance_summary": "表2 HVL为6.4法名义值；各层Al厚度已知至±0.01 mm。",
+      "physical_config": {
+        "target_material": "W",
+        "maximum_voltage_ripple_percent": 10,
+        "hvl_material": "Al",
+        "voltage_quantity": "practical_peak_voltage",
+        "base_quality": "RQR 9",
+        "additional_filter": {
+          "material": "Al",
+          "thickness_mm": 40,
+          "minimum_purity_percent": 99.9
+        },
+        "construction_method": "6.4_corresponding_RQR_plus_prescribed_Al"
+      }
+    },
+    {
+      "name": "RQA 10",
+      "family": "RQA",
+      "number": 10,
+      "table": 2,
+      "standard_page": 33,
+      "pdf_page": 35,
+      "clause": "6",
+      "verified": true,
+      "kvp": 150,
+      "hvl1_mm_al": 13.3,
+      "homogeneity": null,
+      "source": {
+        "url": "IEC 61267:2005 — author-supplied source, not distributed",
+        "locator": "IEC 61267:2005 表2；纸页33，PDF第35页（English）；第6章"
+      },
+      "reference_kind": "nominal_hvl1_method_6_4",
+      "homogeneity_note": "表2及第6章不规定RQA均匀系数；该值未列出，不能从RQR复制。",
+      "physical_summary": "对应RQR 10条件再加45 mm Al；厚度是额外过滤，非总过滤。",
+      "tolerance": {
+        "clause": "6.3.2, 6.4, 6.5",
+        "added_filter_layer_thickness_known_within_mm": 0.01,
+        "added_filter_al_minimum_purity_percent": 99.9,
+        "method_6_4": "先建立RQR再加入规定Al滤片；表2的RQA HVL是名义值，不用拟合偏差单独验收。",
+        "alternative_method_6_5": "允许按第5章直接建立RQA，此时表2 HVL为要求目标；按第5章HVL测试程序验证。",
+        "alternative_method_6_5_hvl_test_device_transmission_range": [
+          0.485,
+          0.515
+        ],
+        "source": {
+          "url": "https://psqca.com.pk/cs/newitems2021/electronics/18-PS%20IEC%2061267-2009_FINAL.pdf",
+          "locator": "原IEC 61267:2005第6.4、6.5条（官方PSQCA转载正文，纸页35）；6.3.2由用户PDF第35页/纸页33核对。"
+        }
+      },
+      "tolerance_summary": "表2 HVL为6.4法名义值；各层Al厚度已知至±0.01 mm。",
+      "physical_config": {
+        "target_material": "W",
+        "maximum_voltage_ripple_percent": 10,
+        "hvl_material": "Al",
+        "voltage_quantity": "practical_peak_voltage",
+        "base_quality": "RQR 10",
+        "additional_filter": {
+          "material": "Al",
+          "thickness_mm": 45,
+          "minimum_purity_percent": 99.9
+        },
+        "construction_method": "6.4_corresponding_RQR_plus_prescribed_Al"
+      }
+    },
+    {
+      "name": "RQT 8",
+      "family": "RQT",
+      "number": 8,
+      "table": 4,
+      "standard_page": 39,
+      "pdf_page": 41,
+      "clause": "8",
+      "verified": true,
+      "kvp": 100,
+      "hvl1_mm_al": 6.9,
+      "homogeneity": null,
+      "source": {
+        "url": "IEC 61267:2005 — author-supplied source, not distributed",
+        "locator": "IEC 61267:2005 表4；纸页39，PDF第41页（English）；第8章"
+      },
+      "reference_kind": "nominal_hvl1_with_prescribed_Cu",
+      "homogeneity_note": "表4及第8章不规定RQT均匀系数；不得编造。",
+      "physical_summary": "对应RQR 8条件再加0.20 mm Cu；Cu纯度≥99.9%。",
+      "tolerance": {
+        "clause": "8.3.2, 8.4",
+        "additional_cu_filter_thickness_kind": "nominal",
+        "additional_cu_filter_minimum_purity_percent": 99.9,
+        "hvl_kind": "规定名义Cu过滤时HVL为名义值；表4没有通用百分比HVL厚度公差。",
+        "source": {
+          "url": "IEC 61267:2005 — author-supplied source, not distributed",
+          "locator": "第8.3.2、8.4条，用户PDF第41页/纸页39。"
+        }
+      },
+      "tolerance_summary": "表4为名义Cu过滤/HVL；Cu纯度≥99.9%，无通用HVL百分比公差。",
+      "notes": [
+        "英文8.4存在表号及系列交叉引用不一致；数值依照表4的明确RQT表头，不自行伪造修订条文。"
+      ],
+      "physical_config": {
+        "target_material": "W",
+        "maximum_voltage_ripple_percent": 10,
+        "hvl_material": "Al",
+        "voltage_quantity": "practical_peak_voltage",
+        "base_quality": "RQR 8",
+        "additional_filter": {
+          "material": "Cu",
+          "thickness_mm": 0.2,
+          "minimum_purity_percent": 99.9,
+          "thickness_kind": "nominal"
+        }
+      }
+    },
+    {
+      "name": "RQT 9",
+      "family": "RQT",
+      "number": 9,
+      "table": 4,
+      "standard_page": 39,
+      "pdf_page": 41,
+      "clause": "8",
+      "verified": true,
+      "kvp": 120,
+      "hvl1_mm_al": 8.4,
+      "homogeneity": null,
+      "source": {
+        "url": "IEC 61267:2005 — author-supplied source, not distributed",
+        "locator": "IEC 61267:2005 表4；纸页39，PDF第41页（English）；第8章"
+      },
+      "reference_kind": "nominal_hvl1_with_prescribed_Cu",
+      "homogeneity_note": "表4及第8章不规定RQT均匀系数；不得编造。",
+      "physical_summary": "对应RQR 9条件再加0.25 mm Cu；Cu纯度≥99.9%。",
+      "tolerance": {
+        "clause": "8.3.2, 8.4",
+        "additional_cu_filter_thickness_kind": "nominal",
+        "additional_cu_filter_minimum_purity_percent": 99.9,
+        "hvl_kind": "规定名义Cu过滤时HVL为名义值；表4没有通用百分比HVL厚度公差。",
+        "source": {
+          "url": "IEC 61267:2005 — author-supplied source, not distributed",
+          "locator": "第8.3.2、8.4条，用户PDF第41页/纸页39。"
+        }
+      },
+      "tolerance_summary": "表4为名义Cu过滤/HVL；Cu纯度≥99.9%，无通用HVL百分比公差。",
+      "notes": [
+        "英文8.4存在表号及系列交叉引用不一致；数值依照表4的明确RQT表头，不自行伪造修订条文。"
+      ],
+      "physical_config": {
+        "target_material": "W",
+        "maximum_voltage_ripple_percent": 10,
+        "hvl_material": "Al",
+        "voltage_quantity": "practical_peak_voltage",
+        "base_quality": "RQR 9",
+        "additional_filter": {
+          "material": "Cu",
+          "thickness_mm": 0.25,
+          "minimum_purity_percent": 99.9,
+          "thickness_kind": "nominal"
+        }
+      }
+    },
+    {
+      "name": "RQT 10",
+      "family": "RQT",
+      "number": 10,
+      "table": 4,
+      "standard_page": 39,
+      "pdf_page": 41,
+      "clause": "8",
+      "verified": true,
+      "kvp": 150,
+      "hvl1_mm_al": 10.1,
+      "homogeneity": null,
+      "source": {
+        "url": "IEC 61267:2005 — author-supplied source, not distributed",
+        "locator": "IEC 61267:2005 表4；纸页39，PDF第41页（English）；第8章"
+      },
+      "reference_kind": "nominal_hvl1_with_prescribed_Cu",
+      "homogeneity_note": "表4及第8章不规定RQT均匀系数；不得编造。",
+      "physical_summary": "对应RQR 10条件再加0.30 mm Cu；Cu纯度≥99.9%。",
+      "tolerance": {
+        "clause": "8.3.2, 8.4",
+        "additional_cu_filter_thickness_kind": "nominal",
+        "additional_cu_filter_minimum_purity_percent": 99.9,
+        "hvl_kind": "规定名义Cu过滤时HVL为名义值；表4没有通用百分比HVL厚度公差。",
+        "source": {
+          "url": "IEC 61267:2005 — author-supplied source, not distributed",
+          "locator": "第8.3.2、8.4条，用户PDF第41页/纸页39。"
+        }
+      },
+      "tolerance_summary": "表4为名义Cu过滤/HVL；Cu纯度≥99.9%，无通用HVL百分比公差。",
+      "notes": [
+        "英文8.4存在表号及系列交叉引用不一致；数值依照表4的明确RQT表头，不自行伪造修订条文。"
+      ],
+      "physical_config": {
+        "target_material": "W",
+        "maximum_voltage_ripple_percent": 10,
+        "hvl_material": "Al",
+        "voltage_quantity": "practical_peak_voltage",
+        "base_quality": "RQR 10",
+        "additional_filter": {
+          "material": "Cu",
+          "thickness_mm": 0.3,
+          "minimum_purity_percent": 99.9,
+          "thickness_kind": "nominal"
+        }
+      }
+    },
+    {
+      "name": "RQR-M 1",
+      "family": "RQR-M",
+      "number": 1,
+      "table": 5,
+      "standard_page": 47,
+      "pdf_page": 49,
+      "clause": "11",
+      "verified": true,
+      "kvp": 25,
+      "hvl1_mm_al": 0.28,
+      "homogeneity": null,
+      "homogeneity_note": "IEC 61267:2005 表5及第11章未列乳腺系列均匀系数；不得由HVL₁经验关系推定。",
+      "source": {
+        "url": "IEC 61267:2005 — author-supplied source, not distributed",
+        "locator": "IEC 61267:2005 表5；纸页47，PDF第49页；第11.3条"
+      },
+      "reference_kind": "required_target_hvl1",
+      "physical_summary": "Mo靶；源组件总Mo过滤0.032±0.002 mm；电压脉动≤4%。",
+      "tolerance": {
+        "clause": "11.3, 11.4",
+        "measured_hvl1_acceptance_absolute_mm_al": 0.02,
+        "source_assembly_total_mo_filtration_tolerance_mm": 0.002,
+        "source": {
+          "url": "IEC 61267:2005 — author-supplied source, not distributed",
+          "locator": "11.3、表5：PDF49/纸页47；11.4：PDF51/纸页49。"
+        },
+        "note": "±0.02 mm Al为第一HVL绝对厚度容差，不能写成±2%。"
+      },
+      "tolerance_summary": "实测HVL₁允许±0.02 mm Al；总Mo过滤±0.002 mm。",
+      "physical_config": {
+        "target_material": "Mo",
+        "maximum_voltage_ripple_percent": 4,
+        "hvl_material": "Al",
+        "voltage_quantity": "practical_peak_voltage",
+        "source_assembly_total_mo_filtration_mm": 0.032,
+        "source_assembly_total_mo_filtration_tolerance_mm": 0.002,
+        "note": "标准未规定统一Be窗厚度；本标准条件不采用PMMA体模。"
+      }
+    },
+    {
+      "name": "RQR-M 2",
+      "family": "RQR-M",
+      "number": 2,
+      "table": 5,
+      "standard_page": 47,
+      "pdf_page": 49,
+      "clause": "11",
+      "verified": true,
+      "kvp": 28,
+      "hvl1_mm_al": 0.31,
+      "homogeneity": null,
+      "homogeneity_note": "IEC 61267:2005 表5及第11章未列乳腺系列均匀系数；不得由HVL₁经验关系推定。",
+      "source": {
+        "url": "IEC 61267:2005 — author-supplied source, not distributed",
+        "locator": "IEC 61267:2005 表5；纸页47，PDF第49页；第11.3条"
+      },
+      "reference_kind": "required_target_hvl1",
+      "physical_summary": "Mo靶；源组件总Mo过滤0.032±0.002 mm；电压脉动≤4%。",
+      "tolerance": {
+        "clause": "11.3, 11.4",
+        "measured_hvl1_acceptance_absolute_mm_al": 0.02,
+        "source_assembly_total_mo_filtration_tolerance_mm": 0.002,
+        "source": {
+          "url": "IEC 61267:2005 — author-supplied source, not distributed",
+          "locator": "11.3、表5：PDF49/纸页47；11.4：PDF51/纸页49。"
+        },
+        "note": "±0.02 mm Al为第一HVL绝对厚度容差，不能写成±2%。"
+      },
+      "tolerance_summary": "实测HVL₁允许±0.02 mm Al；总Mo过滤±0.002 mm。",
+      "physical_config": {
+        "target_material": "Mo",
+        "maximum_voltage_ripple_percent": 4,
+        "hvl_material": "Al",
+        "voltage_quantity": "practical_peak_voltage",
+        "source_assembly_total_mo_filtration_mm": 0.032,
+        "source_assembly_total_mo_filtration_tolerance_mm": 0.002,
+        "note": "标准未规定统一Be窗厚度；本标准条件不采用PMMA体模。"
+      }
+    },
+    {
+      "name": "RQR-M 3",
+      "family": "RQR-M",
+      "number": 3,
+      "table": 5,
+      "standard_page": 47,
+      "pdf_page": 49,
+      "clause": "11",
+      "verified": true,
+      "kvp": 30,
+      "hvl1_mm_al": 0.33,
+      "homogeneity": null,
+      "homogeneity_note": "IEC 61267:2005 表5及第11章未列乳腺系列均匀系数；不得由HVL₁经验关系推定。",
+      "source": {
+        "url": "IEC 61267:2005 — author-supplied source, not distributed",
+        "locator": "IEC 61267:2005 表5；纸页47，PDF第49页；第11.3条"
+      },
+      "reference_kind": "required_target_hvl1",
+      "physical_summary": "Mo靶；源组件总Mo过滤0.032±0.002 mm；电压脉动≤4%。",
+      "tolerance": {
+        "clause": "11.3, 11.4",
+        "measured_hvl1_acceptance_absolute_mm_al": 0.02,
+        "source_assembly_total_mo_filtration_tolerance_mm": 0.002,
+        "source": {
+          "url": "IEC 61267:2005 — author-supplied source, not distributed",
+          "locator": "11.3、表5：PDF49/纸页47；11.4：PDF51/纸页49。"
+        },
+        "note": "±0.02 mm Al为第一HVL绝对厚度容差，不能写成±2%。"
+      },
+      "tolerance_summary": "实测HVL₁允许±0.02 mm Al；总Mo过滤±0.002 mm。",
+      "physical_config": {
+        "target_material": "Mo",
+        "maximum_voltage_ripple_percent": 4,
+        "hvl_material": "Al",
+        "voltage_quantity": "practical_peak_voltage",
+        "source_assembly_total_mo_filtration_mm": 0.032,
+        "source_assembly_total_mo_filtration_tolerance_mm": 0.002,
+        "note": "标准未规定统一Be窗厚度；本标准条件不采用PMMA体模。"
+      }
+    },
+    {
+      "name": "RQR-M 4",
+      "family": "RQR-M",
+      "number": 4,
+      "table": 5,
+      "standard_page": 47,
+      "pdf_page": 49,
+      "clause": "11",
+      "verified": true,
+      "kvp": 35,
+      "hvl1_mm_al": 0.36,
+      "homogeneity": null,
+      "homogeneity_note": "IEC 61267:2005 表5及第11章未列乳腺系列均匀系数；不得由HVL₁经验关系推定。",
+      "source": {
+        "url": "IEC 61267:2005 — author-supplied source, not distributed",
+        "locator": "IEC 61267:2005 表5；纸页47，PDF第49页；第11.3条"
+      },
+      "reference_kind": "required_target_hvl1",
+      "physical_summary": "Mo靶；源组件总Mo过滤0.032±0.002 mm；电压脉动≤4%。",
+      "tolerance": {
+        "clause": "11.3, 11.4",
+        "measured_hvl1_acceptance_absolute_mm_al": 0.02,
+        "source_assembly_total_mo_filtration_tolerance_mm": 0.002,
+        "source": {
+          "url": "IEC 61267:2005 — author-supplied source, not distributed",
+          "locator": "11.3、表5：PDF49/纸页47；11.4：PDF51/纸页49。"
+        },
+        "note": "±0.02 mm Al为第一HVL绝对厚度容差，不能写成±2%。"
+      },
+      "tolerance_summary": "实测HVL₁允许±0.02 mm Al；总Mo过滤±0.002 mm。",
+      "physical_config": {
+        "target_material": "Mo",
+        "maximum_voltage_ripple_percent": 4,
+        "hvl_material": "Al",
+        "voltage_quantity": "practical_peak_voltage",
+        "source_assembly_total_mo_filtration_mm": 0.032,
+        "source_assembly_total_mo_filtration_tolerance_mm": 0.002,
+        "note": "标准未规定统一Be窗厚度；本标准条件不采用PMMA体模。"
+      }
+    },
+    {
+      "name": "RQA-M 1",
+      "family": "RQA-M",
+      "number": 1,
+      "table": 6,
+      "standard_page": 49,
+      "pdf_page": 51,
+      "clause": "12",
+      "verified": true,
+      "kvp": 25,
+      "hvl1_mm_al": 0.56,
+      "homogeneity": null,
+      "homogeneity_note": "IEC 61267:2005 表6及第12章未列乳腺系列均匀系数；不得由HVL₁经验关系推定。",
+      "source": {
+        "url": "IEC 61267:2005 — author-supplied source, not distributed",
+        "locator": "IEC 61267:2005 表6；纸页49，PDF第51页；第12.3条"
+      },
+      "reference_kind": "nominal_hvl1_with_prescribed_Al",
+      "physical_summary": "对应RQR-M 1条件再加2.00±0.01 mm Al；滤片距焦点200–300 mm。",
+      "tolerance": {
+        "clause": "12.3, 12.4",
+        "added_al_thickness_mm": 2,
+        "added_al_tolerance_mm": 0.01,
+        "source_assembly_total_mo_filtration_tolerance_mm": 0.002,
+        "hvl_kind": "表6为名义HVL；12.4不将RQR-M的±0.02 mm Al验收容差套用于RQA-M。",
+        "source": {
+          "url": "IEC 61267:2005 — author-supplied source, not distributed",
+          "locator": "12.3、表6：PDF51/纸页49；12.4：PDF53/纸页51。"
+        }
+      },
+      "tolerance_summary": "额外Al滤片2.00±0.01 mm；表6 HVL为名义值。",
+      "physical_config": {
+        "target_material": "Mo",
+        "maximum_voltage_ripple_percent": 4,
+        "hvl_material": "Al",
+        "voltage_quantity": "practical_peak_voltage",
+        "source_assembly_total_mo_filtration_mm": 0.032,
+        "source_assembly_total_mo_filtration_tolerance_mm": 0.002,
+        "note": "标准未规定统一Be窗厚度；本标准条件不采用PMMA体模。",
+        "base_quality": "RQR-M 1",
+        "additional_filter": {
+          "material": "Al",
+          "thickness_mm": 2,
+          "thickness_tolerance_mm": 0.01
+        },
+        "additional_filter_entrance_surface_distance_to_focal_spot_mm_range": [
+          200,
+          300
+        ]
+      }
+    },
+    {
+      "name": "RQA-M 2",
+      "family": "RQA-M",
+      "number": 2,
+      "table": 6,
+      "standard_page": 49,
+      "pdf_page": 51,
+      "clause": "12",
+      "verified": true,
+      "kvp": 28,
+      "hvl1_mm_al": 0.6,
+      "homogeneity": null,
+      "homogeneity_note": "IEC 61267:2005 表6及第12章未列乳腺系列均匀系数；不得由HVL₁经验关系推定。",
+      "source": {
+        "url": "IEC 61267:2005 — author-supplied source, not distributed",
+        "locator": "IEC 61267:2005 表6；纸页49，PDF第51页；第12.3条"
+      },
+      "reference_kind": "nominal_hvl1_with_prescribed_Al",
+      "physical_summary": "对应RQR-M 2条件再加2.00±0.01 mm Al；滤片距焦点200–300 mm。",
+      "tolerance": {
+        "clause": "12.3, 12.4",
+        "added_al_thickness_mm": 2,
+        "added_al_tolerance_mm": 0.01,
+        "source_assembly_total_mo_filtration_tolerance_mm": 0.002,
+        "hvl_kind": "表6为名义HVL；12.4不将RQR-M的±0.02 mm Al验收容差套用于RQA-M。",
+        "source": {
+          "url": "IEC 61267:2005 — author-supplied source, not distributed",
+          "locator": "12.3、表6：PDF51/纸页49；12.4：PDF53/纸页51。"
+        }
+      },
+      "tolerance_summary": "额外Al滤片2.00±0.01 mm；表6 HVL为名义值。",
+      "physical_config": {
+        "target_material": "Mo",
+        "maximum_voltage_ripple_percent": 4,
+        "hvl_material": "Al",
+        "voltage_quantity": "practical_peak_voltage",
+        "source_assembly_total_mo_filtration_mm": 0.032,
+        "source_assembly_total_mo_filtration_tolerance_mm": 0.002,
+        "note": "标准未规定统一Be窗厚度；本标准条件不采用PMMA体模。",
+        "base_quality": "RQR-M 2",
+        "additional_filter": {
+          "material": "Al",
+          "thickness_mm": 2,
+          "thickness_tolerance_mm": 0.01
+        },
+        "additional_filter_entrance_surface_distance_to_focal_spot_mm_range": [
+          200,
+          300
+        ]
+      }
+    },
+    {
+      "name": "RQA-M 3",
+      "family": "RQA-M",
+      "number": 3,
+      "table": 6,
+      "standard_page": 49,
+      "pdf_page": 51,
+      "clause": "12",
+      "verified": true,
+      "kvp": 30,
+      "hvl1_mm_al": 0.62,
+      "homogeneity": null,
+      "homogeneity_note": "IEC 61267:2005 表6及第12章未列乳腺系列均匀系数；不得由HVL₁经验关系推定。",
+      "source": {
+        "url": "IEC 61267:2005 — author-supplied source, not distributed",
+        "locator": "IEC 61267:2005 表6；纸页49，PDF第51页；第12.3条"
+      },
+      "reference_kind": "nominal_hvl1_with_prescribed_Al",
+      "physical_summary": "对应RQR-M 3条件再加2.00±0.01 mm Al；滤片距焦点200–300 mm。",
+      "tolerance": {
+        "clause": "12.3, 12.4",
+        "added_al_thickness_mm": 2,
+        "added_al_tolerance_mm": 0.01,
+        "source_assembly_total_mo_filtration_tolerance_mm": 0.002,
+        "hvl_kind": "表6为名义HVL；12.4不将RQR-M的±0.02 mm Al验收容差套用于RQA-M。",
+        "source": {
+          "url": "IEC 61267:2005 — author-supplied source, not distributed",
+          "locator": "12.3、表6：PDF51/纸页49；12.4：PDF53/纸页51。"
+        }
+      },
+      "tolerance_summary": "额外Al滤片2.00±0.01 mm；表6 HVL为名义值。",
+      "physical_config": {
+        "target_material": "Mo",
+        "maximum_voltage_ripple_percent": 4,
+        "hvl_material": "Al",
+        "voltage_quantity": "practical_peak_voltage",
+        "source_assembly_total_mo_filtration_mm": 0.032,
+        "source_assembly_total_mo_filtration_tolerance_mm": 0.002,
+        "note": "标准未规定统一Be窗厚度；本标准条件不采用PMMA体模。",
+        "base_quality": "RQR-M 3",
+        "additional_filter": {
+          "material": "Al",
+          "thickness_mm": 2,
+          "thickness_tolerance_mm": 0.01
+        },
+        "additional_filter_entrance_surface_distance_to_focal_spot_mm_range": [
+          200,
+          300
+        ]
+      }
+    },
+    {
+      "name": "RQA-M 4",
+      "family": "RQA-M",
+      "number": 4,
+      "table": 6,
+      "standard_page": 49,
+      "pdf_page": 51,
+      "clause": "12",
+      "verified": true,
+      "kvp": 35,
+      "hvl1_mm_al": 0.68,
+      "homogeneity": null,
+      "homogeneity_note": "IEC 61267:2005 表6及第12章未列乳腺系列均匀系数；不得由HVL₁经验关系推定。",
+      "source": {
+        "url": "IEC 61267:2005 — author-supplied source, not distributed",
+        "locator": "IEC 61267:2005 表6；纸页49，PDF第51页；第12.3条"
+      },
+      "reference_kind": "nominal_hvl1_with_prescribed_Al",
+      "physical_summary": "对应RQR-M 4条件再加2.00±0.01 mm Al；滤片距焦点200–300 mm。",
+      "tolerance": {
+        "clause": "12.3, 12.4",
+        "added_al_thickness_mm": 2,
+        "added_al_tolerance_mm": 0.01,
+        "source_assembly_total_mo_filtration_tolerance_mm": 0.002,
+        "hvl_kind": "表6为名义HVL；12.4不将RQR-M的±0.02 mm Al验收容差套用于RQA-M。",
+        "source": {
+          "url": "IEC 61267:2005 — author-supplied source, not distributed",
+          "locator": "12.3、表6：PDF51/纸页49；12.4：PDF53/纸页51。"
+        }
+      },
+      "tolerance_summary": "额外Al滤片2.00±0.01 mm；表6 HVL为名义值。",
+      "physical_config": {
+        "target_material": "Mo",
+        "maximum_voltage_ripple_percent": 4,
+        "hvl_material": "Al",
+        "voltage_quantity": "practical_peak_voltage",
+        "source_assembly_total_mo_filtration_mm": 0.032,
+        "source_assembly_total_mo_filtration_tolerance_mm": 0.002,
+        "note": "标准未规定统一Be窗厚度；本标准条件不采用PMMA体模。",
+        "base_quality": "RQR-M 4",
+        "additional_filter": {
+          "material": "Al",
+          "thickness_mm": 2,
+          "thickness_tolerance_mm": 0.01
+        },
+        "additional_filter_entrance_surface_distance_to_focal_spot_mm_range": [
+          200,
+          300
+        ]
+      }
+    }
+  ],
+  "requirements": {
+    "general": {
+      "common": {
+        "percentage_ripple_max_percent": 10,
+        "mammography_percentage_ripple_max_percent": 4,
+        "ripple_source": {
+          "clause": "4.3",
+          "pdf_page": 27,
+          "printed_page": 25
+        },
+        "target_tungsten_note": "Tungsten means tungsten-rich target material; alloys containing up to 10% rhenium are permissible examples (4.4).",
+        "target_source": {
+          "clause": "4.4",
+          "pdf_page": 27,
+          "printed_page": 25
+        },
+        "detector_energy_response_max_deviation_percent": 3,
+        "detector_energy_response_range": "N15 to N200 ISO 4037-1",
+        "detector_source": {
+          "clause": "4.2",
+          "pdf_page": 25,
+          "printed_page": 23
+        }
+      },
+      "RQR": {
+        "total_filtration": "Adjusted for each X-ray source assembly to establish specified first HVL and approximately specified homogeneity. No universal fixed total Al thickness is specified by Table 1.",
+        "homogeneity_absolute_tolerance": 0.03,
+        "homogeneity_source": {
+          "clause": "5.3",
+          "pdf_page": 27,
+          "printed_page": 25
+        },
+        "tube_voltage_quantity": "Practical peak voltage",
+        "tube_voltage_expanded_uncertainty": "max(1.5% of voltage, 1.5 kV), coverage factor k=2",
+        "tube_voltage_source": {
+          "clause": "5.4",
+          "pdf_page": 28,
+          "printed_page": 26,
+          "language": "French"
+        },
+        "attenuation_curve_minimum_factor": 6,
+        "hvl_verification_transmission_range": [
+          0.485,
+          0.515
+        ],
+        "hvl_verification_source": {
+          "clause": "5.5",
+          "pdf_page": 28,
+          "printed_page": 26,
+          "language": "French"
+        },
+        "inherent_hvl_greater_than_target": "The source assembly shall not be used to establish the desired radiation quality.",
+        "voltage_measurement": "Voltage divider connected in parallel to X-ray generator and tube; non-invasive devices are stated inappropriate for this standard.",
+        "auxiliary_filter_al_min_purity_percent": 99.9,
+        "attenuation_layers_al_min_purity_percent": 99.9,
+        "attenuation_layers_combined_max_mm": 25,
+        "attenuation_layers_step_max_mm": 0.5,
+        "attenuation_layer_thickness_known_within_mm": 0.01,
+        "beam_after_attenuation_exit_max_mm": [
+          50,
+          50
+        ],
+        "hvl_test_device_al_min_purity_percent": 99.9,
+        "hvl_test_device_total_thickness_tolerance_mm": 0.1,
+        "test_equipment_source": {
+          "clauses": [
+            "5.6.1",
+            "5.6.2",
+            "5.6.3",
+            "5.6.4",
+            "5.6.7"
+          ],
+          "pdf_page": 31,
+          "printed_page": 29
+        },
+        "reference_plane_distance": "At least max(550 mm, twice focal-spot-to-HVL-test-device distance).",
+        "backscatter_region": "Within radiation beam, only measurement-required objects between reference plane and plane 450 mm beyond it in reference direction.",
+        "series_shared_added_filter_condition": "If maximum minus minimum required added filtration among qualities is not greater than 0.5 mm, one filter near arithmetic average of all required added filtration values may be used for whole series.",
+        "geometry_source": {
+          "clauses": [
+            "5.7.1",
+            "5.7.3"
+          ],
+          "pdf_page": 32,
+          "printed_page": 30,
+          "language": "French"
+        },
+        "figure_1": {
+          "pdf_page": 59,
+          "printed_page": 57,
+          "focal_spot_to_test_device_mm_range": [
+            200,
+            300
+          ],
+          "reference_distance_min_mm": 550,
+          "distance_behind_reference_min_mm": 450
+        }
+      },
+      "RQA": {
+        "construction": "Corresponding RQR tube voltage and adjusted total filtration according to 5.4 and 5.5, plus the added Al layer in Table 2.",
+        "hvl_type": "Nominal first HVL under method 6.4; required target first HVL under alternative direct method 6.5.",
+        "validation_by_method": {
+          "6.4": "Verify corresponding RQR per Clause 5, then add prescribed Table 2 Al filter. Table 2 RQA HVL is nominal and no additional HVL-adjustment freedom remains. Do not use Table 2 percentage residual alone to certify or reject this route.",
+          "6.5": "Directly establish RQA using Clause 5 procedures. Table 2 HVL is the required target, and the Clause 5 HVL-device transmission criterion 0.485 to 0.515 applies. RQA Table 2 contains no homogeneity target; do not invent one.",
+          "hvl_thickness_tolerance": "No universal numeric percent HVL-thickness tolerance is specified in Tables 1, 2, or the retrieved 6.4/6.5. Use the stated transmission validation procedure and required instrument/layer tolerances; model fit error is a separate numerical quality check."
+        },
+        "added_filter_al_min_purity_percent": 99.9,
+        "each_added_filter_layer_thickness_known_within_mm": 0.01,
+        "filter_size": "Large enough to intercept full beam used for test.",
+        "source": {
+          "clauses": [
+            "6.3.1",
+            "6.3.2"
+          ],
+          "pdf_page": 35,
+          "printed_page": 33
+        },
+        "figure_2": {
+          "pdf_page": 61,
+          "printed_page": 59,
+          "focal_spot_to_filter_mm_range": [
+            200,
+            300
+          ],
+          "reference_distance_min_mm": 550,
+          "distance_behind_reference_min_mm": 450
+        },
+        "clause_6_4_status": "Both supplied PDF 36 and 37 are genuinely blank; 6.4 and 6.5 were supplemented from the official PSQCA original IEC:2005 text as described in supplementary_primary_source."
+      },
+      "RQT": {
+        "construction": "Corresponding RQR setup and tube voltage, with copper added filter from Table 4.",
+        "hvl_type": "first HVL in Table 4; nominal when introducing specified nominal added filter (8.4)",
+        "added_filter_cu_min_purity_percent": 99.9,
+        "filter_size": "Large enough to intercept full beam used for test.",
+        "source": {
+          "clauses": [
+            "8.3.1",
+            "8.3.2",
+            "8.4"
+          ],
+          "pdf_page": 41,
+          "printed_page": 39
+        },
+        "source_cross_reference_note": "Printed English 8.4 contains inconsistent cross references to Table 5 and a note referring to RQA/Table 2. Use Table 4 and its explicit RQT header for extracted numeric data; do not silently invent a corrected clause."
+      }
+    },
+    "mammography": {
+      "common_mammography": {
+        "clauses": [
+          "4.3",
+          "11.3",
+          "12.3"
+        ],
+        "pdf_pages": [
+          27,
+          49,
+          51
+        ],
+        "target_material": "Mo",
+        "max_voltage_ripple_percent": 4,
+        "source_assembly_total_mo_filtration_mm": 0.032,
+        "source_assembly_total_mo_filtration_tolerance_mm": 0.002,
+        "voltage_quantity": "practical peak voltage per 3.7 and Annex C",
+        "beryllium_window_thickness_mm": null,
+        "beryllium_note": "Clauses 11 and 12 do not prescribe a Be window thickness; a chosen Be window in a spectrum model is a declared model/source-assembly assumption, not a requirement of IEC 61267:2005.",
+        "pmma_mm": null,
+        "pmma_note": "RQR-M and RQA-M in clauses 11 and 12 do not use a PMMA phantom. The 45 mm phantom belongs to RQN-M (clause 13), outside these two requested mammography families."
+      },
+      "RQR-M_generation": {
+        "clause": "11.4",
+        "pdf_page": 51,
+        "printed_page": 49,
+        "procedure": "Select the nominal X-ray tube voltage and measure the first aluminium half-value layer using a half-value-layer test device.",
+        "measured_hvl1_acceptance_absolute_mm_al": 0.02,
+        "acceptance_note": "The text says within ±0.02 of table 5 column 3. Column 3 is in mm aluminium; this is an absolute 0.02 mm Al tolerance, not ±2%."
+      },
+      "RQA-M_generation": {
+        "clause": "12.4",
+        "pdf_page": 53,
+        "printed_page": 51,
+        "procedure": "First establish the corresponding RQR-M radiation quality; then add the aluminium filter.",
+        "added_al_mm": 2,
+        "added_al_tolerance_mm": 0.01,
+        "added_filter_entrance_surface_min_distance_to_focal_spot_mm": 200,
+        "added_filter_entrance_surface_max_distance_to_focal_spot_mm": 300,
+        "hvl_acceptance_note": "Table 6 lists nominal first HVLs. Clause 12.4 specifies the generation method and does not itself impose the RQR-M ±0.02 mm Al acceptance tolerance on RQA-M. Do not silently copy that tolerance across series."
+      },
+      "scope_and_scatter": {
+        "RQR-M_clause": "11.1",
+        "RQR-M_pdf_page": 49,
+        "RQR-M": "Unattenuated mammography beam; voltage essentially below 40 kV; scattered radiation contribution to detected signal minimized.",
+        "RQA-M_clause": "12.1",
+        "RQA-M_pdf_page": 51,
+        "RQA-M": "Measurements in a beam emerging from an object simulating the patient; scattered radiation insignificant (low scatter); close simulation of patient-exit spectrum is not a prerequisite."
+      },
+      "hvl_definition": {
+        "clause": "3.5 and 3.6",
+        "pdf_page": 23,
+        "printed_page": 21,
+        "hvl1": "A specified material thickness that reduces air kerma or air kerma rate to one half under narrow-beam conditions.",
+        "hvl2": "Additional thickness beyond HVL1 needed to reduce air kerma rate to one quarter of the unattenuated value.",
+        "homogeneity_coefficient": "HVL1/HVL2"
+      },
+      "al_purity_scope": {
+        "clause": "5.6.2, 5.6.3, 5.6.7",
+        "pdf_page": 31,
+        "printed_page": 29,
+        "al_purity_min_percent": 99.9,
+        "scope_note": "The explicit ≥99.9% aluminium purity statements read here are in the RQR test-equipment section 5.6; clauses 11 and 12 contain no independent Mo purity percentage. Do not falsely describe a Be window or a Mo purity percentage as mandated by these clauses."
+      },
+      "clinical_mammography_adaptation": {
+        "pdf_page": 21,
+        "printed_page": 19,
+        "note": "The scope discussion says clinical mammography units are unsuitable for producing clauses 11–14 conditions without modification; patient support needs removal to adapt them."
+      }
+    }
+  },
+  "source_limitations": [
+    "Several pages in supplied PDF are genuinely blank, not a text-extraction issue: PDF pages 29, 33, 34, 36 and 37 were checked. Both missing RQA production clause pages are blank.",
+    "RQA and RQT tables do not give homogeneity coefficients. null is intentional.",
+    "The transmission range 0.485 to 0.515 is an HVL-test-device validation criterion; it is not a universal plus/minus 3% HVL thickness tolerance.",
+    "Prescribed practical-peak-voltage uncertainty is not a freely adjustable fit tolerance.",
+    "General narrow-beam and instrument requirements are documented separately from a computed spectrum or fitted HVL; matching a tabulated HVL alone does not establish physical IEC conformity."
+  ],
+  "mammography_guardrails": [
+    "Keep the year and source references as 2005; do not inherit 2025 targets or validation conditions.",
+    "Do not use 2 mm PMMA or a PMMA phantom for RQA-M: the additional filter is 2.00 ±0.01 mm Al.",
+    "Do not reuse the W-target ISO spectrum as a physical Mo-target spectrum and claim IEC compliance.",
+    "An independent HVL-versus-voltage fit calibrated to table values can be presented as a nominal-HVL interpolation; it cannot alone infer a unique spectrum, mean energy, fluence, or HVL2.",
+    "The narrow-beam air-kerma definition determines physical HVL weighting; photon-count halving is not the prescribed HVL definition."
+  ]
+}

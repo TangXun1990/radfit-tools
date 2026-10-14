@@ -1,0 +1,797 @@
+{
+  "document": "IAEA TRS 457 (2007), Dosimetry in Diagnostic Radiology: An International Code of Practice",
+  "source_file": "https://www.iaea.org/publications/7638/dosimetry-in-diagnostic-radiology-an-international-code-of-practice",
+  "source_sha256": "829b6c34f6aec400a36eac57e14da6ad97eeed9f3f389153b308c1751fa4cc6b",
+  "source_page_count": 372,
+  "method": "Text extraction from supplied PDF, followed by complete-page visual verification of every numerical table and relevant requirements pages.",
+  "reviewed_pdf_pages": [
+    74,
+    78,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    95,
+    273,
+    274,
+    275,
+    276
+  ],
+  "printed_page_offset": 12,
+  "referenced_iec": {
+    "edition": "IEC 61267:2005",
+    "reference": "[6.7]",
+    "pdf_page": 95,
+    "printed_page": 83
+  },
+  "verified": true,
+  "preset_count": 29,
+  "tables": {
+    "RQR": {
+      "table": "6.2",
+      "pdf_page": 83,
+      "printed_page": 71,
+      "section": "6.5.2"
+    },
+    "RQA": {
+      "table": "6.3",
+      "pdf_page": 86,
+      "printed_page": 74,
+      "section": "6.5.3"
+    },
+    "RQT": {
+      "table": "6.4",
+      "pdf_page": 86,
+      "printed_page": 74,
+      "section": "6.5.3"
+    },
+    "RQR-M": {
+      "table": "6.5",
+      "pdf_page": 87,
+      "printed_page": 75,
+      "section": "6.5.4"
+    },
+    "RQA-M": {
+      "table": "6.6",
+      "pdf_page": 88,
+      "printed_page": 76,
+      "section": "6.5.4"
+    }
+  },
+  "presets": [
+    {
+      "id": "RQR-2",
+      "series": "RQR",
+      "index": 2,
+      "kvp": 40,
+      "hvl1_mmAl": 1.42,
+      "homogeneity": 0.81,
+      "added_filter": null,
+      "target": "W",
+      "source": {
+        "table": "6.2",
+        "pdf_page": 83,
+        "printed_page": 71,
+        "section": "6.5.2"
+      }
+    },
+    {
+      "id": "RQR-3",
+      "series": "RQR",
+      "index": 3,
+      "kvp": 50,
+      "hvl1_mmAl": 1.78,
+      "homogeneity": 0.76,
+      "added_filter": null,
+      "target": "W",
+      "source": {
+        "table": "6.2",
+        "pdf_page": 83,
+        "printed_page": 71,
+        "section": "6.5.2"
+      }
+    },
+    {
+      "id": "RQR-4",
+      "series": "RQR",
+      "index": 4,
+      "kvp": 60,
+      "hvl1_mmAl": 2.19,
+      "homogeneity": 0.74,
+      "added_filter": null,
+      "target": "W",
+      "source": {
+        "table": "6.2",
+        "pdf_page": 83,
+        "printed_page": 71,
+        "section": "6.5.2"
+      }
+    },
+    {
+      "id": "RQR-5",
+      "series": "RQR",
+      "index": 5,
+      "kvp": 70,
+      "hvl1_mmAl": 2.58,
+      "homogeneity": 0.71,
+      "added_filter": null,
+      "target": "W",
+      "source": {
+        "table": "6.2",
+        "pdf_page": 83,
+        "printed_page": 71,
+        "section": "6.5.2"
+      }
+    },
+    {
+      "id": "RQR-6",
+      "series": "RQR",
+      "index": 6,
+      "kvp": 80,
+      "hvl1_mmAl": 3.01,
+      "homogeneity": 0.69,
+      "added_filter": null,
+      "target": "W",
+      "source": {
+        "table": "6.2",
+        "pdf_page": 83,
+        "printed_page": 71,
+        "section": "6.5.2"
+      }
+    },
+    {
+      "id": "RQR-7",
+      "series": "RQR",
+      "index": 7,
+      "kvp": 90,
+      "hvl1_mmAl": 3.48,
+      "homogeneity": 0.68,
+      "added_filter": null,
+      "target": "W",
+      "source": {
+        "table": "6.2",
+        "pdf_page": 83,
+        "printed_page": 71,
+        "section": "6.5.2"
+      }
+    },
+    {
+      "id": "RQR-8",
+      "series": "RQR",
+      "index": 8,
+      "kvp": 100,
+      "hvl1_mmAl": 3.97,
+      "homogeneity": 0.68,
+      "added_filter": null,
+      "target": "W",
+      "source": {
+        "table": "6.2",
+        "pdf_page": 83,
+        "printed_page": 71,
+        "section": "6.5.2"
+      }
+    },
+    {
+      "id": "RQR-9",
+      "series": "RQR",
+      "index": 9,
+      "kvp": 120,
+      "hvl1_mmAl": 5.0,
+      "homogeneity": 0.68,
+      "added_filter": null,
+      "target": "W",
+      "source": {
+        "table": "6.2",
+        "pdf_page": 83,
+        "printed_page": 71,
+        "section": "6.5.2"
+      }
+    },
+    {
+      "id": "RQR-10",
+      "series": "RQR",
+      "index": 10,
+      "kvp": 150,
+      "hvl1_mmAl": 6.57,
+      "homogeneity": 0.72,
+      "added_filter": null,
+      "target": "W",
+      "source": {
+        "table": "6.2",
+        "pdf_page": 83,
+        "printed_page": 71,
+        "section": "6.5.2"
+      }
+    },
+    {
+      "id": "RQA-2",
+      "series": "RQA",
+      "index": 2,
+      "kvp": 40,
+      "hvl1_mmAl": 2.2,
+      "homogeneity": null,
+      "added_filter": {
+        "material": "Al",
+        "thickness_mm": 4
+      },
+      "base_quality": "RQR-2",
+      "target": "W",
+      "source": {
+        "table": "6.3",
+        "pdf_page": 86,
+        "printed_page": 74,
+        "section": "6.5.3"
+      }
+    },
+    {
+      "id": "RQA-3",
+      "series": "RQA",
+      "index": 3,
+      "kvp": 50,
+      "hvl1_mmAl": 3.8,
+      "homogeneity": null,
+      "added_filter": {
+        "material": "Al",
+        "thickness_mm": 10
+      },
+      "base_quality": "RQR-3",
+      "target": "W",
+      "source": {
+        "table": "6.3",
+        "pdf_page": 86,
+        "printed_page": 74,
+        "section": "6.5.3"
+      }
+    },
+    {
+      "id": "RQA-4",
+      "series": "RQA",
+      "index": 4,
+      "kvp": 60,
+      "hvl1_mmAl": 5.4,
+      "homogeneity": null,
+      "added_filter": {
+        "material": "Al",
+        "thickness_mm": 16
+      },
+      "base_quality": "RQR-4",
+      "target": "W",
+      "source": {
+        "table": "6.3",
+        "pdf_page": 86,
+        "printed_page": 74,
+        "section": "6.5.3"
+      }
+    },
+    {
+      "id": "RQA-5",
+      "series": "RQA",
+      "index": 5,
+      "kvp": 70,
+      "hvl1_mmAl": 6.8,
+      "homogeneity": null,
+      "added_filter": {
+        "material": "Al",
+        "thickness_mm": 21
+      },
+      "base_quality": "RQR-5",
+      "target": "W",
+      "source": {
+        "table": "6.3",
+        "pdf_page": 86,
+        "printed_page": 74,
+        "section": "6.5.3"
+      }
+    },
+    {
+      "id": "RQA-6",
+      "series": "RQA",
+      "index": 6,
+      "kvp": 80,
+      "hvl1_mmAl": 8.2,
+      "homogeneity": null,
+      "added_filter": {
+        "material": "Al",
+        "thickness_mm": 26
+      },
+      "base_quality": "RQR-6",
+      "target": "W",
+      "source": {
+        "table": "6.3",
+        "pdf_page": 86,
+        "printed_page": 74,
+        "section": "6.5.3"
+      }
+    },
+    {
+      "id": "RQA-7",
+      "series": "RQA",
+      "index": 7,
+      "kvp": 90,
+      "hvl1_mmAl": 9.2,
+      "homogeneity": null,
+      "added_filter": {
+        "material": "Al",
+        "thickness_mm": 30
+      },
+      "base_quality": "RQR-7",
+      "target": "W",
+      "source": {
+        "table": "6.3",
+        "pdf_page": 86,
+        "printed_page": 74,
+        "section": "6.5.3"
+      }
+    },
+    {
+      "id": "RQA-8",
+      "series": "RQA",
+      "index": 8,
+      "kvp": 100,
+      "hvl1_mmAl": 10.1,
+      "homogeneity": null,
+      "added_filter": {
+        "material": "Al",
+        "thickness_mm": 34
+      },
+      "base_quality": "RQR-8",
+      "target": "W",
+      "source": {
+        "table": "6.3",
+        "pdf_page": 86,
+        "printed_page": 74,
+        "section": "6.5.3"
+      }
+    },
+    {
+      "id": "RQA-9",
+      "series": "RQA",
+      "index": 9,
+      "kvp": 120,
+      "hvl1_mmAl": 11.6,
+      "homogeneity": null,
+      "added_filter": {
+        "material": "Al",
+        "thickness_mm": 40
+      },
+      "base_quality": "RQR-9",
+      "target": "W",
+      "source": {
+        "table": "6.3",
+        "pdf_page": 86,
+        "printed_page": 74,
+        "section": "6.5.3"
+      }
+    },
+    {
+      "id": "RQA-10",
+      "series": "RQA",
+      "index": 10,
+      "kvp": 150,
+      "hvl1_mmAl": 13.3,
+      "homogeneity": null,
+      "added_filter": {
+        "material": "Al",
+        "thickness_mm": 45
+      },
+      "base_quality": "RQR-10",
+      "target": "W",
+      "source": {
+        "table": "6.3",
+        "pdf_page": 86,
+        "printed_page": 74,
+        "section": "6.5.3"
+      }
+    },
+    {
+      "id": "RQT-8",
+      "series": "RQT",
+      "index": 8,
+      "kvp": 100,
+      "hvl1_mmAl": 6.9,
+      "homogeneity": null,
+      "added_filter": {
+        "material": "Cu",
+        "thickness_mm": 0.2,
+        "nominal": true
+      },
+      "base_quality": "RQR-8",
+      "target": "W",
+      "source": {
+        "table": "6.4",
+        "pdf_page": 86,
+        "printed_page": 74,
+        "section": "6.5.3"
+      }
+    },
+    {
+      "id": "RQT-9",
+      "series": "RQT",
+      "index": 9,
+      "kvp": 120,
+      "hvl1_mmAl": 8.4,
+      "homogeneity": null,
+      "added_filter": {
+        "material": "Cu",
+        "thickness_mm": 0.25,
+        "nominal": true
+      },
+      "base_quality": "RQR-9",
+      "target": "W",
+      "source": {
+        "table": "6.4",
+        "pdf_page": 86,
+        "printed_page": 74,
+        "section": "6.5.3"
+      }
+    },
+    {
+      "id": "RQT-10",
+      "series": "RQT",
+      "index": 10,
+      "kvp": 150,
+      "hvl1_mmAl": 10.1,
+      "homogeneity": null,
+      "added_filter": {
+        "material": "Cu",
+        "thickness_mm": 0.3,
+        "nominal": true
+      },
+      "base_quality": "RQR-10",
+      "target": "W",
+      "source": {
+        "table": "6.4",
+        "pdf_page": 86,
+        "printed_page": 74,
+        "section": "6.5.3"
+      }
+    },
+    {
+      "id": "RQR-M-1",
+      "series": "RQR-M",
+      "index": 1,
+      "kvp": 25,
+      "hvl1_mmAl": 0.28,
+      "homogeneity": null,
+      "target": "Mo",
+      "total_mo_filter_mm": 0.032,
+      "total_mo_filter_tolerance_mm": 0.002,
+      "added_filter": null,
+      "source": {
+        "table": "6.5",
+        "pdf_page": 87,
+        "printed_page": 75,
+        "section": "6.5.4"
+      }
+    },
+    {
+      "id": "RQR-M-2",
+      "series": "RQR-M",
+      "index": 2,
+      "kvp": 28,
+      "hvl1_mmAl": 0.31,
+      "homogeneity": null,
+      "target": "Mo",
+      "total_mo_filter_mm": 0.032,
+      "total_mo_filter_tolerance_mm": 0.002,
+      "added_filter": null,
+      "source": {
+        "table": "6.5",
+        "pdf_page": 87,
+        "printed_page": 75,
+        "section": "6.5.4"
+      }
+    },
+    {
+      "id": "RQR-M-3",
+      "series": "RQR-M",
+      "index": 3,
+      "kvp": 30,
+      "hvl1_mmAl": 0.33,
+      "homogeneity": null,
+      "target": "Mo",
+      "total_mo_filter_mm": 0.032,
+      "total_mo_filter_tolerance_mm": 0.002,
+      "added_filter": null,
+      "source": {
+        "table": "6.5",
+        "pdf_page": 87,
+        "printed_page": 75,
+        "section": "6.5.4"
+      }
+    },
+    {
+      "id": "RQR-M-4",
+      "series": "RQR-M",
+      "index": 4,
+      "kvp": 35,
+      "hvl1_mmAl": 0.36,
+      "homogeneity": null,
+      "target": "Mo",
+      "total_mo_filter_mm": 0.032,
+      "total_mo_filter_tolerance_mm": 0.002,
+      "added_filter": null,
+      "source": {
+        "table": "6.5",
+        "pdf_page": 87,
+        "printed_page": 75,
+        "section": "6.5.4"
+      }
+    },
+    {
+      "id": "RQA-M-1",
+      "series": "RQA-M",
+      "index": 1,
+      "kvp": 25,
+      "hvl1_mmAl": 0.56,
+      "homogeneity": null,
+      "target": "Mo",
+      "total_mo_filter_mm": 0.032,
+      "total_mo_filter_tolerance_mm": 0.002,
+      "added_filter": {
+        "material": "Al",
+        "thickness_mm": 2
+      },
+      "source": {
+        "table": "6.6",
+        "pdf_page": 88,
+        "printed_page": 76,
+        "section": "6.5.4"
+      },
+      "base_quality": "RQR-M-1"
+    },
+    {
+      "id": "RQA-M-2",
+      "series": "RQA-M",
+      "index": 2,
+      "kvp": 28,
+      "hvl1_mmAl": 0.6,
+      "homogeneity": null,
+      "target": "Mo",
+      "total_mo_filter_mm": 0.032,
+      "total_mo_filter_tolerance_mm": 0.002,
+      "added_filter": {
+        "material": "Al",
+        "thickness_mm": 2
+      },
+      "source": {
+        "table": "6.6",
+        "pdf_page": 88,
+        "printed_page": 76,
+        "section": "6.5.4"
+      },
+      "base_quality": "RQR-M-2"
+    },
+    {
+      "id": "RQA-M-3",
+      "series": "RQA-M",
+      "index": 3,
+      "kvp": 30,
+      "hvl1_mmAl": 0.62,
+      "homogeneity": null,
+      "target": "Mo",
+      "total_mo_filter_mm": 0.032,
+      "total_mo_filter_tolerance_mm": 0.002,
+      "added_filter": {
+        "material": "Al",
+        "thickness_mm": 2
+      },
+      "source": {
+        "table": "6.6",
+        "pdf_page": 88,
+        "printed_page": 76,
+        "section": "6.5.4"
+      },
+      "base_quality": "RQR-M-3"
+    },
+    {
+      "id": "RQA-M-4",
+      "series": "RQA-M",
+      "index": 4,
+      "kvp": 35,
+      "hvl1_mmAl": 0.68,
+      "homogeneity": null,
+      "target": "Mo",
+      "total_mo_filter_mm": 0.032,
+      "total_mo_filter_tolerance_mm": 0.002,
+      "added_filter": {
+        "material": "Al",
+        "thickness_mm": 2
+      },
+      "source": {
+        "table": "6.6",
+        "pdf_page": 88,
+        "printed_page": 76,
+        "section": "6.5.4"
+      },
+      "base_quality": "RQR-M-4"
+    }
+  ],
+  "comparison_with_iec2005": {
+    "all_five_families_have_identical_table_numerics": true,
+    "RQR_1_present": false,
+    "RQA_1_present": false,
+    "family_counts": {
+      "RQR": 9,
+      "RQA": 9,
+      "RQT": 3,
+      "RQR-M": 4,
+      "RQA-M": 4
+    },
+    "difference_scope": "Measurement and implementation guidance differ; tabulated kVp, HVL, homogeneity and added filters are identical to the verified IEC 2005 tables.",
+    "do_not_mix_note": "Do not add an RQR 1 from the 1994 edition or use newer-edition values. Keep IEC and TRS document names, table numbers and procedural criteria distinct even when the numerical rows are shared."
+  },
+  "requirements": {
+    "tube": {
+      "section": "6.4.2",
+      "pdf_page": 74,
+      "printed_page": 62,
+      "ripple_percent_less_than": {
+        "conventional": 10,
+        "mammography": 4
+      },
+      "anode_angle_max_deg": 27,
+      "target": {
+        "RQR": "W",
+        "RQA": "W",
+        "RQT": "W",
+        "RQR-M": "Mo",
+        "RQA-M": "Mo"
+      },
+      "spectrum_window_note": "Exit-window filtration should be as small as practicable; no fixed Be-window thickness is specified. A model Be thickness is an explicit modelling assumption."
+    },
+    "voltage_measurement": {
+      "section": "6.5.2",
+      "pdf_page": 82,
+      "printed_page": 70,
+      "quantity": "practical peak voltage",
+      "coverage_factor": 2,
+      "preferred_method": "Invasive voltage divider connected in parallel to the X ray tube",
+      "alternative_method": "Non-invasive device permitted by TRS 457; non-invasive instruments should comply with IEC 61676 (6.4.6, PDF 78 / printed 66).",
+      "trs457_expanded_uncertainty_max": {
+        "relative_percent": 5,
+        "absolute_kv": 2,
+        "combination": "whichever is greater"
+      },
+      "iec61267_footnote_expanded_uncertainty_max": {
+        "relative_percent": 1.5,
+        "absolute_kv": 1.5,
+        "combination": "whichever is greater"
+      },
+      "note": "TRS practical relaxation is not an IEC tolerance or a numerical model-fit error allowance."
+    },
+    "RQR": {
+      "sections": [
+        "6.5.2",
+        "6.5.2.1"
+      ],
+      "pdf_pages": [
+        82,
+        83,
+        84,
+        85
+      ],
+      "adjust_filtration_per_source": true,
+      "attenuation_curve_min_factor": 6,
+      "target_hvl_test_transmission_range": [
+        0.485,
+        0.515
+      ],
+      "homogeneity_absolute_tolerance": 0.03,
+      "periodic_hvl_drift_max_percent": 3,
+      "shared_filter_condition_max_spread_mmAl": 0.5,
+      "reference_quality": "RQR-5",
+      "periodic_drift_note": "The 3% figure is periodic change relative to earlier measured HVL, not a universal ±3% fit-to-tabulated-HVL acceptance criterion."
+    },
+    "RQA": {
+      "section": "6.5.3",
+      "pdf_pages": [
+        85,
+        86,
+        87
+      ],
+      "construction": "Corresponding established RQR beam plus additional Al in Table 6.3.",
+      "hvl_table_type": "Nominal first HVL",
+      "direct_establishment_possible": true,
+      "direct_establishment_note": "TRS describes adjusting the total additional Al using the attenuation-template offset if an RQR baseline cannot or need not be established.",
+      "reference_quality": "RQA-5",
+      "homogeneity_target": null
+    },
+    "RQT": {
+      "section": "6.5.3",
+      "pdf_pages": [
+        86,
+        87
+      ],
+      "construction": "Corresponding established RQR beam plus additional Cu in Table 6.4.",
+      "hvl_table_type": "Nominal first HVL",
+      "reference_quality": "RQT-9",
+      "direct_trial_method": "If RQR not established, start with listed Cu, verify air-kerma transmission through tabulated Al HVL and adjust Cu by trial and error.",
+      "direct_trial_transmission_range": [
+        0.485,
+        0.515
+      ],
+      "homogeneity_target": null
+    },
+    "mammography": {
+      "section": "6.5.4",
+      "pdf_pages": [
+        87,
+        88
+      ],
+      "target": "Mo",
+      "filter_material": "Mo",
+      "total_mo_filter_mm": 0.032,
+      "total_mo_filter_tolerance_mm": 0.002,
+      "mo_filter_note": "Mo filtration already contained in the inherent tube filtration is included in this requirement; do not double-count it.",
+      "RQR-M_hvl_acceptance_absolute_mmAl": 0.02,
+      "RQA-M_added_Al_mm": 2,
+      "RQA-M_added_filter_note": "2 mm Al added to corresponding RQR-M. It is not PMMA.",
+      "RQA-M_hvl_table_type": "Nominal first HVL",
+      "RQA-M_hvl_acceptance_absolute_mmAl": null,
+      "RQA-M_acceptance_note": "Do not carry the ±0.02 mm Al RQR-M requirement into RQA-M as if independently specified.",
+      "at_least_n_qualities": 3,
+      "requested_established_voltage_range_kv": [
+        20,
+        35
+      ],
+      "reference_quality": "RQR-M-2",
+      "noninvasive_voltage_measurement_permitted": true,
+      "Be_window_mm": null
+    },
+    "hvl": {
+      "sections": [
+        "6.5.1",
+        "Appendix V.1",
+        "V.2",
+        "V.3"
+      ],
+      "pdf_pages": [
+        81,
+        273,
+        274,
+        275,
+        276
+      ],
+      "weighting": "air kerma or air kerma rate",
+      "formula": {
+        "hvl1": "t at K(t)/K(0)=0.5",
+        "hvl2": "t at K(t)/K(0)=0.25 minus HVL1",
+        "h": "HVL1/HVL2"
+      },
+      "geometry": "narrow beam, detector completely and uniformly irradiated with minimal field",
+      "absorber_detector_distance_min_beam_diameters": 5,
+      "absorber_location": "Equidistant from monitor chamber and detector",
+      "detector_energy_response": "Negligible energy-response dependence; reference-class chamber preferred",
+      "measurement_monitor": "Normalize readings to monitor chamber to account for source-output variation; bracket absorber measurements with no-absorber measurements.",
+      "attenuation_plot": "Semi-log graph; take several thickness readings near 50%, and near 25% for HVL2, interpolate locally.",
+      "al_purity_min_percent": 99.9,
+      "attenuator_thickness_uncertainty_max_mm": {
+        "voltage_40kv_and_above": 0.01,
+        "mammography": 0.005
+      },
+      "spectrum_uniqueness_note": "Section 6.5.1 explicitly notes that same voltage and first HVL can correspond to different spectral distributions due to tube-design and ageing differences."
+    }
+  },
+  "recommended_ui": {
+    "pages": [
+      "ISO 4037 防护辐射质",
+      "诊断 X 射线 IEC 61267:2005 / IAEA TRS 457"
+    ],
+    "reference_selection": "Numeric presets can use one shared 2005 table dataset because the supplied TRS 457 repeats the exact same rows. In the diagnostic-page source selector switch the cited document/table and procedure notes, not the physical spectrum.",
+    "source_label_iec": "IEC 61267:2005",
+    "source_label_trs": "IAEA TRS 457（2007）",
+    "mammography_label": "Mo 钼靶 · 总 Mo 过滤 0.032 mm；RQA-M 另加 2 mm Al",
+    "visible_estimate_note": "能谱为模型估计；HVL 按窄束空气比释动能计算。标准符合性需实测验证。",
+    "avoid": [
+      "Do not add RQR 1 / RQA 1.",
+      "Do not identify the clinical PMMA phantom or mammography mean glandular dose tables as RQA-M beam-generation filters.",
+      "Do not use a W spectrum with an Mo label.",
+      "Do not silently replace IEC strict metrology requirements with TRS practical measurement guidance."
+    ]
+  }
+}
