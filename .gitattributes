@@ -1,0 +1,4 @@
+* text=auto eol=lf
+iso_fitted_params.json -text
+iso_reference_model.py -text
+tests/fixtures/iso-baseline.html.txt -text
