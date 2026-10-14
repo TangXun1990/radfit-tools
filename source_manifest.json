@@ -1,0 +1,27 @@
+{
+  "pages": [
+    "index.html",
+    "diagnostic.html"
+  ],
+  "original_dir": "author-supplied ISO baseline",
+  "original_sha256": {
+    "xray-calculator-精简修复版.html": "21a43217c8a95f7a10eccd81f1fe3cb0bffe9182432a601927a3e1111cfeaaa7",
+    "xray_model.py": "1243f6d65be8fa837d0ec321cd8ff5da698b8e9ec323da402274df0cc6808fdb",
+    "fitted_params.json": "77cbcead63ce23ce6393fa349aa6732c8c077ca86ae9de554a2cf224aed64a47"
+  },
+  "TRS457_pdf_sha256": "829b6c34f6aec400a36eac57e14da6ad97eeed9f3f389153b308c1751fa4cc6b",
+  "Mo_reference_archive_sha256": "2d61ec2784128b4a8de0870a43c2428f43e8f7834754270ffcf1db3520ee30bf",
+  "embedded_data_sha256": {
+    "iec61267-2005.json": "2445bf2798a802f0721738e19382e84b929003412eb97a1637252bfc46440a1a",
+    "trs457_requirements.json": "d28ae2e0e6653f303e3d6f221be1d0302f641db227335f698b5c04ec759bdc11",
+    "diagnostic_w_params.json": "ac8e475ed467999fd45f75bf14525c0b9ffb8cb04832cf9a71eb20b0fa1efd79",
+    "mo_reference_spectra.json": "1ed703ba3d69d3c89ff2547b2635604564266a6432386ce1c1ea0a573901f990",
+    "mo_calibration.json": "a3451a4621b58d27647969432181461049eca56d85e8dd9a35d5953976d6873a"
+  },
+  "physics_policy": "原ISO物理参数未改；W仅独立校准RQR基准过滤；乳腺采用真实Mo基础谱+标准Mo/Al过滤。",
+  "software_version": "1.0.0-beta.1",
+  "published_html_sha256": {
+    "index.html": "5a834be07440a494da98fd85c2400f9ca53ea3dd76033e50e8c86080c4437cd5",
+    "diagnostic.html": "4b3d81fefdbccedb5c23757a6b6b1cfe65dea412b050a733693c074e5c2f1bfd"
+  }
+}

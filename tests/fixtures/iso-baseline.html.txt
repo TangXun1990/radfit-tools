@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>湖北省计量院-电离辐射实验室拟合工具</title>
+<script>
+// ECharts 是唯一外部依赖；本地文件可选，两个 CDN 依次兜底，失败不阻塞计算。
+(function(){
+  window.__echartsReady = new Promise(function(resolve){
+    var sources = ['./echarts.min.js',
+      'https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js',
+      'https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.1/echarts.min.js'];
+    function next(i){
+      if(window.echarts) return resolve(true);
+      if(i >= sources.length) return resolve(false);
+      var s=document.createElement('script'), done=false;
+      var timer=setTimeout(function(){finish(false);}, 5000);
+      function finish(ok){
+        if(done) return;
+        done=true; clearTimeout(timer); s.onload=s.onerror=null;
+        if(ok && window.echarts) resolve(true);
+        else {s.remove(); next(i+1);}
+      }
+      s.src=sources[i]; s.async=true;
+      s.onload=function(){finish(true);}; s.onerror=function(){finish(false);};
+      document.head.appendChild(s);
+    }
+    next(0);
+  });
+})();
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:#f0f2f5;color:#1d2129;font-size:14px}
+.app{max-width:1400px;margin:0 auto;padding:16px}
+.header{background:linear-gradient(135deg,#0284c7,#0ea5e9);color:#fff;padding:16px 24px;border-radius:8px;display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.header h1{font-size:20px;font-weight:600}
+.header .sub{font-size:12px;opacity:.8;margin-top:4px}
+.btn-export{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);color:#fff;padding:6px 16px;border-radius:4px;cursor:pointer;font-size:13px}
+.btn-export:hover{background:rgba(255,255,255,.3)}
+.main{display:grid;grid-template-columns:340px 1fr;gap:16px}
+@media(max-width:900px){.main{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:8px;padding:16px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.panel-title{font-size:15px;font-weight:600;color:#1d2129;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid #e5e6eb}
+.field{margin-bottom:12px}
+.field label{display:block;font-size:13px;color:#4e5969;margin-bottom:4px;font-weight:500}
+.field .row{display:flex;align-items:center;gap:8px}
+.field input[type=number]{width:90px;padding:6px 8px;border:1px solid #c9cdd4;border-radius:4px;font-size:13px;text-align:right}
+.field input[type=range]{flex:1;height:4px;-webkit-appearance:none;background:#e5e6eb;border-radius:2px;outline:none}
+.field input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;background:#0ea5e9;border-radius:50%;cursor:pointer}
+.field select{padding:6px 8px;border:1px solid #c9cdd4;border-radius:4px;font-size:13px}
+.field .unit{font-size:12px;color:#86909c;min-width:50px}
+.tabs{display:flex;gap:0;margin-bottom:10px;border-bottom:2px solid #e5e6eb}
+.tab{padding:6px 12px;font-size:12px;cursor:pointer;color:#86909c;border-bottom:2px solid transparent;margin-bottom:-2px}
+.tab.active{color:#0ea5e9;border-bottom-color:#0ea5e9;font-weight:600}
+.preset-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;max-height:140px;overflow-y:auto}
+.preset-btn{padding:4px 2px;font-size:11px;border:1px solid #c9cdd4;background:#f7f8fa;border-radius:3px;cursor:pointer;text-align:center}
+.preset-btn:hover{background:#e8f0fe;border-color:#0ea5e9;color:#0ea5e9}
+.results{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:700px){.results{grid-template-columns:repeat(2,1fr)}}
+.rcard{background:linear-gradient(135deg,#f7f8fa,#fff);border:1px solid #e5e6eb;border-radius:6px;padding:10px 12px;text-align:center}
+.rcard .lb{font-size:11px;color:#86909c;margin-bottom:4px}
+.rcard .vl{font-size:18px;font-weight:700;color:#1d2129}
+.rcard .un{font-size:11px;color:#86909c;margin-top:2px}
+.charts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+@media(max-width:1200px){.charts{grid-template-columns:1fr}}
+.cbox{background:#fff;border-radius:8px;padding:12px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.ctitle{font-size:13px;font-weight:600;color:#4e5969;margin-bottom:8px}
+.chart{width:100%;height:340px}
+.table-section{margin-top:16px}
+.table-tabs{display:flex;gap:0;border-bottom:2px solid #e5e6eb}
+.table-tab{padding:8px 16px;font-size:13px;cursor:pointer;color:#86909c;border-bottom:2px solid transparent;margin-bottom:-2px;background:#f7f8fa;border-radius:4px 4px 0 0;margin-right:4px;transition:.2s}
+.table-tab:hover{color:#4e5969;background:#e8f0fe}
+.table-tab.active{color:#0ea5e9;border-bottom-color:#0ea5e9;font-weight:600;background:#fff}
+.table-wrap{overflow-x:auto;background:#fff;border-radius:0 0 8px 8px;padding:16px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.data-table{width:100%;border-collapse:collapse;font-size:12px;white-space:nowrap}
+.data-table th{background:#f7f8fa;color:#4e5969;font-weight:600;padding:10px 8px;text-align:center;border-bottom:1px solid #e5e6eb}
+.data-table td{padding:8px;text-align:center;border-bottom:1px solid #f2f3f5;color:#1d2129}
+.data-table tr:hover td{background:#f7f8fa}
+.data-table .col-filter{text-align:left;min-width:220px}
+.table-wrap .note{font-size:12px;color:#86909c;margin-top:12px;line-height:1.6}
+.data-table .pred{color:#0e8a4a;font-weight:500}
+.data-table .diff{color:#e67e22;font-size:11px}
+.empty-tip{color:#86909c;text-align:center;padding:40px;font-size:13px}
+.field input.invalid{border-color:#dc2626;background:#fff1f2;outline:1px solid #dc2626}
+.field input:disabled{background:#f1f5f9;color:#94a3b8;cursor:not-allowed}
+.field input:focus-visible,.field select:focus-visible,button:focus-visible{outline:2px solid #0ea5e9;outline-offset:2px}
+.field .hint{font-size:11px;line-height:1.5;color:#64748b;margin-top:4px}
+.status{font-size:12px;line-height:1.6;color:#b45309;margin-bottom:10px}
+.status:empty{display:none}
+.status.error{color:#b91c1c}
+.btn-export:disabled{opacity:.5;cursor:not-allowed}
+.main>div,.cbox{min-width:0}
+@media(max-width:500px){.app{padding:8px}.header{padding:12px;gap:10px}.header h1{font-size:16px}.table-tab{padding:8px}.tabs{flex-wrap:wrap}}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="header">
+<div><h1>湖北省计量院-电离辐射实验室拟合工具</h1><div class="sub">Birch-Marshall模型 · NIST XCOM衰减系数 · 钨靶W(Z=74) ·powered by 唐逊</div></div>
+<button id="exportBtn" class="btn-export" onclick="doExport()">导出 CSV</button>
+</div>
+<div class="main">
+<div class="panel">
+<div class="panel-title">射线源参数</div><div id="inputStatus" class="status error" role="alert"></div>
+<div class="field"><label>管电压 (kVp)</label><div class="row"><input type="range" id="kvp" min="10" max="400" value="100" step="1" oninput="onSlider()"><input type="number" id="kvpN" min="10" max="400" value="100" step="1" oninput="onNum()"><span class="unit">kV</span></div></div>
+<div class="field"><label>靶角</label><div class="row"><input type="number" id="angle" min="5" max="30" value="20" step="1" oninput="recalc()"><span class="unit">度</span></div></div>
+<div class="field"><label for="inhMat">固有过滤</label><div class="row"><select id="inhMat" onchange="onInhMat()"><option value="none">无</option><option value="Be">Be 铍</option><option value="Al" selected>Al 铝</option></select><input type="number" id="inh" aria-label="固有过滤厚度" min="0" max="10" value="1.0" step="0.1" oninput="recalc()"><span class="unit" id="inhUnit">mm Al</span></div><div class="hint">Be 厚度按既有拟合系数折算为 Al 等效厚度。</div></div>
+<div class="panel-title" style="margin-top:16px">附加滤片厚度</div>
+<div class="field"><label>Al 铝</label><div class="row"><input type="number" id="fAl" min="0" max="50" value="0" step="0.1" oninput="recalc()"><span class="unit">mm</span></div></div>
+<div class="field"><label>Cu 铜</label><div class="row"><input type="number" id="fCu" min="0" max="20" value="0" step="0.01" oninput="recalc()"><span class="unit">mm</span></div></div>
+<div class="field"><label>Sn 锡</label><div class="row"><input type="number" id="fSn" min="0" max="20" value="0" step="0.01" oninput="recalc()"><span class="unit">mm</span></div></div>
+<div class="field"><label>Pb 铅</label><div class="row"><input type="number" id="fPb" min="0" max="10" value="0" step="0.01" oninput="recalc()"><span class="unit">mm</span></div></div>
+<div class="field"><label>HVL计算材料</label><select id="hvlMat" onchange="recalc()"><option value="auto">自动选择</option><option value="Al">Al 铝</option><option value="Cu">Cu 铜</option><option value="Pb">Pb 铅</option></select></div>
+<div class="panel-title" style="margin-top:16px">ISO 4037 预设</div>
+<div class="tabs">
+<div class="tab active" data-s="N" onclick="switchTab(this)">N 窄谱</div>
+<div class="tab" data-s="W" onclick="switchTab(this)">W 宽谱</div>
+<div class="tab" data-s="H" onclick="switchTab(this)">H 高剂量率</div>
+<div class="tab" data-s="L" onclick="switchTab(this)">L 低剂量率</div>
+</div>
+<div class="preset-grid" id="pgrid"></div>
+</div>
+<div>
+<div id="calcStatus" class="status" role="status" aria-live="polite"></div><div id="chartStatus" class="status" role="status">图表组件加载中…</div><div class="results">
+<div class="rcard"><div class="lb">第一半值层 HVL₁</div><div class="vl" id="o_hvl1">--</div><div class="un" id="o_u1">mm Cu</div></div>
+<div class="rcard"><div class="lb">第二半值层 HVL₂</div><div class="vl" id="o_hvl2">--</div><div class="un" id="o_u2">mm Cu</div></div>
+<div class="rcard"><div class="lb">均匀系数 h</div><div class="vl" id="o_h">--</div><div class="un">HVL₁/HVL₂</div></div>
+<div class="rcard"><div class="lb">谱分辨力</div><div class="vl" id="o_res">--</div><div class="un">%</div></div>
+<div class="rcard"><div class="lb">注量平均能量</div><div class="vl" id="o_ef">--</div><div class="un">keV</div></div>
+<div class="rcard"><div class="lb">能量注量平均能量</div><div class="vl" id="o_ep">--</div><div class="un">keV</div></div>
+<div class="rcard"><div class="lb">有效能量</div><div class="vl" id="o_ee">--</div><div class="un">keV</div></div>
+<div class="rcard"><div class="lb">相对比释动能率</div><div class="vl" id="o_k">--</div><div class="un">%</div></div>
+</div>
+<div class="charts">
+<div class="cbox"><div class="ctitle">初始韧致辐射谱（相对光子注量 dΦ/dE）</div><div class="chart" id="cSpec0"></div></div>
+<div class="cbox"><div class="ctitle">过滤后能谱（相对光子注量 dΦ/dE）</div><div class="chart" id="cSpec"></div></div>
+<div class="cbox"><div class="ctitle">衰减曲线（空气比释动能透射率）</div><div class="chart" id="cAtt"></div></div>
+</div>
+</div>
+</div>
+<div class="panel table-section">
+<div class="panel-title">ISO 4037-1:2019 辐射质参数对照表</div>
+<div class="table-tabs">
+<div class="table-tab active" data-t="N" onclick="switchTableTab(this)">N 窄谱</div>
+<div class="table-tab" data-t="W" onclick="switchTableTab(this)">W 宽谱</div>
+<div class="table-tab" data-t="H" onclick="switchTableTab(this)">H 高空气比释动能率</div>
+<div class="table-tab" data-t="L" onclick="switchTableTab(this)">L 低空气比释动能率</div>
+</div>
+<div class="table-wrap" id="tableWrap"></div>
+</div>
+</div>
+<script>
+// fitted_params.json 原值完整内嵌，仅用于单文件运行；未重新拟合。
+var FITTED_PARAMS = Object.freeze({
+  "d0": 8.350894563850522e-05,
+  "a": 2.689168367595846,
+  "b": 0.6466484047509071,
+  "cAbs": 29.997769374956256,
+  "E0": 2.8310812878051252,
+  "cK": 0.9889458444745666,
+  "inhBe": 0.03895965467063132,
+  "sigma": 0.8
+});
+
+// ===== 物理常数 =====
+var RHO = {Al:2.699, Cu:8.96, Sn:7.31, Pb:11.35, W:19.3, Air:0.001205};
+
+// NIST XCOM [MeV, μ/ρ, μen/ρ]
+var MU = {
+Al:[[0.001,1185,1183],[0.0015,402.2,400.1],[0.00156,362.1,360],[0.00156,3957,3829],
+[0.002,2263,2204],[0.003,788,773.2],[0.004,360.5,354.5],[0.005,193.4,190.2],
+[0.006,115.3,113.3],[0.008,50.33,49.18],[0.01,26.23,25.43],[0.015,7.955,7.487],
+[0.02,3.441,3.094],[0.03,1.128,0.8778],[0.04,0.5685,0.3601],[0.05,0.3681,0.184],
+[0.06,0.2778,0.1099],[0.08,0.2018,0.05511],[0.1,0.1704,0.03794],[0.15,0.1378,0.02827],
+[0.2,0.1223,0.02745],[0.3,0.1042,0.02816],[0.4,0.09276,0.02862],[0.5,0.08445,0.02868],
+[0.6,0.07802,0.02851],[0.8,0.06841,0.02778],[1,0.06146,0.02686],[2,0.04324,0.02266],[3,0.03541,0.02024]],
+Cu:[[0.001,10570,10490],[0.0015,4418,4393],[0.002,2154,2142],[0.003,748.8,743],
+[0.004,347.3,343.2],[0.005,189.9,186.6],[0.006,115.6,112.8],[0.008,52.55,50.54],
+[0.00898,38.29,36.52],[0.00898,278.4,182.4],[0.01,215.9,148.4],[0.015,74.05,57.88],
+[0.02,33.79,27.88],[0.03,10.92,9.349],[0.04,4.862,4.163],[0.05,2.613,2.192],
+[0.06,1.593,1.29],[0.08,0.763,0.5581],[0.1,0.4584,0.2949],[0.15,0.2217,0.1027],
+[0.2,0.1559,0.05781],[0.3,0.1119,0.03617],[0.4,0.09413,0.03121],[0.5,0.08362,0.02933],
+[0.6,0.07625,0.02826],[0.8,0.06605,0.02681],[1,0.05901,0.02562],[2,0.04205,0.0216],[3,0.03599,0.02023]],
+Sn:[[0.001,8157,8144],[0.0015,3296,3287],[0.002,1665,1657],[0.003,614.3,607.7],
+[0.00393,311.4,305.8],[0.00393,928.5,884.5],[0.004,939.3,894.5],
+[0.00416,846.9,807.4],[0.00416,1145,1084],[0.00447,971.2,922.1],
+[0.00447,1117,1059],[0.005,847.1,806.4],[0.006,529.4,506.5],[0.008,250,240],
+[0.01,138.4,132.7],[0.015,46.64,44.13],[0.02,21.46,19.9],
+[0.0292,7.76,6.876],[0.0292,43.6,15.14],[0.03,41.21,14.9],
+[0.04,19.42,9.835],[0.05,10.7,6.314],[0.06,6.564,4.211],[0.08,3.029,2.101],
+[0.1,1.676,1.189],[0.15,0.6091,0.4119],[0.2,0.326,0.199],[0.3,0.1639,0.08179],
+[0.4,0.1156,0.05138],[0.5,0.09374,0.0398],[0.6,0.08113,0.03417],[0.8,0.06662,0.02878],
+[1,0.058,0.02601],[2,0.04112,0.02085],[3,0.03686,0.02044]],
+Pb:[[0.001,5210,5197],[0.0015,2356,2344],[0.002,1285,1274],[0.00248,800.6,789.5],
+[0.00248,1397,1366],[0.003,1965,1913],[0.004,1251,1221],[0.005,730.4,712.4],
+[0.006,467.2,454.6],[0.008,228.7,220.7],[0.01,130.6,124.7],
+[0.01304,67.01,62.7],[0.01304,162.1,129.1],[0.015,111.6,91],
+[0.0152,107.8,88.07],[0.0152,148.5,113.1],[0.01586,134.4,103.2],
+[0.01586,154.8,118],[0.02,86.36,68.99],[0.03,30.32,25.36],
+[0.04,14.36,12.11],[0.05,8.041,6.74],[0.06,5.021,4.149],[0.08,2.419,1.916],
+[0.088,1.91,1.482],[0.088,7.683,2.16],[0.1,5.549,1.976],[0.15,2.014,1.056],
+[0.2,0.9985,0.587],[0.3,0.4031,0.2455],[0.4,0.2323,0.137],[0.5,0.1614,0.09128],
+[0.6,0.1248,0.06819],[0.8,0.0887,0.04644],[1,0.07102,0.03654],[2,0.04606,0.0236],[3,0.04234,0.02322]],
+W:[[0.005,4200,4100],[0.006,2600,2550],[0.008,1200,1180],[0.01,650,630],
+[0.012,390,375],[0.015,210,200],[0.02,95,88],[0.03,32,28],[0.04,15,12.5],
+[0.05,8,6.5],[0.06,4.8,3.8],[0.0695,3,2.3],[0.0695,18.5,5.5],
+[0.08,12.5,4],[0.1,6.8,2.2],[0.15,2.2,0.75],[0.2,1,0.32],
+[0.3,0.35,0.11],[0.4,0.18,0.06],[0.5,0.12,0.045]],
+Air:[[0.001,3606,3599],[0.0015,1191,1188],[0.002,527.9,526.2],[0.003,162.5,161.4],
+[0.0032,134,133],[0.0032,148.5,146],[0.004,77.88,76.36],[0.005,40.27,39.31],
+[0.006,23.41,22.7],[0.008,9.921,9.446],[0.01,5.12,4.742],[0.015,1.614,1.334],
+[0.02,0.7779,0.5389],[0.03,0.3538,0.1537],[0.04,0.2485,0.06833],[0.05,0.208,0.04098],
+[0.06,0.1875,0.03041],[0.08,0.1662,0.02407],[0.1,0.1541,0.02325],[0.15,0.1356,0.02496],
+[0.2,0.1233,0.02672],[0.3,0.1067,0.02872],[0.4,0.09549,0.02949],[0.5,0.08712,0.02966],
+[0.6,0.08055,0.02953],[0.8,0.07074,0.02882],[1,0.06358,0.02789],[2,0.04447,0.02345],[3,0.03581,0.02057]]
+};
+
+// 对数-对数插值；吸收边同能量取边后值，与 Python np.interp 一致。
+function interp(mat, EkeV, col) {
+  col = col || 1;
+  var d = MU[mat];
+  var x = EkeV / 1000;
+  if (x <= d[0][0]) return d[0][col];
+  if (x >= d[d.length-1][0]) return d[d.length-1][col];
+  for (var i = 0; i < d.length-1; i++) {
+    var x1 = d[i][0], x2 = d[i+1][0];
+    if (x1 === x2) { if (x === x1) return d[i+1][col]; continue; }
+    if (x >= x1 && x < x2) {
+      var y1 = d[i][col], y2 = d[i+1][col];
+      if (y1 <= 0 || y2 <= 0) return y1;
+      var t = Math.log(x/x1) / Math.log(x2/x1);
+      return y1 * Math.pow(y2/y1, t);
+    }
+  }
+  return d[d.length-1][col];
+}
+
+// 预设：[名称,kVp,固有厚度(mm),Al,Cu,Sn,Pb,固有材料]；过滤配置沿用参考模型。
+var PRE = {"N":[["N-10",10,1,0.1,0,0,0,"Be"],["N-15",15,1,0.5,0,0,0,"Be"],["N-20",20,1,1,0,0,0,"Be"],["N-25",25,1,2,0,0,0,"Be"],["N-30",30,1,4,0,0,0,"Be"],["N-40",40,4,0,0.21,0,0,"Al"],["N-60",60,4,0,0.6,0,0,"Al"],["N-80",80,4,0,2,0,0,"Al"],["N-100",100,4,0,5,0,0,"Al"],["N-120",120,4,0,5,1,0,"Al"],["N-150",150,4,0,0,2.5,0,"Al"],["N-200",200,4,0,2,3,1,"Al"],["N-250",250,4,0,0,2,3,"Al"],["N-300",300,4,0,0,3,5,"Al"],["N-350",350,4,0,0,4.5,7,"Al"],["N-400",400,4,0,0,6,10,"Al"]],"W":[["W-30",30,1,2,0,0,0,"Be"],["W-40",40,1,4,0,0,0,"Be"],["W-60",60,4,0,0.3,0,0,"Al"],["W-80",80,4,0,0.5,0,0,"Al"],["W-110",110,4,0,2,0,0,"Al"],["W-150",150,4,0,0,1,0,"Al"],["W-200",200,4,0,0,2,0,"Al"],["W-250",250,4,0,0,4,0,"Al"],["W-300",300,4,0,0,6.5,0,"Al"]],"H":[["H-10",10,1,0,0,0,0,"Be"],["H-20",20,1,0.15,0,0,0,"Be"],["H-30",30,1,0.5,0,0,0,"Be"],["H-40",40,1,1,0,0,0,"Be"],["H-60",60,1,3.9,0,0,0,"Be"],["H-80",80,4,3.2,0,0,0,"Al"],["H-100",100,4,0,0.15,0,0,"Al"],["H-150",150,4,0,0.5,0,0,"Al"],["H-200",200,4,0,1,0,0,"Al"],["H-250",250,4,0,1.6,0,0,"Al"],["H-280",280,4,0,3,0,0,"Al"],["H-300",300,4,0,2.2,0,0,"Al"],["H-350",350,4,0,3.4,0,0,"Al"],["H-400",400,4,0,4.7,0,0,"Al"]],"L":[["L-10",10,1,0.3,0,0,0,"Be"],["L-20",20,1,2,0,0,0,"Be"],["L-30",30,1,4,0.18,0,0,"Be"],["L-35",35,4,0,0.25,0,0,"Al"],["L-55",55,4,0,1.2,0,0,"Al"],["L-70",70,4,0,2.5,0,0,"Al"],["L-100",100,4,0,0.5,2,0,"Al"],["L-125",125,4,0,1,4,0,"Al"],["L-170",170,4,0,1,3,1.5,"Al"],["L-210",210,4,0,0.5,2,3.5,"Al"],["L-240",240,4,0,0.5,2,5.5,"Al"]]};
+
+var RES = null;
+var ch1, ch2, ch3;
+
+// 自动 HVL 材料沿用参考模型：H-60 无重金属滤片，仍以 Al 报告。
+function hvlMaterial(kvp, fCu, fSn, fPb){
+  return kvp>=80 || (kvp>=50 && fCu+fSn+fPb>0) ? 'Cu' : 'Al';
+}
+var LIMITS = {
+  kvpN:[10,400,'管电压'], angle:[5,30,'靶角'], inh:[0,10,'固有过滤厚度'],
+  fAl:[0,50,'Al 厚度'], fCu:[0,20,'Cu 厚度'], fSn:[0,20,'Sn 厚度'], fPb:[0,10,'Pb 厚度']
+};
+function readInputs(){
+  var values={}, errors=[];
+  Object.keys(LIMITS).forEach(function(id){
+    var el=document.getElementById(id), rule=LIMITS[id], v=Number(el.value);
+    var ok=el.value.trim()!=='' && Number.isFinite(v) && v>=rule[0] && v<=rule[1];
+    el.classList.toggle('invalid', !ok); el.setAttribute('aria-invalid', String(!ok));
+    var message=ok?'':rule[2]+'请输入 '+rule[0]+'～'+rule[1]+' 范围内的有限数值。';
+    el.setCustomValidity(message); el.title=message;
+    if(!ok) errors.push(message);
+    values[id]=v;
+  });
+  var inhMat=document.getElementById('inhMat').value;
+  var mat=document.getElementById('hvlMat').value;
+  if(['none','Be','Al'].indexOf(inhMat)<0 || ['auto','Al','Cu','Pb'].indexOf(mat)<0) errors.push('请选择有效材料。');
+  document.getElementById('inputStatus').textContent=errors.join(' ');
+  if(errors.length) return null;
+  return {kvp:values.kvpN,ang:values.angle,
+    inh:inhMat==='none'?0:values.inh*(inhMat==='Be'?FITTED_PARAMS.inhBe:1),
+    fAl:values.fAl,fCu:values.fCu,fSn:values.fSn,fPb:values.fPb,mat:mat};
+}
+// 扩区间和二分求 HVL 均有次数及厚度上限；无有效根时返回 null，不伪造结果。
+function findHVL(tr, frac){
+  if(!(frac>0 && frac<1)) return null;
+  var atZero=tr(0);
+  if(!Number.isFinite(atZero) || atZero<=frac) return null;
+  var lo=0, hi=0.001, value;
+  for(var expand=0;expand<64;expand++){
+    value=tr(hi);
+    if(!Number.isFinite(value) || value<0) return null;
+    if(value<=frac) break;
+    if(hi>=5000) return null;
+    hi=Math.min(hi*1.5,5000);
+  }
+  if(value>frac) return null;
+  for(var it=0;it<80;it++){
+    var mid=(lo+hi)/2, t=tr(mid);
+    if(!Number.isFinite(t) || t<0) return null;
+    if(t>frac) lo=mid; else hi=mid;
+    if(hi-lo<=1e-10*Math.max(1,hi)) break;
+  }
+  return (lo+hi)/2;
+}
+// 谱生成与指标计算：保留 Birch-Marshall 公式、1 keV 步长及已收敛常数。
+// 此函数不读写 DOM，主界面、ISO 表及验证共用同一内核；inh 始终为 mm Al 等效。
+function calculate(p) {
+  var kvp=p.kvp, ang=p.ang, inh=p.inh, fAl=p.fAl, fCu=p.fCu, fSn=p.fSn, fPb=p.fPb;
+  var vals=[kvp,ang,inh,fAl,fCu,fSn,fPb], bounds=[[10,400],[5,30],[0,10],[0,50],[0,20],[0,20],[0,10]];
+  if(vals.some(function(v,i){return !Number.isFinite(v)||v<bounds[i][0]||v>bounds[i][1];})) throw new RangeError('计算参数超出允许范围');
+  var mat=p.mat && p.mat!=='auto'?p.mat:hvlMaterial(kvp,fCu,fSn,fPb);
+  if(['Al','Cu','Pb'].indexOf(mat)<0) throw new RangeError('HVL 材料无效');
+  var dE = 1;
+  var n = Math.floor(kvp / dE);
+  var E = [], p0 = [], pF = [];
+  var cosA = Math.cos(ang * Math.PI / 180);
+  var dSelf = FITTED_PARAMS.d0 / cosA;
+
+  for (var i = 0; i < n; i++) {
+    var Ei = (i+1) * dE;
+    E.push(Ei);
+    // 韧致辐射
+    var br = 74 * (kvp - Ei);
+    if (br < 0) br = 0;
+    var sa = Math.exp(-interp('W',Ei,1) * RHO.W * dSelf);
+    var knee = FITTED_PARAMS.b*kvp;
+    var sh = (Ei < knee) ? 1 + FITTED_PARAMS.a*(1 - Ei/knee) : 1;
+    sh = sh*(1 + FITTED_PARAMS.cAbs*Math.exp(-Ei/FITTED_PARAMS.E0));
+    var v = br * sa * sh;
+    // K特征线
+    if (kvp > 69.5) {
+      var cf = FITTED_PARAMS.cK * (1 - 69.5/kvp);
+      var cs = kvp * cf / 4;
+      var lns = [[59.32,1],[57.98,0.52],[67.24,0.28],[69.07,0.08]];
+      for (var j=0;j<4;j++) {
+        var d = Ei - lns[j][0];
+        v += cs * lns[j][1] * Math.exp(-0.5*d*d/(FITTED_PARAMS.sigma*FITTED_PARAMS.sigma));
+      }
+    }
+    p0.push(v);
+    // 衰减
+    var at = interp('Al',Ei,1)*RHO.Al*(inh/10);
+    if (fAl>0) at += interp('Al',Ei,1)*RHO.Al*(fAl/10);
+    if (fCu>0) at += interp('Cu',Ei,1)*RHO.Cu*(fCu/10);
+    if (fSn>0) at += interp('Sn',Ei,1)*RHO.Sn*(fSn/10);
+    if (fPb>0) at += interp('Pb',Ei,1)*RHO.Pb*(fPb/10);
+    pF.push(v * Math.exp(-at));
+  }
+
+  // 比释动能
+  function K(phi) {
+    var s = 0;
+    for (var i=0;i<n;i++) s += phi[i]*E[i]*interp('Air',E[i],2)*RHO.Air*dE;
+    return s;
+  }
+  var K0 = K(p0), Kf = K(pF);
+  var relK = K0 > 0 ? Kf/K0*100 : 0;
+
+  // 透射率
+  function tr(t) {
+    var s = 0;
+    for (var i=0;i<n;i++) {
+      var a = interp(mat,E[i],1)*RHO[mat]*(t/10);
+      s += pF[i]*Math.exp(-a)*E[i]*interp('Air',E[i],2)*RHO.Air*dE;
+    }
+    return Kf > 0 ? s/Kf : 0;
+  }
+  var empty = !(Kf>0) || !Number.isFinite(Kf) || !pF.some(function(v){return v>0;});
+  var hv1 = empty ? null : findHVL(tr,0.5);
+  var t25 = empty ? null : findHVL(tr,0.25);
+  var hv2 = hv1!==null && t25!==null && t25>hv1 ? t25-hv1 : null;
+  var hc = hv2>0 ? hv1/hv2 : null;
+
+  // 平均能量
+  var sp=0,sep=0,se2p=0;
+  for (var i=0;i<n;i++) { sp+=pF[i]; sep+=E[i]*pF[i]; se2p+=E[i]*E[i]*pF[i]; }
+  var eF = sp>0 ? sep/sp : 0;
+  var eP = sep>0 ? se2p/sep : 0;
+
+  // 有效能量
+  var muEff = hv1>0 ? Math.log(2)/(RHO[mat]*hv1/10) : 0;
+  var eE = hv1>0 ? eF : null;
+  var dd = MU[mat];
+  for (var i=0;hv1>0 && i<dd.length-1;i++) {
+    var x1=dd[i][0],y1=dd[i][1],x2=dd[i+1][0],y2=dd[i+1][1];
+    if (x1===x2) continue;
+    if ((y1>=muEff&&y2<=muEff)||(y1<=muEff&&y2>=muEff)) {
+      if (y1>0&&y2>0) { var t=Math.log(muEff/y1)/Math.log(y2/y1); eE=x1*Math.pow(x2/x1,t)*1000; }
+      break;
+    }
+  }
+
+  // 分辨力: ISO 4037定义 R = FWHM/E_mean × 100% (半高宽/平均能量)
+  var maxP = 0;
+  for (var i=0;i<n;i++) if (pF[i]>maxP) maxP=pF[i];
+  var halfMax = maxP/2;
+  var eLow=-1, eHigh=-1;
+  for (var i=1;i<n;i++) {
+    if (pF[i-1]<halfMax && pF[i]>=halfMax) {
+      // 线性插值上升沿
+      var frac = (halfMax-pF[i-1])/(pF[i]-pF[i-1]);
+      eLow = E[i-1]+frac*(E[i]-E[i-1]);
+    }
+    if (pF[i-1]>=halfMax && pF[i]<halfMax && eLow>0) {
+      var frac2 = (pF[i-1]-halfMax)/(pF[i-1]-pF[i]);
+      eHigh = E[i-1]+frac2*(E[i]-E[i-1]);
+      break;
+    }
+  }
+  var fwhm = (eLow>0&&eHigh>0) ? eHigh-eLow : 0;
+  var res = eF>0 ? fwhm/eF*100 : 0;
+
+  return {E:E,p0:p0,pF:pF,mat:mat,hv1:hv1,hv2:hv2,t25:t25,empty:empty,
+    p:{kvp:kvp,ang:ang,inh:inh,fAl:fAl,fCu:fCu,fSn:fSn,fPb:fPb},
+    o:{hv1:hv1,hv2:hv2,hc:hc,res:empty?null:res,eF:empty?null:eF,eP:empty?null:eP,eE:eE,relK:relK}};
+}
+function fmt(v,d){return Number.isFinite(v)?v.toFixed(d):'--';}
+function recalc(){
+  var p=readInputs();
+  RES=p?calculate(p):null;
+  if(p) document.getElementById('kvp').value=p.kvp;
+  var out=RES?RES.o:{};
+  [['hvl1','hv1',3],['hvl2','hv2',3],['h','hc',3],['res','res',1],['ef','eF',1],['ep','eP',1],['ee','eE',1],['k','relK',2]].forEach(function(item){
+    document.getElementById('o_'+item[0]).textContent=fmt(out[item[1]],item[2]);
+  });
+  ['o_u1','o_u2'].forEach(function(id){document.getElementById(id).textContent=RES?'mm '+RES.mat:'mm';});
+  document.getElementById('calcStatus').textContent=!RES?'请修正输入后重新计算。':RES.empty?'过滤后能谱为零或低于数值精度，无法计算 HVL 与平均能量。':RES.hv1===null||RES.hv2===null?'HVL 未在安全范围内收敛，请调整过滤条件。':'';
+  document.getElementById('exportBtn').disabled=!RES || RES.empty || RES.hv1===null || RES.hv2===null;
+  draw();
+}
+function emptyChart(chart,text){
+  if(!chart) return;
+  chart.setOption({title:{text:text,left:'center',top:'middle',textStyle:{fontSize:13,fontWeight:'normal',color:'#86909c'}},xAxis:{type:'value',show:false},yAxis:{type:'value',show:false},series:[]},true);
+}
+
+function draw() {
+  if(!ch1 || !ch2 || !ch3) return;
+  if(!RES){[ch1,ch2,ch3].forEach(function(c){emptyChart(c,'请修正输入');}); return;}
+  var E=RES.E, p0=RES.p0, pF=RES.pF, n=E.length;
+  var mx = 0;
+  for (var i=0;i<n;i++) if (pF[i]>mx) mx=pF[i];
+  if (mx<=0) mx=1;
+
+  // 能谱图数据（各自按自身峰值归一化）
+  var sF=[], s0=[], mx0=0;
+  for (var i=0;i<n;i++) if (p0[i]>mx0) mx0=p0[i];
+  if (mx0<=0) mx0=1;
+  for (var i=0;i<n;i++) {
+    sF.push(+(pF[i]/mx*100).toFixed(2));
+    s0.push(+(p0[i]/mx0*100).toFixed(2));
+  }
+
+  var ml = [];
+  if (RES.p.kvp > 69.5) {
+    ml = [{xAxis:59,name:'Kα'},{xAxis:67,name:'Kβ'}];
+  }
+
+  if(RES.empty) emptyChart(ch1,'无有效能谱，请减小过滤厚度');
+  else ch1.setOption({
+    tooltip:{trigger:'axis'},
+    grid:{left:50,right:20,top:30,bottom:40},
+    legend:{data:['过滤后谱'],top:0,textStyle:{fontSize:11}},
+    xAxis:{type:'category',data:E,name:'能量(keV)',nameLocation:'middle',nameGap:25,
+           interval:Math.max(1,Math.floor(n/10))},
+    yAxis:{type:'value',name:'相对注量(%)',min:0},
+    series:[
+      {name:'过滤后谱',type:'line',data:sF,
+       areaStyle:{color:'rgba(14,165,233,0.22)'},lineStyle:{color:'#0ea5e9',width:2},
+       symbol:'none'}
+    ]
+  }, true);
+
+  ch3.setOption({
+    tooltip:{trigger:'axis'},
+    grid:{left:50,right:20,top:30,bottom:40},
+    legend:{data:['初始韧致辐射'],top:0,textStyle:{fontSize:11}},
+    xAxis:{type:'category',data:E,name:'能量(keV)',nameLocation:'middle',nameGap:25,
+           interval:Math.max(1,Math.floor(n/10))},
+    yAxis:{type:'value',name:'相对注量(%)',min:0},
+    series:[
+      {name:'初始韧致辐射',type:'line',data:s0,
+       lineStyle:{color:'#bbb',type:'dashed',width:1.5},symbol:'none',
+       areaStyle:{color:'rgba(187,187,187,0.15)'},
+       markLine:{silent:true,data:ml,lineStyle:{color:'#ccc',type:'dashed'},
+                 label:{fontSize:10,color:'#999'}}}
+    ]
+  }, true);
+
+  // 零谱或无效 HVL 不进入对数坐标，避免 0/0 与 NaN。
+  if(RES.empty || RES.hv1===null || RES.t25===null){emptyChart(ch2,'无有效衰减曲线');return;}
+  // 衰减图
+  var mat=RES.mat;
+  var tMax = Math.max(RES.hv1*5, 0.5);
+  var ad=[], base=0;
+  for(var i=0;i<n;i++) base+=pF[i]*E[i]*interp('Air',E[i],2)*RHO.Air;
+  for (var j=0;j<=100;j++) {
+    var t = tMax*j/100;
+    var kk=0;
+    for (var i=0;i<n;i++) {
+      var a=interp(mat,E[i],1)*RHO[mat]*(t/10);
+      kk+=pF[i]*Math.exp(-a)*E[i]*interp('Air',E[i],2)*RHO.Air;
+    }
+    var pct=base>0?kk/base*100:0;
+    if(Number.isFinite(pct)&&pct>0) ad.push([+t.toFixed(4),pct]);
+  }
+  var un={Al:'mm Al',Cu:'mm Cu',Pb:'mm Pb'};
+  ch2.setOption({
+    tooltip:{trigger:'axis',valueFormatter:function(v){return typeof v==='number'?v.toFixed(3):v}},
+    grid:{left:55,right:20,top:30,bottom:40},
+    xAxis:{type:'value',name:'衰减层厚度('+un[mat]+')',nameLocation:'middle',nameGap:25},
+    yAxis:{type:'log',name:'透射率(%)',min:0.1,max:100},
+    series:[{
+      name:'透射率',type:'line',data:ad,
+      lineStyle:{color:'#0e8a4a',width:2},symbol:'none',
+      markLine:{silent:true,data:[
+        {yAxis:50,lineStyle:{color:'#e74c3c',type:'dashed'},label:{formatter:'50%',fontSize:10}},
+        {yAxis:25,lineStyle:{color:'#e67e22',type:'dashed'},label:{formatter:'25%',fontSize:10}}
+      ]},
+      markPoint:{data:[
+        {coord:[RES.hv1,50],value:'HVL₁',symbolSize:36,itemStyle:{color:'#e74c3c'},label:{fontSize:9,color:'#fff'}},
+        {coord:[RES.t25,25],value:'HVL₁+HVL₂',symbolSize:36,itemStyle:{color:'#e67e22'},label:{fontSize:9,color:'#fff'}}
+      ]}
+    }]
+  }, true);
+}
+
+// UI：先同步输入，再统一校验；非法输入不会被滑块静默截断。
+function onSlider(){document.getElementById('kvpN').value=document.getElementById('kvp').value;recalc();}
+function onNum(){recalc();}
+function onInhMat(skipRecalc){
+  var material=document.getElementById('inhMat').value, input=document.getElementById('inh');
+  input.disabled=material==='none';
+  if(input.disabled) input.value=0;
+  document.getElementById('inhUnit').textContent=material==='none'?'mm':'mm '+material;
+  if(skipRecalc!==true) recalc();
+}
+function switchTab(el){document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});el.classList.add('active');renderPre(el.dataset.s);}
+function renderPre(s){var g=document.getElementById('pgrid');g.innerHTML='';PRE[s].forEach(function(it){var b=document.createElement('button');b.type='button';b.className='preset-btn';b.textContent=it[0];b.onclick=function(){applyPre(it);};g.appendChild(b);});}
+function presetCase(it){return {kvp:it[1],ang:20,inh:it[2]*(it[7]==='Be'?FITTED_PARAMS.inhBe:it[7]==='none'?0:1),fAl:it[3],fCu:it[4],fSn:it[5],fPb:it[6],mat:'auto'};}
+function applyPre(it){
+  document.getElementById('kvp').value=it[1]; document.getElementById('kvpN').value=it[1];
+  document.getElementById('angle').value=20;
+  document.getElementById('inhMat').value=it[7]; document.getElementById('inh').value=it[2];
+  ['fAl','fCu','fSn','fPb'].forEach(function(id,i){document.getElementById(id).value=it[i+3];});
+  document.getElementById('hvlMat').value='auto';
+  onInhMat(true); recalc();
+}
+
+function doExport(){
+  recalc();
+  if(!RES || RES.empty || RES.hv1===null || RES.hv2===null)return;
+  var c='\uFEFFISO 4037 X射线能谱数据\n';
+  c+='管电压,'+RES.p.kvp+',kVp\n靶角,'+RES.p.ang+',度\n固有过滤,'+RES.p.inh+',mm Al\n';
+  c+='Al,'+RES.p.fAl+',mm\nCu,'+RES.p.fCu+',mm\nSn,'+RES.p.fSn+',mm\nPb,'+RES.p.fPb+',mm\n\n';
+  c+='HVL1,'+RES.o.hv1.toFixed(4)+',mm '+RES.mat+'\nHVL2,'+RES.o.hv2.toFixed(4)+',mm '+RES.mat+'\n';
+  c+='均匀系数,'+RES.o.hc.toFixed(4)+'\n谱分辨力,'+RES.o.res.toFixed(2)+'%\n';
+  c+='注量平均,'+RES.o.eF.toFixed(2)+',keV\n能量注量平均,'+RES.o.eP.toFixed(2)+',keV\n';
+  c+='有效能量,'+RES.o.eE.toFixed(2)+',keV\n相对K,'+RES.o.relK.toFixed(2)+'%\n\n';
+  c+='E(keV),Phi0,PhiF,mu_Al,mu_Cu,mu_Sn,mu_Pb,muen_Air\n';
+  for(var i=0;i<RES.E.length;i++){
+    var e=RES.E[i];
+    c+=e+','+RES.p0[i].toExponential(4)+','+RES.pF[i].toExponential(4)+',';
+    c+=interp('Al',e,1).toExponential(4)+','+interp('Cu',e,1).toExponential(4)+',';
+    c+=interp('Sn',e,1).toExponential(4)+','+interp('Pb',e,1).toExponential(4)+',';
+    c+=interp('Air',e,2).toExponential(4)+'\n';
+  }
+  var b=new Blob([c],{type:'text/csv;charset=utf-8'});
+  var a=document.createElement('a');a.href=URL.createObjectURL(b);
+  a.download='xray_'+RES.p.kvp+'kVp.csv';document.body.appendChild(a);a.click();a.remove();
+  setTimeout(function(){URL.revokeObjectURL(a.href);},1000);
+}
+
+// 仅保存标准参考列：[平均能量,分辨力,HVL1,HVL2]；预测值绝不存表。
+// 过滤配置核对 ISO 4037-1:2019 表 3～6；h 参考值由同一距离的 HVL1/HVL2 推算。
+var ISO_REF = {"N-10":[8.5,"28",0.055,0.06],"N-15":[12.4,"33",0.157,0.177],"N-20":[16.3,"34",0.344,0.396],"N-25":[20.3,"33",0.662,0.746],"N-30":[24.6,"32",1.16,1.28],"N-40":[33.3,"30",2.63,2.83],"N-60":[47.9,"36",0.234,0.263],"N-80":[65.2,"32",0.578,0.622],"N-100":[83.3,"28",1.09,1.15],"N-120":[100,"27",1.67,1.73],"N-150":[118,"37",2.3,2.41],"N-200":[165,"30",3.92,3.99],"N-250":[207,"28",5.1,5.14],"N-300":[248,"27",5.96,6.0],"N-350":[288,"29",6.69,6.74],"N-400":[328,27,7.31,7.34],"W-30":[22.9,"—",0.863,1.02],"W-40":[29.8,"—",1.72,2.03],"W-60":[44.8,"48",0.18,0.215],"W-80":[56.5,"55",0.349,0.433],"W-110":[79.1,"51",0.933,1.08],"W-150":[104,"56",1.78,2.03],"W-200":[138,"57",3.0,3.24],"W-250":[172,"56",4.14,4.34],"W-300":[205,57,5.03,5.18],"H-10":[8,"—",0.044,0.05],"H-20":[13.1,"—",0.128,0.172],"H-30":[19.5,"—",0.364,0.563],"H-40":[25.4,"—",0.815,1.17],"H-60":[38,"—",2.53,3.38],"H-80":[48.8,"—",0.176,0.268],"H-100":[57.3,"—",0.294,0.462],"H-150":[78,"—",0.808,1.21],"H-200":[99.3,"—",1.54,2.28],"H-250":[122,"—",2.42,3.24],"H-280":[145,"—",3.26,3.88],"H-300":[143,"—",3.22,4.0],"H-350":[167,"—",4.01,4.65],"H-400":[190,null,4.65,5.22],"L-10":[9,"—",0.068,0.071],"L-20":[17.3,"21",0.446,0.486],"L-30":[26.7,"21",1.56,1.62],"L-35":[30.4,"21",2.18,2.29],"L-55":[47.8,"22",0.248,0.261],"L-70":[60.6,"22",0.483,0.505],"L-100":[86.8,"22",1.22,1.25],"L-125":[109,"21",1.98,2.02],"L-170":[149,"18",3.4,3.46],"L-210":[185,"18",4.52,4.55],"L-240":[211,18,5.19,5.22]};
+function filterText(it){
+  var parts=[];
+  ['Al','Cu','Sn','Pb'].forEach(function(m,i){if(it[i+3]>0) parts.push(it[i+3]+' mm '+m);});
+  return '固有 '+it[2]+' mm '+it[7]+(parts.length?'；附加 '+parts.join(' + '):'');
+}
+function diffText(value,ref){return Number.isFinite(value)&&ref>0?' <span class="diff">('+((value/ref-1)*100>=0?'+':'')+((value/ref-1)*100).toFixed(1)+'%)</span>':'';}
+function renderTable(t){
+  var wrap=document.getElementById('tableWrap');
+  var html='<table class="data-table"><thead><tr><th>辐射质</th><th>kV</th><th class="col-filter">固有+附加过滤</th><th>E(keV)<br>ISO</th><th>E(keV)<br>预测</th><th>RE(%)<br>ISO</th><th>RE(%)<br>预测</th><th>HVL1(mm)<br>ISO</th><th>HVL1(mm)<br>预测</th><th>HVL2(mm)<br>ISO</th><th>HVL2(mm)<br>预测</th><th>h<br>ISO推算</th><th>h<br>预测</th></tr></thead><tbody>';
+  PRE[t].forEach(function(it){
+    var r=ISO_REF[it[0]], result=calculate(presetCase(it)), o=result.o, mat=result.mat;
+    html+='<tr><td>'+it[0]+'</td><td>'+it[1]+'</td><td class="col-filter">'+filterText(it)+'</td><td>'+r[0]+'</td><td class="pred">'+fmt(o.eF,1)+diffText(o.eF,r[0])+'</td><td>'+(r[1]||'—')+'</td><td class="pred">'+fmt(o.res,0)+'</td><td>'+r[2]+' '+mat+'</td><td class="pred">'+fmt(o.hv1,3)+' '+mat+diffText(o.hv1,r[2])+'</td><td>'+r[3]+' '+mat+'</td><td class="pred">'+fmt(o.hv2,3)+' '+mat+'</td><td>'+fmt(r[2]/r[3],2)+'</td><td class="pred">'+fmt(o.hc,2)+'</td></tr>';
+  });
+  html+='</tbody></table><div class="note">ISO 参考列沿用所提供的标准数据，补齐已核对的分辨力；缺失项以“—”显示。h 参考列由同一距离的 ISO HVL1/HVL2 推算。预测列使用本页同一计算函数实时生成（靶角 20°、预设过滤、自动 HVL 材料）。Be 按原拟合参数换算为 Al 等效厚度，CSV 固有过滤字段仍输出 mm Al 等效值。<br>HVL 参考值采用 1 m 列；N-350/N-400、H-350/H-400 采用 2.5 m 列。原模型未显式加入空气路径衰减，保持其原有计算口径。<br>H系列薄过滤软射线，半经验模型存在固有约±10%残差，更高精度建议使用蒙特卡洛或SpekPy</div>';
+  wrap.innerHTML=html;
+}
+
+function switchTableTab(el){
+document.querySelectorAll('.table-tab').forEach(function(t){t.classList.remove('active')});
+el.classList.add('active');
+renderTable(el.dataset.t);
+}
+
+function showChartFailure(){
+  document.getElementById('chartStatus').textContent='图表组件加载失败，请联网后刷新；数值计算、预设和 CSV 导出仍可使用。';
+  ['cSpec','cAtt','cSpec0'].forEach(function(id){document.getElementById(id).textContent='图表暂不可用';});
+}
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('input[type="number"]').forEach(function(el){el.setAttribute('aria-describedby','inputStatus');if(!el.getAttribute('aria-label'))el.setAttribute('aria-label',LIMITS[el.id][2]);});
+  renderPre('N'); onInhMat(true); recalc(); renderTable('N');
+  window.__echartsReady.then(function(ok){
+    if(!ok || !window.echarts){showChartFailure();return;}
+    try{
+      ch1=echarts.init(document.getElementById('cSpec'));
+      ch2=echarts.init(document.getElementById('cAtt'));
+      ch3=echarts.init(document.getElementById('cSpec0'));
+      document.getElementById('chartStatus').textContent='';
+      window.addEventListener('resize',function(){[ch1,ch2,ch3].forEach(function(c){c.resize();});});
+      draw();
+    }catch(error){
+      [ch1,ch2,ch3].forEach(function(c){if(c)c.dispose();});ch1=ch2=ch3=null;showChartFailure();
+    }
+  });
+});
+</script>
+</body>
+</html>
