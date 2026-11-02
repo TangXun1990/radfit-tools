@@ -22,18 +22,18 @@
     "xray_model.py": "1243f6d65be8fa837d0ec321cd8ff5da698b8e9ec323da402274df0cc6808fdb"
   },
   "delivered_html_sha256": {
-    "ISO": "98be31d9888280d63fd869ca8ea811a47adfbc9548361828cb7d62b30661f1b6",
-    "diagnostic": "53c7d3c69e9d71ec6c43e8434ed943c7b749bd38d3b8855cfe7a4a2ed1fbbbd3"
+    "ISO": "af37c0a732c6e13dfa0d04254bf8e08798c36205e35ea6fc2d048ce4d3f460d6",
+    "diagnostic": "57b442bc02727dc1c259aa9de791e64035756882aed0f2819ebe7111e537a634"
   },
   "limitation": "Node VM executes delivered JS with simulated DOM/ECharts. This verifies numerical data and UI state logic; it does not replace visual browser verification or physical standard conformity.",
   "html_structural_audit": {
     "index.html": {
       "balanced_tags": true,
-      "unique_ids": 32
+      "unique_ids": 33
     },
     "diagnostic.html": {
       "balanced_tags": true,
-      "unique_ids": 37
+      "unique_ids": 38
     }
   },
   "original_model_and_parameter_copies_byte_identical": true,
@@ -64,13 +64,12 @@
     "reapplied_Be_or_air": false
   },
   "interpretation": "数值实现一致性、模型表值残差、实际设备符合性分别评价；名义HVL残差不以JS/Python 2%要求代替验收。",
-  "cosmetic_revision": "beta.3: bilingual interface with persistent ENG/CHS controls; physical functions, parameters and CSV export unchanged",
-  "publication_preparation": "两页内嵌语言切换；tests/verify.cjs 与 tests/language.cjs 通过，保留原模型参数和标准参考数据。",
-  "software_version": "1.0.0-beta.3",
+  "publication_preparation": "两页增加空气路径，tests/verify.cjs、tests/language.cjs、tests/air.cjs通过；不重新拟合或覆盖原物理参数。",
+  "software_version": "1.0.0-beta.4",
   "ui_language_regression": {
     "passed": true,
     "pages": 2,
-    "translated_static_nodes": 82,
+    "translated_static_nodes": 86,
     "cases": [
       "both standalone pages embed the exact maintained common helper",
       "iso custom values, family/table/source, results and CSV roundtrip",
@@ -93,5 +92,25 @@
     "physical_results_language_invariance": true,
     "limitation": "Executes delivered inline JS in Node VM with simulated DOM/ECharts; numerical regression remains separately verified by tests/verify.cjs."
   },
-  "physics_and_csv_unchanged_from_beta_2": true
+  "air_path_regression": {
+    "passed": true,
+    "cases": 47,
+    "independent_spectral_bins": 2870,
+    "max_percent_difference": 0.017104476340956687,
+    "references": "Frozen Python source spectra + independent air attenuation and HVL integration",
+    "coverage": [
+      "ISO N-120/H-60/L-30/H-10",
+      "Diagnostic W and Mo including filterless Mo",
+      "0/1/2/5/100 m and Mo 0.6 m",
+      "baseline recovery",
+      "spectral hardening",
+      "no inverse-square",
+      "UI state/validation/zero spectrum",
+      "CSV schema and filename"
+    ],
+    "limitation": "Node VM with simulated DOM/ECharts; no visual browser or real-device conformity validation."
+  },
+  "original_fitted_constants_and_default_results_unchanged": true,
+  "csv_schema_unchanged": true,
+  "physical_model_revision": "beta.4 adds a narrow-beam, energy-dependent air-path attenuation factor relative to the prior W/ISO and measured Mo baselines."
 }

@@ -113,7 +113,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 </style></head><body><div class="app">
 <nav class="page-nav" aria-label="计算页面" data-en-aria-label="Calculator pages"><a href="index.html" data-page-link data-en="ISO 4037 · Radiation protection">ISO 4037 · 防护辐射质</a><a href="diagnostic.html" data-page-link data-en="Diagnostic X-rays · IEC / TRS-457" aria-current="page" class="active">诊断 X 射线 · IEC / TRS‑457</a></nav>
 <div class="header"><div><h1 data-en="Hubei Institute of Metrology · Ionizing Radiation Laboratory Fitting Tool">湖北省计量院-电离辐射实验室拟合工具</h1><div class="sub" data-en="IEC 61267:2005 · IAEA TRS-457 · W / Mo spectra">IEC 61267:2005 · IAEA TRS‑457 · W / Mo 靶独立谱计算</div></div><div class="header-actions"><div class="lang-switch" role="group" aria-label="界面语言" data-en-aria-label="Interface language"><button type="button" id="langENG" onclick="setLanguage('eng')" aria-pressed="false">ENG</button><button type="button" id="langCHS" class="active" onclick="setLanguage('chs')" aria-pressed="true">CHS</button></div><button id="exportBtn" class="btn-export" onclick="doDiagExport()" data-en="Export CSV">导出 CSV</button></div></div>
-<div class="app-version" data-en="Software v1.0.0-beta.3">软件 v1.0.0-beta.3</div>
+<div class="app-version" data-en="Software v1.0.0-beta.4">软件 v1.0.0-beta.4</div>
 <div class="main"><div class="panel">
 <div class="panel-title" data-en="Radiation qualities and references">辐射质与来源</div>
 <div class="field"><label for="standardSource" data-en="Reference source">参考来源</label><select id="standardSource" onchange="changeStandard()"><option value="IEC">IEC 61267:2005</option><option value="TRS">IAEA TRS‑457 (2007)</option></select></div>
@@ -127,8 +127,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 <div class="field"><label for="fAl" data-en="Additional Al filtration">附加 Al 铝过滤</label><div class="row"><input type="number" id="fAl" value="0" min="0" max="60" step="any" oninput="recalcDiag()"><span class="unit">mm Al</span></div></div>
 <div class="field" id="cuField"><label for="fCu" data-en="Additional Cu filtration">附加 Cu 铜过滤</label><div class="row"><input type="number" id="fCu" value="0" min="0" max="5" step="any" oninput="recalcDiag()"><span class="unit">mm Cu</span></div></div>
 <div class="field" id="moField" style="display:none"><label for="fMo" data-en="Total Mo filtration">总 Mo 钼过滤</label><div class="row"><input type="number" id="fMo" value="0.032" min="0" max="0.1" step="any" oninput="recalcDiag()"><span class="unit">mm Mo</span></div><div class="hint" data-en="The standard specifies 0.032±0.002 mm Mo; adding Al establishes RQA-M.">标准为0.032±0.002 mm Mo；另加 Al 构成 RQA‑M。</div></div>
+<div class="field"><label for="airDistance" data-en="Air path to measurement point">测量点空气路径</label><div class="row"><input type="number" id="airDistance" value="0" min="0" max="100" step="any" oninput="recalcDiag()"><span class="unit">m</span></div><div class="hint" data-en="W: additional air path relative to the original fitted W model (reference 0 m); the fitting may already include air effects. Mo: total air path, relative to its measured 1 m basis. Below 1 m the spectrum is back-corrected; missing soft photons cannot be recovered, and truncation or noise limits accuracy. Air density is fixed at 0.001205 g/cm³. Only narrow-beam unscattered attenuation is included; inverse-square geometry, scattering and absolute dose are excluded. CSV fields do not contain this distance; non-reference distances are added to the file name.">W：相对原拟合模型增加的空气路径（基准 0 m）；拟合可能已包含参考测量的空气效应。Mo：实际空气路径，以 1 m 实测基础谱为基准；小于 1 m 为反向估算，不能恢复未测到的软光子，截断与噪声会限制准确度。空气密度固定为 0.001205 g/cm³；仅计窄束未散射衰减，不含距离平方反比、散射和绝对剂量。CSV 字段不记录该距离；非基准距离会写入文件名。</div></div>
 <div class="hint" id="sourceAssembly"></div><div id="inputStatus" class="status error" role="alert"></div>
-<div class="note" data-en="Diagnostic HVLs are reported in Al. Editing parameters gives a custom estimate; select a preset to restore its reference configuration.">诊断系列 HVL 统一使用 Al。修改参数后显示自定义估计；重新点击预设可恢复参考配置。</div>
+<div class="note" data-en="Diagnostic HVLs are reported in Al. Editing parameters gives a custom estimate; selecting a preset restores its source configuration while retaining the air path for the same anode.">诊断系列 HVL 统一使用 Al。修改参数后显示自定义估计；选择预设可恢复源配置，同一靶材的空气路径保持不变。</div>
 </div><div>
 <div id="calcStatus" class="status" role="status" aria-live="polite"></div><div id="chartStatus" class="status" role="status">图表组件加载中…</div>
 <div class="results">
@@ -155,11 +156,11 @@ var UI_LANG='chs', UI_CHART_STATE='loading';
 var UI_LANGUAGE_KEY='radfit.ui.language';
 function uiT(chs,eng){return UI_LANG==='eng'?eng:chs;}
 function uiInputName(id,chs){
-  var names={kvpN:'Tube voltage',angle:'Anode angle',inh:'Inherent filtration thickness',fAl:'Al thickness',fCu:'Cu thickness',fSn:'Sn thickness',fPb:'Pb thickness',baseAl:'RQR baseline Al-equivalent filtration',fMo:'Mo thickness'};
+  var names={kvpN:'Tube voltage',angle:'Anode angle',inh:'Inherent filtration thickness',fAl:'Al thickness',fCu:'Cu thickness',fSn:'Sn thickness',fPb:'Pb thickness',baseAl:'RQR baseline Al-equivalent filtration',fMo:'Mo thickness',airDistance:'Air path length'};
   return UI_LANG==='eng'?(names[id]||chs):chs;
 }
 function uiChineseInputName(id){
-  var names={kvpN:'管电压',angle:'靶角',inh:'固有过滤厚度',fAl:'Al 厚度',fCu:'Cu 厚度',fSn:'Sn 厚度',fPb:'Pb 厚度',baseAl:'RQR 基准 Al 等效过滤',fMo:'Mo 厚度'};
+  var names={kvpN:'管电压',angle:'靶角',inh:'固有过滤厚度',fAl:'Al 厚度',fCu:'Cu 厚度',fSn:'Sn 厚度',fPb:'Pb 厚度',baseAl:'RQR 基准 Al 等效过滤',fMo:'Mo 厚度',airDistance:'空气路径长度'};
   return names[id]||id;
 }
 function readUiLanguage(){
@@ -253,18 +254,24 @@ function summarize(E,p0,pF,widths,p){
   var hv1=empty?null:findHVL(tr,.5),t25=empty?null:findHVL(tr,.25),hv2=hv1!==null&&t25!==null&&t25>hv1?t25-hv1:null;
   return {E:E,p0:p0,pF:pF,widths:widths,p:p,mat:'Al',empty:empty,hv1:hv1,hv2:hv2,t25:t25,transmission:tr,o:{hv1:hv1,hv2:hv2,hc:hv2>0?hv1/hv2:null,eF:empty?null:sep/sp,eP:empty?null:se2p/sep,relK:K0>0?Kf/K0*100:null}};
 }
+// 空气质量衰减系数使用总衰减列；距离 m 转换为 cm，Mo 可相对于 1 m 回推。
+function airTransmission(EkeV,deltaMeters){
+  var exponent=-interp('Air',EkeV,1)*RHO.Air*100*deltaMeters;
+  return Math.exp(Math.max(-745,Math.min(700,exponent)));
+}
 // 独立诊断 W 分支沿用既有谱公式；IEC 的基准过滤独立保存，ISO 参数文件不变。
-function wSpectrum(p){
+function wSpectrum(p,airDistance){
+  if(airDistance===undefined)airDistance=p.airDistance===undefined?0:p.airDistance;
   var f=W_MODEL.physical_parameters,E=[],p0=[],pF=[],widths=[],dSelf=f.d0/Math.cos(p.ang*Math.PI/180);
   for(var i=1;i<=Math.floor(p.kvp);i++){
     var knee=f.b*p.kvp,shape=i<knee?1+f.a*(1-i/knee):1;
     var v=74*(p.kvp-i)*Math.exp(-interp('W',i,1)*RHO.W*dSelf)*shape*(1+f.cAbs*Math.exp(-i/f.E0));
     if(p.kvp>69.5){var cs=p.kvp*f.cK*(1-69.5/p.kvp)/4,lines=[[59.32,1],[57.98,.52],[67.24,.28],[69.07,.08]];lines.forEach(function(line){v+=cs*line[1]*Math.exp(-.5*Math.pow((i-line[0])/f.sigma,2));});}
     var a=interp('Al',i,1)*RHO.Al*(p.baseAl+p.fAl)/10+interp('Cu',i,1)*RHO.Cu*p.fCu/10;
-    E.push(i);p0.push(v);pF.push(v*Math.exp(-a));widths.push(1);
+    E.push(i);p0.push(v);pF.push(v*Math.exp(-a)*airTransmission(i,airDistance));widths.push(1);
   }return summarize(E,p0,pF,widths,p);
 }
-// 同箱网格的实测 Mo 谱按电压线性插值；源自带的 Be 和空气路径不重复施加。
+// 同箱网格的实测 Mo 谱按电压线性插值；源已含 1 m 空气，只施加相对 1 m 的差量。
 function moBasis(kvp){
   var spectra=MO_DATA.spectra,keys=Object.keys(spectra).map(Number).sort(function(a,b){return a-b;});
   if(kvp<keys[0]||kvp>keys[keys.length-1])throw new RangeError('钼靶电压超出参考谱范围');
@@ -274,28 +281,33 @@ function moBasis(kvp){
   var sum=phi.reduce(function(s,v){return s+v;},0);if(!(sum>0))throw new RangeError('钼靶参考谱为空');phi=phi.map(function(v){return v/sum;});
   return {E:E,p0:phi,widths:widths};
 }
-function moSpectrum(p){
+function moSpectrum(p,airDistance){
+  if(airDistance===undefined)airDistance=p.airDistance===undefined?1:p.airDistance;
   var b=moBasis(p.kvp),pF=[];
-  for(var i=0;i<b.E.length;i++){var e=b.E[i],a=interp('Mo',e,1)*RHO.Mo*p.fMo/10+interp('Al',e,1)*RHO.Al*p.fAl/10;pF.push(b.p0[i]*Math.exp(-a));}
+  for(var i=0;i<b.E.length;i++){var e=b.E[i],a=interp('Mo',e,1)*RHO.Mo*p.fMo/10+interp('Al',e,1)*RHO.Al*p.fAl/10;pF.push(b.p0[i]===0?0:b.p0[i]*Math.exp(-a)*airTransmission(e,airDistance-1));}
   return summarize(b.E,b.p0,pF,b.widths,p);
 }
 function calculateDiag(p){
   var ranges=p.target==='Mo'?{kvp:[25,35],ang:[26,26],baseAl:[0,0],fAl:[0,60],fCu:[0,0],fMo:[0,.1]}:{kvp:[40,150],ang:[5,30],baseAl:[0,30],fAl:[0,60],fCu:[0,5],fMo:[0,0]};
   if(['W','Mo'].indexOf(p.target)<0)throw new RangeError('无效靶材');
   Object.keys(ranges).forEach(function(k){if(!Number.isFinite(p[k])||p[k]<ranges[k][0]||p[k]>ranges[k][1])throw new RangeError(k+' 超出允许范围');});
-  return p.target==='Mo'?moSpectrum(p):wSpectrum(p);
+  var airDistance=p.airDistance===undefined?(p.target==='Mo'?1:0):p.airDistance;
+  if(!Number.isFinite(airDistance)||airDistance<0||airDistance>100)throw new RangeError('airDistance 超出允许范围');
+  return p.target==='Mo'?moSpectrum(p,airDistance):wSpectrum(p,airDistance);
 }
 function presetParams(q){
   var mo=q.family.indexOf('-M')>=0,baseKey=q.physical_config.base_quality||q.name;
   var base=W_MODEL.rqr_base_filtration_by_kvp_mm_al[String(q.kvp)];
   var add=q.physical_config.additional_filter;
-  return {target:mo?'Mo':'W',kvp:q.kvp,ang:mo?26:W_MODEL.angle_deg,baseAl:mo?0:base,fAl:add&&add.material==='Al'?add.thickness_mm:0,fCu:add&&add.material==='Cu'?add.thickness_mm:0,fMo:mo?MO_CALIBRATION.mo_filter_mm:0};
+  return {target:mo?'Mo':'W',kvp:q.kvp,ang:mo?26:W_MODEL.angle_deg,baseAl:mo?0:base,fAl:add&&add.material==='Al'?add.thickness_mm:0,fCu:add&&add.material==='Cu'?add.thickness_mm:0,fMo:mo?MO_CALIBRATION.mo_filter_mm:0,airDistance:mo?1:0};
 }
 function modelResult(q){if(!CACHE[q.name])CACHE[q.name]=calculateDiag(presetParams(q));return CACHE[q.name];}
 function renderFamilies(){var holder=document.getElementById('familyTabs');holder.innerHTML='';FAMILIES.forEach(function(f){var b=document.createElement('button');b.type='button';b.className='tab'+(f===FAMILY?' active':'');b.textContent=f;b.onclick=function(){FAMILY=f;renderFamilies();renderPresets();renderTable();applyDiag(items(f)[0]);};holder.appendChild(b);});}
 function renderPresets(){var holder=document.getElementById('presetGrid');holder.innerHTML='';items(FAMILY).forEach(function(q){var b=document.createElement('button');b.type='button';b.className='preset-btn';b.textContent=q.name;b.onclick=function(){applyDiag(q);};holder.appendChild(b);});}
 function applyDiag(q){
+  var oldTarget=ACTIVE?(ACTIVE.family.indexOf('-M')>=0?'Mo':'W'):null;
   ACTIVE=q;FAMILY=q.family;renderFamilies();renderPresets();var p=presetParams(q),mo=p.target==='Mo';
+  if(oldTarget!==p.target)document.getElementById('airDistance').value=p.airDistance;
   ['kvpN','angle','baseAl','fAl','fCu','fMo'].forEach(function(id){var k=id==='kvpN'?'kvp':id==='angle'?'ang':id;document.getElementById(id).value=p[k];});
   var voltage=document.getElementById('kvpN');voltage.min=mo?25:40;voltage.max=mo?35:150;
   updateDiagSourceLabels();
@@ -306,7 +318,7 @@ function applyDiag(q){
 }
 function readDiagInputs(){
   if(!ACTIVE)return null;var target=ACTIVE.family.indexOf('-M')>=0?'Mo':'W',mo=target==='Mo',p={target:target},errors=[];
-  var rules={kvpN:[mo?25:40,mo?35:150,'管电压'],angle:[5,standardProfile()==='TRS'?27:30,'靶角'],baseAl:[0,30,'基准过滤'],fAl:[0,60,'Al 厚度'],fCu:[0,5,'Cu 厚度'],fMo:[0,.1,'Mo 厚度']};
+  var rules={kvpN:[mo?25:40,mo?35:150,'管电压'],angle:[5,standardProfile()==='TRS'?27:30,'靶角'],baseAl:[0,30,'基准过滤'],fAl:[0,60,'Al 厚度'],fCu:[0,5,'Cu 厚度'],fMo:[0,.1,'Mo 厚度'],airDistance:[0,100,'空气路径']};
   Object.keys(rules).forEach(function(id){var el=document.getElementById(id),r=rules[id],v=Number(el.value),ignored=(mo&&['angle','baseAl','fCu'].indexOf(id)>=0)||(!mo&&id==='fMo');var ok=ignored||(el.value.trim()!==''&&Number.isFinite(v)&&v>=r[0]&&v<=r[1]);el.classList.toggle('invalid',!ok);el.setAttribute('aria-invalid',String(!ok));var message=ok?'':uiT(r[2]+'请输入 '+r[0]+'～'+r[1]+' 范围内的有限值。',uiInputName(id,r[2])+': enter a finite value from '+r[0]+' to '+r[1]+'.');el.setCustomValidity(message);if(!ok)errors.push(message);p[id==='kvpN'?'kvp':id==='angle'?'ang':id]=ignored?(id==='angle'?26:0):v;});
   document.getElementById('inputStatus').textContent=errors.join(' ');return errors.length?null:p;
 }
@@ -380,7 +392,7 @@ function renderTable(){
   document.getElementById('tableWrap').innerHTML=html+'</tbody></table>';
   document.getElementById('tableTitle').textContent=FAMILY+' · '+(source==='TRS'?'IAEA TRS-457':'IEC 61267:2005')+uiT(' 对照表',' reference comparison');
   var locator=source==='TRS'?TRS_DATA.tables[FAMILY]:{table:items(FAMILY)[0].table,pdf_page:items(FAMILY)[0].pdf_page,printed_page:items(FAMILY)[0].standard_page};
-  document.getElementById('tableNote').textContent=(source==='TRS'?'TRS-457':'IEC 61267:2005')+uiT(' 表 '+locator.table+'，印刷第 '+locator.printed_page+' 页 / PDF第 '+locator.pdf_page+' 页。参考列与谱计算列分别显示，谱计算列实时调用与主界面相同的函数。HVL₂为从1/2衰减至1/4所需追加Al厚度。RQA/RQT/RQA‑M按对应基础质量叠加指定过滤，名义HVL差值不作为统一百分比验收。基础谱各自归一化，相对比释动能不能跨靶材比较绝对输出。',' Table '+locator.table+', printed page '+locator.printed_page+' / PDF page '+locator.pdf_page+'. Reference and spectrum-calculated columns are separate. Calculated values use the same live function as the main view. HVL₂ is the additional Al thickness needed to reduce transmission from 1/2 to 1/4. RQA/RQT/RQA-M add the specified filters to their matching basis qualities; nominal HVL differences are not a universal percentage acceptance criterion. The basis spectra are normalized independently; relative kerma cannot compare absolute output across anodes. CSV field names remain fixed when changing UI language.');
+  document.getElementById('tableNote').textContent=(source==='TRS'?'TRS-457':'IEC 61267:2005')+uiT(' 表 '+locator.table+'，印刷第 '+locator.printed_page+' 页 / PDF第 '+locator.pdf_page+' 页。参考列与谱计算列分别显示，谱计算列实时调用与主界面相同的函数。HVL₂为从1/2衰减至1/4所需追加Al厚度。RQA/RQT/RQA‑M按对应基础质量叠加指定过滤，名义HVL差值不作为统一百分比验收。基础谱各自归一化，相对比释动能不能跨靶材比较绝对输出。表内计算沿用原基准：W 相对原模型新增空气路径 0 m，Mo 基础谱空气路径 1 m；不随上方输入改变。',' Table '+locator.table+', printed page '+locator.printed_page+' / PDF page '+locator.pdf_page+'. Reference and spectrum-calculated columns are separate. Calculated values use the same live function as the main view. HVL₂ is the additional Al thickness needed to reduce transmission from 1/2 to 1/4. RQA/RQT/RQA-M add the specified filters to their matching basis qualities; nominal HVL differences are not a universal percentage acceptance criterion. The basis spectra are normalized independently; relative kerma cannot compare absolute output across anodes. Table calculations retain the original references: 0 m additional air relative to the W model, and a 1 m air path for the Mo basis; they do not change with the input above. CSV field names remain fixed when changing UI language.');
 }
 function showDiagChartFailure(){
   UI_CHART_STATE='failed';document.getElementById('chartStatus').textContent=uiT('图表组件加载失败；数值、预设及CSV仍可使用。','Charts could not be loaded; numerical results, presets and CSV remain available.');
@@ -391,7 +403,7 @@ function doDiagExport(){
   recalcDiag();if(!RES||RES.empty||RES.hv1===null||RES.hv2===null)return;
   var p=RES.p,o=RES.o,c='\uFEFF诊断X射线能谱模型数据\n参考来源,'+(standardProfile()==='TRS'?'IAEA TRS-457':'IEC 61267:2005')+'\n辐射质,'+ACTIVE.name+'\n配置,'+(isPreset(p)?'参考预设':'自定义')+'\n靶材,'+p.target+'\n管电压,'+p.kvp+',kV\n靶角,'+p.ang+',度\n基准过滤,'+p.baseAl+',mm Al等效\n附加Al,'+p.fAl+',mm\n附加Cu,'+p.fCu+',mm\nMo过滤,'+p.fMo+',mm\nHVL1,'+o.hv1+',mm Al\nHVL2,'+o.hv2+',mm Al\n均匀系数,'+o.hc+'\n注量平均,'+o.eF+',keV\n能量注量平均,'+o.eP+',keV\n相对K,'+o.relK+',%\n谱来源,'+(p.target==='Mo'?'PTB实测Mo基础谱含1mmBe和1m空气':'Birch-Marshall W模型')+'\n\nE(keV),binWidth(keV),Phi0_bin,PhiF_bin,mu_Al,muen_Air\n';
   for(var i=0;i<RES.E.length;i++){var e=RES.E[i];c+=[e,RES.widths[i],RES.p0[i],RES.pF[i],interp('Al',e,1),interp('Air',e,2)].join(',')+'\n';}
-  var blob=new Blob([c],{type:'text/csv;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=ACTIVE.name.replace(/ /g,'-')+'_'+p.kvp+'kV_'+p.target+'.csv';document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(a.href);},1000);
+  var blob=new Blob([c],{type:'text/csv;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);var airSuffix=p.airDistance===(p.target==='Mo'?1:0)?'':'_air-'+String(p.airDistance).replace(/[^0-9.e+\-]/gi,'')+'m';a.download=ACTIVE.name.replace(/ /g,'-')+'_'+p.kvp+'kV_'+p.target+airSuffix+'.csv';document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(a.href);},1000);
 }
 document.addEventListener('DOMContentLoaded',function(){
   initLanguage();

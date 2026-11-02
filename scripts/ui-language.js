@@ -3,11 +3,11 @@ var UI_LANG='chs', UI_CHART_STATE='loading';
 var UI_LANGUAGE_KEY='radfit.ui.language';
 function uiT(chs,eng){return UI_LANG==='eng'?eng:chs;}
 function uiInputName(id,chs){
-  var names={kvpN:'Tube voltage',angle:'Anode angle',inh:'Inherent filtration thickness',fAl:'Al thickness',fCu:'Cu thickness',fSn:'Sn thickness',fPb:'Pb thickness',baseAl:'RQR baseline Al-equivalent filtration',fMo:'Mo thickness'};
+  var names={kvpN:'Tube voltage',angle:'Anode angle',inh:'Inherent filtration thickness',fAl:'Al thickness',fCu:'Cu thickness',fSn:'Sn thickness',fPb:'Pb thickness',baseAl:'RQR baseline Al-equivalent filtration',fMo:'Mo thickness',airDistance:'Air path length'};
   return UI_LANG==='eng'?(names[id]||chs):chs;
 }
 function uiChineseInputName(id){
-  var names={kvpN:'管电压',angle:'靶角',inh:'固有过滤厚度',fAl:'Al 厚度',fCu:'Cu 厚度',fSn:'Sn 厚度',fPb:'Pb 厚度',baseAl:'RQR 基准 Al 等效过滤',fMo:'Mo 厚度'};
+  var names={kvpN:'管电压',angle:'靶角',inh:'固有过滤厚度',fAl:'Al 厚度',fCu:'Cu 厚度',fSn:'Sn 厚度',fPb:'Pb 厚度',baseAl:'RQR 基准 Al 等效过滤',fMo:'Mo 厚度',airDistance:'空气路径长度'};
   return names[id]||id;
 }
 function readUiLanguage(){

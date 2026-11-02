@@ -126,13 +126,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 <div><h1 data-en="Hubei Institute of Metrology · Ionizing Radiation Laboratory Fitting Tool">湖北省计量院-电离辐射实验室拟合工具</h1><div class="sub" data-en="Birch-Marshall model · NIST XCOM attenuation coefficients · W target (Z=74)">Birch-Marshall模型 · NIST XCOM衰减系数 · 钨靶W(Z=74)</div></div>
 <div class="header-actions"><div class="lang-switch" role="group" aria-label="界面语言" data-en-aria-label="Interface language"><button type="button" id="langENG" onclick="setLanguage('eng')" aria-pressed="false">ENG</button><button type="button" id="langCHS" class="active" onclick="setLanguage('chs')" aria-pressed="true">CHS</button></div><button id="exportBtn" class="btn-export" onclick="doExport()" data-en="Export CSV">导出 CSV</button></div>
 </div>
-<div class="app-version" data-en="Software v1.0.0-beta.3">软件 v1.0.0-beta.3</div>
+<div class="app-version" data-en="Software v1.0.0-beta.4">软件 v1.0.0-beta.4</div>
 <div class="main">
 <div class="panel">
 <div class="panel-title" data-en="X-ray source parameters">射线源参数</div><div id="inputStatus" class="status error" role="alert"></div>
 <div class="field"><label data-en="Tube voltage (kVp)">管电压 (kVp)</label><div class="row"><input type="range" id="kvp" min="10" max="400" value="100" step="1" oninput="onSlider()"><input type="number" id="kvpN" min="10" max="400" value="100" step="1" oninput="onNum()"><span class="unit">kV</span></div></div>
 <div class="field"><label data-en="Anode angle">靶角</label><div class="row"><input type="number" id="angle" min="5" max="30" value="20" step="1" oninput="recalc()"><span class="unit" data-en="degrees">度</span></div></div>
 <div class="field"><label for="inhMat" data-en="Inherent filtration">固有过滤</label><div class="row"><select id="inhMat" onchange="onInhMat()"><option value="none" data-en="None">无</option><option value="Be" data-en="Be · Beryllium">Be 铍</option><option value="Al" selected data-en="Al · Aluminium">Al 铝</option></select><input type="number" id="inh" aria-label="固有过滤厚度" min="0" max="10" value="1.0" step="0.1" oninput="recalc()"><span class="unit" id="inhUnit">mm Al</span></div><div class="hint" data-en="Be thickness is converted to an equivalent Al thickness using the existing fitted coefficient.">Be 厚度按既有拟合系数折算为 Al 等效厚度。</div></div>
+<div class="field"><label for="airDistance" data-en="Additional air path relative to the original model">相对原模型新增空气路径</label><div class="row"><input type="number" id="airDistance" min="0" max="100" value="0" step="any" oninput="recalc()"><span class="unit">m</span></div><div class="hint" data-en="The original model may already include air effects from its fitted reference conditions; 0 m preserves that baseline and is not necessarily a source-vacuum spectrum. Enter the additional air path to the measurement point. Narrow-beam primary attenuation uses air density 0.001205 g/cm³; geometric inverse-square variation, air scatter and absolute dose are not included. CSV fields do not contain this distance; a nonzero path is added to the file name.">原模型的拟合参考条件可能已包含空气效应，0 m 沿用原模型，不一定代表源头真空谱。请输入相对原模型至测量点新增的空气路径。按空气密度 0.001205 g/cm³ 计算窄束一次光子衰减，不包含几何平方反比、空气散射或绝对剂量。CSV 字段不记录该距离；非零路径会写入文件名。</div></div>
 <div class="panel-title" style="margin-top:16px" data-en="Additional filtration thickness">附加滤片厚度</div>
 <div class="field"><label data-en="Al · Aluminium">Al 铝</label><div class="row"><input type="number" id="fAl" min="0" max="50" value="0" step="0.1" oninput="recalc()"><span class="unit">mm</span></div></div>
 <div class="field"><label data-en="Cu · Copper">Cu 铜</label><div class="row"><input type="number" id="fCu" min="0" max="20" value="0" step="0.01" oninput="recalc()"><span class="unit">mm</span></div></div>
@@ -184,11 +185,11 @@ var UI_LANG='chs', UI_CHART_STATE='loading';
 var UI_LANGUAGE_KEY='radfit.ui.language';
 function uiT(chs,eng){return UI_LANG==='eng'?eng:chs;}
 function uiInputName(id,chs){
-  var names={kvpN:'Tube voltage',angle:'Anode angle',inh:'Inherent filtration thickness',fAl:'Al thickness',fCu:'Cu thickness',fSn:'Sn thickness',fPb:'Pb thickness',baseAl:'RQR baseline Al-equivalent filtration',fMo:'Mo thickness'};
+  var names={kvpN:'Tube voltage',angle:'Anode angle',inh:'Inherent filtration thickness',fAl:'Al thickness',fCu:'Cu thickness',fSn:'Sn thickness',fPb:'Pb thickness',baseAl:'RQR baseline Al-equivalent filtration',fMo:'Mo thickness',airDistance:'Air path length'};
   return UI_LANG==='eng'?(names[id]||chs):chs;
 }
 function uiChineseInputName(id){
-  var names={kvpN:'管电压',angle:'靶角',inh:'固有过滤厚度',fAl:'Al 厚度',fCu:'Cu 厚度',fSn:'Sn 厚度',fPb:'Pb 厚度',baseAl:'RQR 基准 Al 等效过滤',fMo:'Mo 厚度'};
+  var names={kvpN:'管电压',angle:'靶角',inh:'固有过滤厚度',fAl:'Al 厚度',fCu:'Cu 厚度',fSn:'Sn 厚度',fPb:'Pb 厚度',baseAl:'RQR 基准 Al 等效过滤',fMo:'Mo 厚度',airDistance:'空气路径长度'};
   return names[id]||id;
 }
 function readUiLanguage(){
@@ -337,7 +338,8 @@ function hvlMaterial(kvp, fCu, fSn, fPb){
 }
 var LIMITS = {
   kvpN:[10,400,'管电压'], angle:[5,30,'靶角'], inh:[0,10,'固有过滤厚度'],
-  fAl:[0,50,'Al 厚度'], fCu:[0,20,'Cu 厚度'], fSn:[0,20,'Sn 厚度'], fPb:[0,10,'Pb 厚度']
+  fAl:[0,50,'Al 厚度'], fCu:[0,20,'Cu 厚度'], fSn:[0,20,'Sn 厚度'], fPb:[0,10,'Pb 厚度'],
+  airDistance:[0,100,'空气路径长度']
 };
 function readInputs(){
   var values={}, errors=[];
@@ -356,9 +358,11 @@ function readInputs(){
   if(['none','Be','Al'].indexOf(inhMat)<0 || ['auto','Al','Cu','Pb'].indexOf(mat)<0) errors.push(uiT('请选择有效材料。','Select a valid material.'));
   document.getElementById('inputStatus').textContent=errors.join(' ');
   if(errors.length) return null;
-  return {kvp:values.kvpN,ang:values.angle,
+  var p={kvp:values.kvpN,ang:values.angle,
     inh:inhMat==='none'?0:values.inh*(inhMat==='Be'?FITTED_PARAMS.inhBe:1),
     fAl:values.fAl,fCu:values.fCu,fSn:values.fSn,fPb:values.fPb,mat:mat};
+  if(values.airDistance>0) p.airDistance=values.airDistance;
+  return p;
 }
 // 扩区间和二分求 HVL 均有次数及厚度上限；无有效根时返回 null，不伪造结果。
 function findHVL(tr, frac){
@@ -386,7 +390,8 @@ function findHVL(tr, frac){
 // 此函数不读写 DOM，主界面、ISO 表及验证共用同一内核；inh 始终为 mm Al 等效。
 function calculate(p) {
   var kvp=p.kvp, ang=p.ang, inh=p.inh, fAl=p.fAl, fCu=p.fCu, fSn=p.fSn, fPb=p.fPb;
-  var vals=[kvp,ang,inh,fAl,fCu,fSn,fPb], bounds=[[10,400],[5,30],[0,10],[0,50],[0,20],[0,20],[0,10]];
+  var airDistance=p.airDistance===undefined?0:p.airDistance;
+  var vals=[kvp,ang,inh,fAl,fCu,fSn,fPb,airDistance], bounds=[[10,400],[5,30],[0,10],[0,50],[0,20],[0,20],[0,10],[0,100]];
   if(vals.some(function(v,i){return !Number.isFinite(v)||v<bounds[i][0]||v>bounds[i][1];})) throw new RangeError('计算参数超出允许范围');
   var mat=p.mat && p.mat!=='auto'?p.mat:hvlMaterial(kvp,fCu,fSn,fPb);
   if(['Al','Cu','Pb'].indexOf(mat)<0) throw new RangeError('HVL 材料无效');
@@ -424,6 +429,8 @@ function calculate(p) {
     if (fCu>0) at += interp('Cu',Ei,1)*RHO.Cu*(fCu/10);
     if (fSn>0) at += interp('Sn',Ei,1)*RHO.Sn*(fSn/10);
     if (fPb>0) at += interp('Pb',Ei,1)*RHO.Pb*(fPb/10);
+    // 原模型基准之外的空气路径：m 转 cm，窄束一次光子衰减。
+    if (airDistance>0) at += interp('Air',Ei,1)*RHO.Air*airDistance*100;
     pF.push(v * Math.exp(-at));
   }
 
@@ -490,9 +497,11 @@ function calculate(p) {
   var fwhm = (eLow>0&&eHigh>0) ? eHigh-eLow : 0;
   var res = eF>0 ? fwhm/eF*100 : 0;
 
-  return {E:E,p0:p0,pF:pF,mat:mat,hv1:hv1,hv2:hv2,t25:t25,empty:empty,
+  var result={E:E,p0:p0,pF:pF,mat:mat,hv1:hv1,hv2:hv2,t25:t25,empty:empty,
     p:{kvp:kvp,ang:ang,inh:inh,fAl:fAl,fCu:fCu,fSn:fSn,fPb:fPb},
     o:{hv1:hv1,hv2:hv2,hc:hc,res:empty?null:res,eF:empty?null:eF,eP:empty?null:eP,eE:eE,relK:relK}};
+  if(airDistance>0) result.p.airDistance=airDistance;
+  return result;
 }
 function fmt(v,d){return Number.isFinite(v)?v.toFixed(d):'--';}
 function recalc(){
@@ -646,7 +655,7 @@ function doExport(){
   }
   var b=new Blob([c],{type:'text/csv;charset=utf-8'});
   var a=document.createElement('a');a.href=URL.createObjectURL(b);
-  a.download='xray_'+RES.p.kvp+'kVp.csv';document.body.appendChild(a);a.click();a.remove();
+  a.download='xray_'+RES.p.kvp+'kVp'+(RES.p.airDistance?'_air-'+RES.p.airDistance+'m':'')+'.csv';document.body.appendChild(a);a.click();a.remove();
   setTimeout(function(){URL.revokeObjectURL(a.href);},1000);
 }
 
@@ -669,7 +678,7 @@ function renderTable(t){
     var r=ISO_REF[it[0]], result=calculate(presetCase(it)), o=result.o, mat=result.mat;
     html+='<tr><td>'+it[0]+'</td><td>'+it[1]+'</td><td class="col-filter">'+filterText(it)+'</td><td>'+r[0]+'</td><td class="pred">'+fmt(o.eF,1)+diffText(o.eF,r[0])+'</td><td>'+(r[1]||'—')+'</td><td class="pred">'+fmt(o.res,0)+'</td><td>'+r[2]+' '+mat+'</td><td class="pred">'+fmt(o.hv1,3)+' '+mat+diffText(o.hv1,r[2])+'</td><td>'+r[3]+' '+mat+'</td><td class="pred">'+fmt(o.hv2,3)+' '+mat+'</td><td>'+fmt(r[2]/r[3],2)+'</td><td class="pred">'+fmt(o.hc,2)+'</td></tr>';
   });
-  html+='</tbody></table><div class="note">'+uiT('ISO 参考列沿用所提供的标准数据，补齐已核对的分辨力；缺失项以“—”显示。h 参考列由同一距离的 ISO HVL1/HVL2 推算。预测列使用本页同一计算函数实时生成（靶角 20°、预设过滤、自动 HVL 材料）。Be 按原拟合参数换算为 Al 等效厚度，CSV 固有过滤字段仍输出 mm Al 等效值。','ISO reference columns retain the supplied standard data with verified spectral resolution values added; missing values are shown as “—”. Reference h is derived from ISO HVL1/HVL2 at the same distance. Model columns are calculated live using the same function as this page (20° anode angle, preset filtration and automatic HVL material). Be is converted to an equivalent Al thickness using the original fitted parameter; the CSV inherent filtration field remains in mm Al equivalent.')+'<br>'+uiT('HVL 参考值采用 1 m 列；N-350/N-400、H-350/H-400 采用 2.5 m 列。原模型未显式加入空气路径衰减，保持其原有计算口径。','HVL reference values use the 1 m column, except N-350/N-400 and H-350/H-400, which use the 2.5 m column. Air-path attenuation is not explicitly included in the original model; its existing calculation convention is retained.')+'<br>'+uiT('H系列薄过滤软射线，半经验模型存在固有约±10%残差，更高精度建议使用蒙特卡洛或SpekPy','The H series uses lightly filtered soft X-rays; the semi-empirical model has an inherent residual of approximately ±10%. For higher accuracy, use Monte Carlo methods or SpekPy.')+(UI_LANG==='eng'?'<br>CSV field names and units remain unchanged when switching the interface language.':'')+'</div>';
+  html+='</tbody></table><div class="note">'+uiT('ISO 参考列沿用所提供的标准数据，补齐已核对的分辨力；缺失项以“—”显示。h 参考列由同一距离的 ISO HVL1/HVL2 推算。预测列使用本页同一计算函数实时生成（靶角 20°、预设过滤、自动 HVL 材料）。Be 按原拟合参数换算为 Al 等效厚度，CSV 固有过滤字段仍输出 mm Al 等效值。','ISO reference columns retain the supplied standard data with verified spectral resolution values added; missing values are shown as “—”. Reference h is derived from ISO HVL1/HVL2 at the same distance. Model columns are calculated live using the same function as this page (20° anode angle, preset filtration and automatic HVL material). Be is converted to an equivalent Al thickness using the original fitted parameter; the CSV inherent filtration field remains in mm Al equivalent.')+'<br>'+uiT('HVL 参考值采用 1 m 列；N-350/N-400、H-350/H-400 采用 2.5 m 列。对照表预测沿用原模型的 0 m 新增空气路径基准；上方测量点结果按输入的新增路径计算。原拟合参考条件可能已隐含空气影响。','HVL reference values use the 1 m column, except N-350/N-400 and H-350/H-400, which use the 2.5 m column. Table predictions retain the original model baseline with 0 m additional air path; the measurement-point results above use the entered additional path. The fitted reference conditions may already include air effects.')+'<br>'+uiT('H系列薄过滤软射线，半经验模型存在固有约±10%残差，更高精度建议使用蒙特卡洛或SpekPy','The H series uses lightly filtered soft X-rays; the semi-empirical model has an inherent residual of approximately ±10%. For higher accuracy, use Monte Carlo methods or SpekPy.')+(UI_LANG==='eng'?'<br>CSV field names and units remain unchanged when switching the interface language.':'')+'</div>';
   wrap.innerHTML=html;
 }
 

@@ -18,11 +18,23 @@
     "mo_reference_spectra.json": "eb6c9b8f6832dc323dae2656fa91f1220cf4c8c7043c8a79d50d76d8ea35ce9d",
     "mo_calibration.json": "09f116ed8c048f13fdc098ab64de4dde7dd0e2b3bdc8de797025601faff0b5d4"
   },
-  "physics_policy": "原ISO物理参数未改；W仅独立校准RQR基准过滤；乳腺采用真实Mo基础谱+标准Mo/Al过滤。",
-  "software_version": "1.0.0-beta.3",
+  "physics_policy": "原ISO已拟合物理参数未改；W保留独立RQR基准过滤；Mo使用实测基础谱；新增相对各模型基准的窄束空气衰减。",
+  "software_version": "1.0.0-beta.4",
   "published_html_sha256": {
-    "index.html": "98be31d9888280d63fd869ca8ea811a47adfbc9548361828cb7d62b30661f1b6",
-    "diagnostic.html": "53c7d3c69e9d71ec6c43e8434ed943c7b749bd38d3b8855cfe7a4a2ed1fbbbd3"
+    "index.html": "af37c0a732c6e13dfa0d04254bf8e08798c36205e35ea6fc2d048ce4d3f460d6",
+    "diagnostic.html": "57b442bc02727dc1c259aa9de791e64035756882aed0f2819ebe7111e537a634"
+  },
+  "air_propagation": {
+    "air_density_g_per_cm3": 0.001205,
+    "attenuation_coefficient": "Air total mass attenuation coefficient from the existing NIST table",
+    "ISO_and_W_distance": "additional air path relative to existing fitted-model baseline",
+    "Mo_distance": "measured basis contains 1 m air; apply distance minus 1 m",
+    "excluded": [
+      "air scatter",
+      "geometric inverse square",
+      "temperature and pressure correction",
+      "absolute dose calibration"
+    ]
   },
   "baseline_public_fixture": {
     "path": "tests/fixtures/iso-baseline.html.txt",
