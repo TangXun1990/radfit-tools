@@ -40,6 +40,13 @@
    空气路径独立参考验证：安装Python和NumPy后运行 node tests/air.cjs；必要时用
    RADFIT_PYTHON环境变量指定该Python。报告为reports/air_test_report.json。
 
+   检查诊断页半值层测量几何说明：IEC 61267:2005 对RQR建立时要求焦点至探测器
+   参考点距离D≥max(550 mm, 2×焦点至HVL测试器距离)。测试器距焦点300 mm时，
+   D至少600 mm；图2中RQA焦探距离同样标为≥550 mm。RQR-M第11.4条未单独指定
+   固定焦探距离；RQA-M的200–300 mm是焦点至附加2 mm Al滤片入口，不是焦探距离。
+   IAEA TRS-457 6.5.1另建议Al吸收片至探测器≥探测器处束径5倍。ISO/W的空气
+   长度是相对原模型新增，不等于焦探总距；Mo的1 m来自PTB基谱，不是IEC通用规定。
+
 7. Python参考
    W：diagnostic_model.py（numpy，读取本目录原模型副本与独立诊断过滤参数）。
    Mo：python mo_model.py --kvp 28 --mo-mm 0.032 --al-mm 2（纯标准库）。

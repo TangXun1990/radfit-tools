@@ -19,10 +19,10 @@
     "mo_calibration.json": "09f116ed8c048f13fdc098ab64de4dde7dd0e2b3bdc8de797025601faff0b5d4"
   },
   "physics_policy": "原ISO已拟合物理参数未改；W保留独立RQR基准过滤；Mo使用实测基础谱；新增相对各模型基准的窄束空气衰减。",
-  "software_version": "1.0.0-beta.4",
+  "software_version": "1.0.0-beta.5",
   "published_html_sha256": {
-    "index.html": "0a4710d2c1cccce501a5c8f9c843a728a3d252697ecd67dd18766d2ee58cceee",
-    "diagnostic.html": "0d7aa119d92e7111932dc010e0494aff27042eaf3a1c7e9119448f333f101f33"
+    "index.html": "21e1966d08ae5e1ca11cb3e0f98f1a8052611b1edeec8ad287cf506de9037b86",
+    "diagnostic.html": "8dae41451f98b272ac96c59b9f286e076c6d96b7b404fd46e073cc3ec7b9d1de"
   },
   "air_propagation": {
     "air_density_g_per_cm3": 0.001205,

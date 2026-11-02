@@ -4,7 +4,7 @@
 
 An X-ray spectrum calculator for ionizing radiation metrology.
 
-Current version: **v1.0.0-beta.4**. No backend is required. Each page embeds its own calculation data. ECharts is the only external dependency, with two CDN fallbacks.
+Current version: **v1.0.0-beta.5**. No backend is required. Each page embeds its own calculation data. ECharts is the only external dependency, with two CDN fallbacks.
 
 ## Usage
 
@@ -20,6 +20,14 @@ The mammography series on the diagnostic page uses an independent measured Mo (m
 Both pages allow an air path to be set. For ISO and diagnostic W, the input is an **additional** air path relative to the original fitted model, defaulting to 0 m. The fitted reference conditions may already include air effects, so the baseline is not necessarily a source-vacuum spectrum. The measured Mo basis already includes 1 m of air; an entered measurement distance `d` applies the path difference `d−1 m`, with a default of 1 m. For `d < 1 m`, this extrapolates back from the measured spectrum and cannot restore unmeasured soft photons.
 
 The air calculation uses total mass attenuation coefficients and a fixed dry-air density of 1.205 kg/m³. It models narrow-beam primary attenuation only: there is no temperature or pressure correction, air scatter or geometric inverse-square factor, and the result is not an absolute dose at the measurement point. Main results change with distance; comparison-table predictions retain each model's original baseline. Default distances preserve earlier results. Air distance is not added to the existing CSV fields; when the distance differs from the baseline, it appears in the filename.
+
+## IEC half-value-layer measurement geometry
+
+According to Clause 5.7.1 of the [equivalent adoption of IEC 61267:2005](https://psqca.com.pk/cs/newitems2021/electronics/18-PS%20IEC%2061267-2009_FINAL.pdf), when establishing RQR qualities, the focal-spot-to-application-plane distance `D`, measured to the detector reference point, must be at least `max(550 mm, 2 × the focal-spot-to-HVL-test-device distance)`. Figure 1 depicts the test device 200–300 mm from the focal spot: at 300 mm, `D` must be at least 600 mm. Figure 2 also marks at least 550 mm from focal spot to reference point for RQA.
+
+Clause 11.4 does not separately prescribe one fixed focal-spot-to-detector distance for RQR-M. The 200–300 mm in Clause 12.4 for RQA-M is the distance from the focal spot to the **entrance of the additional 2 mm Al filter**, not the detector. [IAEA TRS-457, Section 6.5.1](https://www-pub.iaea.org/MTCD/Publications/PDF/TRS457_web.pdf), additionally recommends that the aluminium HVL absorber-to-detector distance be at least five times the beam diameter at the detector, to reduce scatter.
+
+The ISO/W air-path input is **additional** to the existing fitted-model baseline and cannot be treated directly as the total focal-spot-to-detector distance. The Mo 1 m baseline comes from the PTB measured basis spectrum; it is **not an IEC distance mandated for all mammography HVL measurements**.
 
 ## Versioning
 

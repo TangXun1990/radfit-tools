@@ -22,8 +22,8 @@
     "xray_model.py": "1243f6d65be8fa837d0ec321cd8ff5da698b8e9ec323da402274df0cc6808fdb"
   },
   "delivered_html_sha256": {
-    "ISO": "0a4710d2c1cccce501a5c8f9c843a728a3d252697ecd67dd18766d2ee58cceee",
-    "diagnostic": "0d7aa119d92e7111932dc010e0494aff27042eaf3a1c7e9119448f333f101f33"
+    "ISO": "21e1966d08ae5e1ca11cb3e0f98f1a8052611b1edeec8ad287cf506de9037b86",
+    "diagnostic": "8dae41451f98b272ac96c59b9f286e076c6d96b7b404fd46e073cc3ec7b9d1de"
   },
   "limitation": "Node VM executes delivered JS with simulated DOM/ECharts. This verifies numerical data and UI state logic; it does not replace visual browser verification or physical standard conformity.",
   "html_structural_audit": {
@@ -64,12 +64,12 @@
     "reapplied_Be_or_air": false
   },
   "interpretation": "数值实现一致性、模型表值残差、实际设备符合性分别评价；名义HVL残差不以JS/Python 2%要求代替验收。",
-  "publication_preparation": "两页增加空气路径，tests/verify.cjs、tests/language.cjs、tests/air.cjs通过；不重新拟合或覆盖原物理参数。",
-  "software_version": "1.0.0-beta.4",
+  "publication_preparation": "诊断页与中英文文档同步IEC测量几何；tests/verify.cjs、tests/language.cjs、tests/air.cjs通过。",
+  "software_version": "1.0.0-beta.5",
   "ui_language_regression": {
     "passed": true,
     "pages": 2,
-    "translated_static_nodes": 86,
+    "translated_static_nodes": 93,
     "cases": [
       "both standalone pages embed the exact maintained common helper",
       "iso custom values, family/table/source, results and CSV roundtrip",
@@ -112,5 +112,6 @@
   },
   "original_fitted_constants_and_default_results_unchanged": true,
   "csv_schema_unchanged": true,
-  "physical_model_revision": "beta.4 adds a narrow-beam, energy-dependent air-path attenuation factor relative to the prior W/ISO and measured Mo baselines."
+  "physical_model_revision": "beta.4 adds a narrow-beam, energy-dependent air-path attenuation factor relative to the prior W/ISO and measured Mo baselines.",
+  "documentation_revision": "beta.5 clarifies IEC 61267:2005 half-value layer measurement geometry and IAEA TRS-457 narrow-beam recommendations; inline calculation scripts and CSV export are unchanged from beta.4."
 }
