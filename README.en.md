@@ -4,7 +4,7 @@
 
 An X-ray spectrum calculator for ionizing radiation metrology.
 
-Current version: **v1.0.0-beta.5**. No backend is required. Each page embeds its own calculation data. ECharts is the only external dependency, with two CDN fallbacks.
+Current version: **v1.0.0-beta.6**. No backend is required. Each page embeds its own calculation data. ECharts is the only external dependency, with two CDN fallbacks.
 
 ## Usage
 
@@ -40,7 +40,9 @@ Both pages share one software version, following `major.minor.patch`:
 | Change existing calculation conventions, a major physical model or the CSV format in an incompatible way | `1.1.0` → `2.0.0` |
 | Prerelease iteration | `1.0.0-beta.1` → `1.0.0-beta.2` |
 
-The software version is stored in `VERSION` and `version.json`, and both pages display the same version. Git tags use the `v` prefix, for example `v1.0.0-beta.1`. Dates are recorded separately and do not replace version numbers. Published tags are not overwritten; changes are released under a new version.
+The software version is stored in `VERSION` and `version.json`, and both pages display the same version. Git tags use the `v` prefix, for example `v1.0.0-beta.1`. Dates are recorded separately and do not replace version numbers. Ordinary updates do not overwrite published tags; changes are released under a new version.
+
+The commit history and older tags were rewritten to remove a personal signature. Reclone older checkouts and avoid pushing the old history back to the repository. The source manifest retains the original webpage's provenance hash and separately records the public test fixture hash after removing the static signature; the fixture's calculation scripts remain unchanged.
 
 The standard editions are fixed separately as ISO 4037-1:2019, IEC 61267:2005 and IAEA TRS-457 (2007). Model identifiers and parameter SHA256 hashes are recorded independently. Interface changes do not imply changes to physical parameters. See `version.json` and `source_manifest.json` for details.
 
