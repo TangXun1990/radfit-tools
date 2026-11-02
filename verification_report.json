@@ -22,8 +22,8 @@
     "xray_model.py": "1243f6d65be8fa837d0ec321cd8ff5da698b8e9ec323da402274df0cc6808fdb"
   },
   "delivered_html_sha256": {
-    "ISO": "0d88efeca221d0bfc0ec14846e229e6912c3e228ac7a1dbe74997275a9f0acc1",
-    "diagnostic": "57a10d8b60d4c6916dbafab93a37f6edc15fc25c98d24a7f9a9181684bbc25f5"
+    "ISO": "675dbe196ddd606b0182e9cc6abc7e254037408ef19cfb09366a27c251918d83",
+    "diagnostic": "e59ea1e1169d0c8bc44aa4abef2824e27dc84d793f0048d32850e0ccb48946a0"
   },
   "limitation": "Node VM executes delivered JS with simulated DOM/ECharts. This verifies numerical data and UI state logic; it does not replace visual browser verification or physical standard conformity.",
   "html_structural_audit": {
@@ -64,8 +64,8 @@
     "reapplied_Be_or_air": false
   },
   "interpretation": "数值实现一致性、模型表值残差、实际设备符合性分别评价；名义HVL残差不以JS/Python 2%要求代替验收。",
-  "publication_preparation": "诊断页与中英文文档同步IEC测量几何；tests/verify.cjs、tests/language.cjs、tests/air.cjs通过。",
-  "software_version": "1.0.0-beta.5",
+  "publication_preparation": "去除公开署名；原计算脚本不变，tests/verify.cjs、tests/language.cjs、tests/air.cjs通过。",
+  "software_version": "1.0.0-beta.6",
   "ui_language_regression": {
     "passed": true,
     "pages": 2,
@@ -113,5 +113,6 @@
   "original_fitted_constants_and_default_results_unchanged": true,
   "csv_schema_unchanged": true,
   "physical_model_revision": "beta.4 adds a narrow-beam, energy-dependent air-path attenuation factor relative to the prior W/ISO and measured Mo baselines.",
-  "documentation_revision": "beta.5 clarifies IEC 61267:2005 half-value layer measurement geometry and IAEA TRS-457 narrow-beam recommendations; inline calculation scripts and CSV export are unchanged from beta.4."
+  "documentation_revision": "beta.5 clarifies IEC 61267:2005 half-value layer measurement geometry and IAEA TRS-457 narrow-beam recommendations; inline calculation scripts and CSV export are unchanged from beta.4.",
+  "privacy_revision": "beta.6 removes the personal signature from current files and historical versions; the published test fixture has only its static signature removed."
 }
