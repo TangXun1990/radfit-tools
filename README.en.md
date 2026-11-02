@@ -4,7 +4,7 @@
 
 An X-ray spectrum calculator for ionizing radiation metrology.
 
-Current version: **v1.0.0-beta.3**. No backend is required. Each page embeds its own calculation data. ECharts is the only external dependency, with two CDN fallbacks.
+Current version: **v1.0.0-beta.4**. No backend is required. Each page embeds its own calculation data. ECharts is the only external dependency, with two CDN fallbacks.
 
 ## Usage
 
@@ -16,6 +16,10 @@ Download or clone the repository and open `index.html` directly. Use the buttons
 Use **ENG / CHS** in the upper-right corner of either page to switch between English and Simplified Chinese, including input labels, results, charts, comparison tables and validation messages. Chinese is the initial default. The browser remembers the selected language, and page links carry the preference. Switching preserves parameters, presets and the reference source; calculation results and CSV fields remain unchanged.
 
 The mammography series on the diagnostic page uses an independent measured Mo (molybdenum) anode basis spectrum. RQR-M uses 0.032 mm Mo filtration; RQA-M adds 2 mm Al to the corresponding basis. The original ISO parameters are not refitted.
+
+Both pages allow an air path to be set. For ISO and diagnostic W, the input is an **additional** air path relative to the original fitted model, defaulting to 0 m. The fitted reference conditions may already include air effects, so the baseline is not necessarily a source-vacuum spectrum. The measured Mo basis already includes 1 m of air; an entered measurement distance `d` applies the path difference `d−1 m`, with a default of 1 m. For `d < 1 m`, this extrapolates back from the measured spectrum and cannot restore unmeasured soft photons.
+
+The air calculation uses total mass attenuation coefficients and a fixed dry-air density of 1.205 kg/m³. It models narrow-beam primary attenuation only: there is no temperature or pressure correction, air scatter or geometric inverse-square factor, and the result is not an absolute dose at the measurement point. Main results change with distance; comparison-table predictions retain each model's original baseline. Default distances preserve earlier results. Air distance is not added to the existing CSV fields; when the distance differs from the baseline, it appears in the filename.
 
 ## Versioning
 
@@ -39,13 +43,14 @@ After installing Node.js, run:
 ```sh
 node tests/verify.cjs
 node tests/language.cjs
+node tests/air.cjs
 ```
 
 The tests include fixed baselines and Python reference results, without depending on other directories on the author's computer. They check the original 50 ISO presets, 29 diagnostic presets, 21 W spectrum calculations and 17 Mo results at tabulated and intermediate tube voltages, as well as CSV export, input boundaries, zero spectra and switching to the TRS source. Results are written to `reports/test_report.json`.
 
-Language tests check both interfaces, unchanged parameters and CSV content, saved preferences, page links and fallback behavior when browser storage is unavailable. Results are written to `reports/language_test_report.json`. These tests execute the page scripts with simulated DOM / ECharts; they do not replace visual verification in a real browser.
+Language tests check both interfaces, unchanged parameters and CSV content, saved preferences, page links and fallback behavior when browser storage is unavailable. Results are written to `reports/language_test_report.json`. Air-path tests independently calculate spectra and HVLs with Python and NumPy; if needed, set the `RADFIT_PYTHON` environment variable to a Python interpreter with NumPy installed. Results are written to `reports/air_test_report.json`. These tests execute the page scripts with simulated DOM / ECharts; they do not replace visual verification in a real browser.
 
-Current maximum JS/Python deviations: ISO `7.42e-8%`, diagnostic W `1.49e-10%` and Mo `2.51e-8%`, all below 2%. These values measure consistency between algorithm implementations, not the measurement accuracy of an actual installation.
+Maximum JS/Python deviations at the default baseline: ISO `7.42e-8%`, diagnostic W `1.49e-10%` and Mo `2.51e-8%`, all below 2%. These values measure consistency between algorithm implementations, not the measurement accuracy of an actual installation.
 
 To run the Python references, the W branch requires `numpy`; the Mo branch uses only the standard library. By default, `python diagnostic_model.py` only outputs reference results using the existing parameters and does not overwrite them. `python mo_model.py --kvp 28 --mo-mm 0.032 --al-mm 2` calculates the mammography conditions.
 
