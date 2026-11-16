@@ -17,7 +17,7 @@ Ketelhut, S., & Büermann, L. (2020). *Catalogue of unfiltered x-ray spectra fro
 
 ## 衰减系数
 
-Mo / Be 来源为 NIST 的质量衰减系数公开表：[Mo](https://physics.nist.gov/PhysRefData/XrayMassCoef/ElemTab/z42.html)、[Be](https://physics.nist.gov/PhysRefData/XrayMassCoef/ElemTab/z04.html)。Al、Air 等原表沿用作者提供的 ISO Python 参考模型，未改变原数值。
+Mo / Be 质量衰减表来源为 NIST 公开数据：[Mo](https://physics.nist.gov/PhysRefData/XrayMassCoef/ElemTab/z42.html)、[Be](https://physics.nist.gov/PhysRefData/XrayMassCoef/ElemTab/z04.html)。ISO 页的固有 Be 则按原拟合参数折算为固定的 Al 等效厚度，不是逐能量 Be 衰减计算。Al、Air 等表沿用作者提供的 ISO Python 参考模型；钨自吸收使用其中的近似表，并非完整的 [NIST 钨表](https://physics.nist.gov/PhysRefData/XrayMassCoef/ElemTab/z74.html)。原模型参数与这些表共同使用，未改变原数值。
 
 ## 标准与操作规程
 

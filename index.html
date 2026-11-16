@@ -123,10 +123,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 <div class="app">
 <nav class="page-nav" aria-label="计算页面" data-en-aria-label="Calculator pages"><a href="index.html" data-page-link data-en="ISO 4037 · Radiation protection" aria-current="page" class="active">ISO 4037 · 防护辐射质</a><a href="diagnostic.html" data-page-link data-en="Diagnostic X-rays · IEC / TRS-457">诊断 X 射线 · IEC / TRS‑457</a></nav>
 <div class="header">
-<div><h1 data-en="X-ray Spectrum Calculator">X 射线能谱计算工具</h1><div class="sub" data-en="Birch-Marshall model · NIST XCOM attenuation coefficients · W target (Z=74)">Birch-Marshall模型 · NIST XCOM衰减系数 · 钨靶W(Z=74)</div></div>
+<div><h1 data-en="X-ray Spectrum Calculator">X 射线能谱计算工具</h1><div class="sub" data-en="Birch-Marshall model · Original model attenuation tables (W approximate) · W target (Z=74)">Birch-Marshall模型 · 原模型衰减表（W为近似） · 钨靶W(Z=74)</div></div>
 <div class="header-actions"><div class="lang-switch" role="group" aria-label="界面语言" data-en-aria-label="Interface language"><button type="button" id="langENG" onclick="setLanguage('eng')" aria-pressed="false">ENG</button><button type="button" id="langCHS" class="active" onclick="setLanguage('chs')" aria-pressed="true">CHS</button></div><button id="exportBtn" class="btn-export" onclick="doExport()" data-en="Export CSV">导出 CSV</button></div>
 </div>
-<div class="app-version" data-en="Software v1.0.0-beta.6">软件 v1.0.0-beta.6</div>
+<div class="app-version" data-en="Software v1.0.0-beta.7">软件 v1.0.0-beta.7</div>
 <div class="main">
 <div class="panel">
 <div class="panel-title" data-en="X-ray source parameters">射线源参数</div><div id="inputStatus" class="status error" role="alert"></div>
@@ -256,7 +256,7 @@ var FITTED_PARAMS = Object.freeze({
 // ===== 物理常数 =====
 var RHO = {Al:2.699, Cu:8.96, Sn:7.31, Pb:11.35, W:19.3, Air:0.001205};
 
-// NIST XCOM [MeV, μ/ρ, μen/ρ]
+// 原模型衰减表 [MeV, μ/ρ, μen/ρ]；钨系数为近似值。
 var MU = {
 Al:[[0.001,1185,1183],[0.0015,402.2,400.1],[0.00156,362.1,360],[0.00156,3957,3829],
 [0.002,2263,2204],[0.003,788,773.2],[0.004,360.5,354.5],[0.005,193.4,190.2],
@@ -678,7 +678,7 @@ function renderTable(t){
     var r=ISO_REF[it[0]], result=calculate(presetCase(it)), o=result.o, mat=result.mat;
     html+='<tr><td>'+it[0]+'</td><td>'+it[1]+'</td><td class="col-filter">'+filterText(it)+'</td><td>'+r[0]+'</td><td class="pred">'+fmt(o.eF,1)+diffText(o.eF,r[0])+'</td><td>'+(r[1]||'—')+'</td><td class="pred">'+fmt(o.res,0)+'</td><td>'+r[2]+' '+mat+'</td><td class="pred">'+fmt(o.hv1,3)+' '+mat+diffText(o.hv1,r[2])+'</td><td>'+r[3]+' '+mat+'</td><td class="pred">'+fmt(o.hv2,3)+' '+mat+'</td><td>'+fmt(r[2]/r[3],2)+'</td><td class="pred">'+fmt(o.hc,2)+'</td></tr>';
   });
-  html+='</tbody></table><div class="note">'+uiT('ISO 参考列沿用所提供的标准数据，补齐已核对的分辨力；缺失项以“—”显示。h 参考列由同一距离的 ISO HVL1/HVL2 推算。预测列使用本页同一计算函数实时生成（靶角 20°、预设过滤、自动 HVL 材料）。Be 按原拟合参数换算为 Al 等效厚度，CSV 固有过滤字段仍输出 mm Al 等效值。','ISO reference columns retain the supplied standard data with verified spectral resolution values added; missing values are shown as “—”. Reference h is derived from ISO HVL1/HVL2 at the same distance. Model columns are calculated live using the same function as this page (20° anode angle, preset filtration and automatic HVL material). Be is converted to an equivalent Al thickness using the original fitted parameter; the CSV inherent filtration field remains in mm Al equivalent.')+'<br>'+uiT('HVL 参考值采用 1 m 列；N-350/N-400、H-350/H-400 采用 2.5 m 列。对照表预测沿用原模型的 0 m 新增空气路径基准；上方测量点结果按输入的新增路径计算。原拟合参考条件可能已隐含空气影响。','HVL reference values use the 1 m column, except N-350/N-400 and H-350/H-400, which use the 2.5 m column. Table predictions retain the original model baseline with 0 m additional air path; the measurement-point results above use the entered additional path. The fitted reference conditions may already include air effects.')+'<br>'+uiT('H系列薄过滤软射线，半经验模型存在固有约±10%残差，更高精度建议使用蒙特卡洛或SpekPy','The H series uses lightly filtered soft X-rays; the semi-empirical model has an inherent residual of approximately ±10%. For higher accuracy, use Monte Carlo methods or SpekPy.')+(UI_LANG==='eng'?'<br>CSV field names and units remain unchanged when switching the interface language.':'')+'</div>';
+  html+='</tbody></table><div class="note">'+uiT('ISO 参考列沿用所提供的标准数据，补齐已核对的分辨力；缺失项以“—”显示。h 参考列由同一距离的 ISO HVL1/HVL2 推算。预测列使用本页同一计算函数实时生成（靶角 20°、预设过滤、自动 HVL 材料）。Be 按原拟合参数换算为 Al 等效厚度，CSV 固有过滤字段仍输出 mm Al 等效值。','ISO reference columns retain the supplied standard data with verified spectral resolution values added; missing values are shown as “—”. Reference h is derived from ISO HVL1/HVL2 at the same distance. Model columns are calculated live using the same function as this page (20° anode angle, preset filtration and automatic HVL material). Be is converted to an equivalent Al thickness using the original fitted parameter; the CSV inherent filtration field remains in mm Al equivalent.')+'<br>'+uiT('HVL 参考值采用 1 m 列；N-350/N-400、H-350/H-400 采用 2.5 m 列。对照表预测沿用原模型的 0 m 新增空气路径基准；上方测量点结果按输入的新增路径计算。原拟合参考条件可能已隐含空气影响。','HVL reference values use the 1 m column, except N-350/N-400 and H-350/H-400, which use the 2.5 m column. Table predictions retain the original model baseline with 0 m additional air path; the measurement-point results above use the entered additional path. The fitted reference conditions may already include air effects.')+'<br>'+uiT('H系列部分低能薄过滤条件对靶、Be等效和空气路径敏感；部分预设HVL与ISO的差值超过10%，这不是误差上限。更高精度请以实测谱或经独立验证的模型为准，例如蒙特卡洛或SpekPy。','Some low-energy, lightly filtered H-series beams are sensitive to the target, Be equivalence and air path. Some preset HVLs differ from ISO by over 10%; this is not an error bound. For greater accuracy, use measured spectra or independently validated models, such as Monte Carlo or SpekPy.')+(UI_LANG==='eng'?'<br>CSV field names and units remain unchanged when switching the interface language.':'')+'</div>';
   wrap.innerHTML=html;
 }
 

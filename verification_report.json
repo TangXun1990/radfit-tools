@@ -22,8 +22,8 @@
     "xray_model.py": "1243f6d65be8fa837d0ec321cd8ff5da698b8e9ec323da402274df0cc6808fdb"
   },
   "delivered_html_sha256": {
-    "ISO": "b1bc8a1dc7b4ddfab6a3bed88bac7ecefd09910d5fc07b903b6dd01e2eeb6b3e",
-    "diagnostic": "09398b117152d62decfe650c1d60d46752e12a3911a87d4232dccb965f919e6e"
+    "ISO": "76cf1d38d5ffacbb50c5b886d6afbc25f19ece61bf95412527ee3af1c1dee47d",
+    "diagnostic": "d66dfea6cfc338cff58b8dcd5693565453df5d257e7a6b44f7907b49831f7dfe"
   },
   "limitation": "Node VM executes delivered JS with simulated DOM/ECharts. This verifies numerical data and UI state logic; it does not replace visual browser verification or physical standard conformity.",
   "html_structural_audit": {
@@ -64,8 +64,8 @@
     "reapplied_Be_or_air": false
   },
   "interpretation": "数值实现一致性、模型表值残差、实际设备符合性分别评价；名义HVL残差不以JS/Python 2%要求代替验收。",
-  "publication_preparation": "去除公开署名；原计算脚本不变，tests/verify.cjs、tests/language.cjs、tests/air.cjs通过。",
-  "software_version": "1.0.0-beta.6",
+  "publication_preparation": "纠正H系列误差范围和原钨衰减表来源标注，记录历史拟合目标不一致；三套回归测试通过，参数及计算保持原值。",
+  "software_version": "1.0.0-beta.7",
   "ui_language_regression": {
     "passed": true,
     "pages": 2,
@@ -114,5 +114,22 @@
   "csv_schema_unchanged": true,
   "physical_model_revision": "beta.4 adds a narrow-beam, energy-dependent air-path attenuation factor relative to the prior W/ISO and measured Mo baselines.",
   "documentation_revision": "beta.5 clarifies IEC 61267:2005 half-value layer measurement geometry and IAEA TRS-457 narrow-beam recommendations; inline calculation scripts and CSV export are unchanged from beta.4.",
-  "privacy_revision": "beta.6 removes the personal signature from current files and historical versions; the published test fixture has only its static signature removed."
+  "privacy_revision": "beta.6 removes the personal signature from current files and historical versions; the published test fixture has only its static signature removed.",
+  "h_series_audit": {
+    "no_refitting_or_physics_change": true,
+    "baseline": "0 m additional air relative to the legacy fitted model; ISO examples are at 1 m and are not necessarily the same geometry",
+    "H20_HVL1": {
+      "model_mm_Al": 0.14341301714760843,
+      "ISO_mm_Al": 0.128,
+      "difference_percent": 12.041419646569086
+    },
+    "H40_HVL2": {
+      "model_mm_Al": 1.0198527070245378,
+      "ISO_mm_Al": 1.17,
+      "difference_percent": -12.83310196371471
+    },
+    "legacy_H20_h_target": 0.97,
+    "H20_h_derived_from_HVLs": 0.744186046511628,
+    "legacy_target_inconsistency_contribution": "unknown"
+  }
 }
